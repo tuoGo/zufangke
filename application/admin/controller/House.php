@@ -6,8 +6,10 @@
  * Time: 11:18
  */
 namespace app\admin\controller;
+use app\common\Common;
 class House {
     public function index(){
-        echo 1;
+        $a = new Common();
+        echo $a->index();
     }
 }

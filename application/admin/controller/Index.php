@@ -1,10 +1,10 @@
 <?php
 namespace app\admin\controller;
-
-class Index
+use Think\Controller;
+class Index extends Controller
 {
     public function index()
     {
-        return 'Hello Admin';
+        return $this->fetch('index');
     }
 }
