@@ -5,6 +5,10 @@
  * Date: 2018/12/3
  * Time: 13:44
  */
-class House{
+namespace app\admin\model;
+use think\model;
+class House extends Model {
+    public function add(){
 
+    }
 }
