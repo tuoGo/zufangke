@@ -13,6 +13,13 @@ use think\Controller;
 class Introduce extends Controller
 {
     public function index(){
-        return $this->fetch('admin/introduce');
+        $data = [
+            'ip'           => GetHostByName($_SERVER['SERVER_NAME']),
+            'php_version'  => PHP_VERSION,
+            'zend_version' => Zend_Version(),
+            'apache'             => $_SERVER ['SERVER_SOFTWARE'],
+        ];
+
+        return $this->fetch('admin/introduce', ['data' => $data]);
     }
 }
