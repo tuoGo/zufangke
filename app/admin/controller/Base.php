@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 use Think\Controller;
 
-class BaseController extends Controller{
+class Base extends Controller{
 
     function _initialize(){
         $adname = cookie('adname');

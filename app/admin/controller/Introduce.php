@@ -2,15 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/12/3
- * Time: 11:18
+ * Date: 2018/12/5
+ * Time: 10:48
  */
+
 namespace app\admin\controller;
-use app\common\Common;
+
 use think\Controller;
 
-class House extends Controller {
+class Introduce extends Controller
+{
     public function index(){
-        $this->fetch('');
+        return $this->fetch('admin/introduce');
     }
 }
