@@ -12,7 +12,8 @@ use think\Controller;
 
 class Introduce extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
             'ip'           => GetHostByName($_SERVER['SERVER_NAME']),
             'php_version'  => PHP_VERSION,

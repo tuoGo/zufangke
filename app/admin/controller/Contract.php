@@ -2,17 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/12/3
- * Time: 11:18
+ * Date: 2018/12/5
+ * Time: 14:36
  */
+
 namespace app\admin\controller;
-use app\common\Common;
+use app\admin\model;
 use think\Controller;
 
-class House extends Controller
+class Contract extends Controller
 {
     public function index()
     {
-        return $this->fetch('house/house_list');
+        return 'contract';
     }
 }

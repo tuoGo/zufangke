@@ -7,8 +7,7 @@
  */
 namespace app\admin\model;
 use think\model;
-class House extends Model {
-    public function add(){
+class House extends Model
+{
 
-    }
 }
