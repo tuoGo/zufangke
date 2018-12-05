@@ -11,6 +11,6 @@ use think\Controller;
 
 class House extends Controller {
     public function index(){
-        $this->fetch('');
+        return $this->fetch('house/house_list');
     }
 }

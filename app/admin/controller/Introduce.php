@@ -17,7 +17,7 @@ class Introduce extends Controller
             'ip'           => GetHostByName($_SERVER['SERVER_NAME']),
             'php_version'  => PHP_VERSION,
             'zend_version' => Zend_Version(),
-            'apache'             => $_SERVER ['SERVER_SOFTWARE'],
+            'apache'       => $_SERVER ['SERVER_SOFTWARE'],
         ];
 
         return $this->fetch('admin/introduce', ['data' => $data]);
