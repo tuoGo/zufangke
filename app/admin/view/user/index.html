@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>我是User的index</p>
+    {foreach name="data" item="value"}
+    <tr>
+        <td>{$value.name}</td>
+        <td>{$value.phone}</td>
+        <td>{$value.idcard}</td>
+    </tr>
+    {/foreach}
+</body>
+</html>
