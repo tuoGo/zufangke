@@ -9,7 +9,12 @@
 namespace app\admin\controller;
 
 
-class Housecount
-{
+use think\Controller;
 
+class Housecount extends Controller
+{
+    public function index()
+    {
+        
+    }
 }
