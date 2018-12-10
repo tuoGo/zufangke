@@ -2,9 +2,318 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>合同页面</title>
+    <link rel="stylesheet" href="../css/H-ui.reset.css">
+    <link rel="stylesheet" href="../css/H-ui.min.css">
+    <link rel="stylesheet" href="../lib/Hui-iconfont/1.0.8/iconfont.min.css">
+    <link rel="stylesheet" href="../css/contract.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/H-ui.min.js"></script>
 </head>
 <body>
-
+    <div id="box">
+        <form action="">
+            <div class="row">
+                <div class="col-8 col-offset-2">
+                    <!--租客信息-->
+                    <div class="sign">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="title">
+                                    租客信息
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="house">
+                                    <h4>房源信息</h4>
+                                    <div>
+                                        <select name="" class="select-box radius">
+                                            <option value="" selected>A栋401</option>
+                                            <option value="">A栋402</option>
+                                            <option value="">A栋403</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="information">
+                                    <div class="row clearfix">
+                                        <div class="col-2">
+                                            <h4>姓名</h4>
+                                            <input type="text" class="input-text radius">
+                                        </div>
+                                        <div class="col-2">
+                                            <h4>电话</h4>
+                                            <input type="text" class="input-text radius">
+                                        </div>
+                                        <div class="col-1">
+                                            <h4>性别</h4>
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>男</option>
+                                                <option value="">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="papers certificate">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>证件类型</h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>身份证</option>
+                                                <option value="">护照</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="input-text radius">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pic">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>证件正面照</h4>
+                                            <div class="dashed-box">
+                                                <div>
+                                                    <div class="plus"><span>+</span></div>
+                                                    <h5>添加上传图片</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <h4>证件反面照</h4>
+                                            <div class="dashed-box">
+                                                <div>
+                                                    <div class="plus"><span>+</span></div>
+                                                    <h5>添加上传图片</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="last">
+                                    <div class="btn btn-secondary-outline radius">添加租客</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--签约资料-->
+                    <div class="sign">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="title">
+                                    签约资料
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="papers">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>租赁时间</h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-secondary-outline radius lease-time">
+                                                点击选择租赁开始时间<i class="Hui-iconfont Hui-iconfont-jishiqi"></i></button>
+                                        </div>
+                                        <div class="col-1"></div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary-outline radius checked">1个月</button>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary-outline radius">3个月</button>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary-outline radius">6个月</button>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary-outline radius">9个月</button>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-secondary-outline radius">12个月</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="自定义月份">
+                                            <button class="btn disabled radius">月</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="papers">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>付款方式</h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>押</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>付</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="information">
+                                    <div class="row clearfix">
+                                        <div class="col-2">
+                                            <h4>租金</h4>
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
+                                            <button class="btn disabled radius">月/元</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <h4>押金</h4>
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
+                                            <button class="btn disabled radius">元</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <h4>每月收租日</h4>
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
+                                            <button class="btn disabled radius">日</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--费用信息-->
+                    <div class="sign">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="title">
+                                    费用信息
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="papers">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>水费</h4>
+                                        </div>
+                                        <div class="col-3">
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>抄表水费</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
+                                            <button class="btn disabled radius">元/吨</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="papers">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>电费</h4>
+                                        </div>
+                                        <div class="col-3">
+                                            <select name="" class="select-box radius">
+                                                <option value="" selected>抄表电费</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
+                                            <button class="btn disabled radius">元/度</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="last">
+                                                <div class="btn btn-secondary-outline radius">添加费用</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="note">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <h4>备注</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="note">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <textarea name="" cols="50" rows="80" class="textarea radius"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pic">
+                                    <div class="row clearfix">
+                                        <div class="col-3">
+                                            <h4>上传合同</h4>
+                                            <div class="dashed-box">
+                                                <div>
+                                                    <div class="plus"><span>+</span></div>
+                                                    <h5>添加上传图片</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--按钮区-->
+                    <div class="sign btn-area">
+                        <div class="row clearfix">
+                            <div class="col-2">
+                                <div class="last">
+                                    <div class="btn btn-secondary radius">提交</div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="last">
+                                    <div class="btn btn-danger radius">取消</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
