@@ -8,7 +8,7 @@
 namespace app\admin\controller;
 use app\common\Common;
 use think\Controller;
-
+use think\Request;
 class House extends Controller
 {
     public function index()

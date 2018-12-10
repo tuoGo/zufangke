@@ -9,5 +9,9 @@ namespace app\admin\model;
 use think\model;
 class House extends Model
 {
-
+    //默认时间格式为int类型
+    protected $autoWriteTimestamp = true;
+    protected $createTime = 'create_time';
+    protected $updateTime = 'update_time';
+    protected $readonly = ['create_time'];
 }

@@ -38,16 +38,21 @@ class User extends Controller
                 'idcard' => $userInfo['idcard'],
             ];
             try{
+                //搜索用户身份证是否已经存在
+                $userRel = model('user')->where('idcard',$userInfo['idcard'])->select();
+                if ($userRel){
+                    return json(['data'=>'','status'=>400,'msg'=>'此用户已存在!']);
+                }
                 //数据库存储操作
-                model('user')->save($data);
+                model('user')->allowField(true)->save($data);
 
                 return json(['data'=>'','status'=>200,'msg'=>'用户添加成功!']);
 
             }catch (Exception $e){
 
                 return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
-
             }
+
         }
     }
     /*
@@ -90,8 +95,11 @@ class User extends Controller
             $uid = input('post.uid');
             try{
                 //数据库删除操作
-                model('user')->where('uid',$uid)->delete();
-
+                $rel = model('user')->where('uid',$uid)->delete();
+                if (empty($rel))
+                {
+                    return json(['data'=>'','status'=>400,'msg'=>'请不要重复删除!']);
+                }
                 return json(['data'=>'','status'=>200,'msg'=>'用户删除成功!']);
 
             }catch (Exception $e){
