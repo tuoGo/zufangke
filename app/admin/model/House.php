@@ -6,7 +6,7 @@
  * Time: 13:44
  */
 namespace app\admin\model;
-use think\model;
+use think\Model;
 class House extends Model
 {
     //默认时间格式为int类型
