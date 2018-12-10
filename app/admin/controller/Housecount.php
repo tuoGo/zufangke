@@ -37,8 +37,9 @@ class Housecount extends Controller
                 foreach ($data as $v){
                     $show[] = $v->toArray();
                 }
+                return $this->fetch('showinfo',['data',$show]);
             }
-            return $this->fetch('showinfo',['data',$show]);
+            return json(['data' => '', 'status' => 400, 'msg' => '您查看的房源信息或许并不存在，如果您确定存在那请联系我们团队！']);
         }
     }
 }
