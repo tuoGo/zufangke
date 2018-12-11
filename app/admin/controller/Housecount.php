@@ -35,7 +35,7 @@ class Housecount extends Controller
             if($data)
             {
                 foreach ($data as $v){
-                    $show[] = $v->toArray();
+                    $show[] = $v->toArray();       //循环去除多余数据，转二维数组
                 }
                 return $this->fetch('showinfo',['data',$show]);
             }

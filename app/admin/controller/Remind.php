@@ -11,6 +11,6 @@ class Remind extends Controller
 {
     public function index()
     {
-        echo 'Remind';
+
     }
 }

@@ -6,16 +6,20 @@
  * Time: 11:18
  */
 namespace app\admin\controller;
-use app\common\Common;
+
 use think\Controller;
 use think\Exception;
 use think\Request;
+use think\Db;
 
 class House extends Controller
 {
+    //房源列表
     public function index()
     {
-        return $this->fetch('house/house_list');
+        $data  = db('house')->select();
+        dump($data);exit;
+        return $this->fetch('house_list',['data'=>$data]);
     }
 
     /**
@@ -24,16 +28,16 @@ class House extends Controller
     public function add(Request $request){
         $result = input('post');
         $data = array(
-            'address'   => '翻斗大街翻斗花园2号楼1001室',//$result['address']
-            'area'      => '280.5',//$result['area']
-            'doormodel' => '四室一厅二卫',//$result['doormodel']
-            'status'    => '2',//$result['status']
+            'address'   => 123,//$result['address']
+            'area'      => 123,//$result['area']
+            'doormodel' => 123,//$result['doormodel']
+            'status'    => 123,//$result['status']
         );
 
         try{
             //数据库存储操作
             model('house')->save($data);
-            dump('成功');exit;
+            return json(['data'=>'','status'=>200,'msg'=>'用户编辑成功!']);
         }catch (Exception $e){
             return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
         }
@@ -44,8 +48,8 @@ class House extends Controller
      */
     public function edit(Request $request){
         if($request->isPost()){
+            $hid = input('post.hid');//主键
             $result = input('post');//数据
-            $hid = $result['hid'];//主键
             $data = array(
                 'address'   => $result['address'],
                 'area'      => $result['area'],
@@ -59,10 +63,10 @@ class House extends Controller
                 return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
             }
         }else{
-
+            $hid = input('get.hid');//主键
+            $data = db('house')->where('hid','=',$hid)->select()[0];
+            return $this->fetch('admin/index');
         }
-
-
-
     }
+
 }
