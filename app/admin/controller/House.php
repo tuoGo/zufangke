@@ -17,10 +17,6 @@ class House extends Controller
     //房源列表
     public function index()
     {
-        echo 1;
-        $data = Db::query('select * from zfk_house');
-        dump($data);exit;
-
         $data  = db('house')->select();
         dump($data);exit;
         return $this->fetch('house/house_list',['data'=>$data]);
@@ -32,10 +28,10 @@ class House extends Controller
     public function add(Request $request){
         $result = input('post');
         $data = array(
-            'address'   => 123,//$result['address']
-            'area'      => 123,//$result['area']
-            'doormodel' => 123,//$result['doormodel']
-            'status'    => 123,//$result['status']
+            'address'   => $result['address'],//$result['address']
+            'area'      => $result['area'],//$result['area']
+            'doormodel' => $result['doormodel'],//$result['doormodel']
+            'status'    => $result['status'],//$result['status']
         );
 
         try{
@@ -71,6 +67,20 @@ class House extends Controller
             $data = db('house')->where('hid','=',$hid)->select()[0];
             return $this->fetch('admin/index');
         }
+    }
+
+    /**
+     * 删除
+     */
+    public function delete(){
+        try{
+            $hid = input('get.hid');
+            db('house')->delete($hid);
+            return json(['data'=>'','status'=>200,'msg'=>'删除用户成功!']);
+        }catch (Exception $e){
+            return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
+        }
+
     }
 
 }
