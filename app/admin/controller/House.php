@@ -17,13 +17,9 @@ class House extends Controller
     //房源列表
     public function index()
     {
-        echo 1;
-        $data = Db::query('select * from zfk_house');
-        dump($data);exit;
-
         $data  = db('house')->select();
         dump($data);exit;
-        return $this->fetch('house/house_list',['data'=>$data]);
+        return $this->fetch('house_list',['data'=>$data]);
     }
 
     /**

@@ -18,7 +18,8 @@ class Contract extends Controller
      */
     public function index()
     {
-//        model('contract')->select();
+        $data = db('contract')->select();
+        return $this->fetch('index',['data' => $data]);
     }
 
     /*
@@ -46,6 +47,23 @@ class Contract extends Controller
                 return json(['data'=>'','status'=>200,'msg'=>'合同添加成功!']);
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同添加失败!']);
+        }
+    }
+
+    /*
+     * 删除合同
+     */
+    public function del(Request $request)
+    {
+        if ($request->isPost())
+        {
+            $contid = input('post.contid');
+            $rel = model('contract')->where('contid','=',$contid)->save(['status' => 0]);
+            if ($rel)
+            {
+                return json(['data'=>'','status'=>200,'msg'=>'合同删除成功!']);
+            }
+            return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
     }
 }
