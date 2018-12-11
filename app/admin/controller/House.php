@@ -19,7 +19,7 @@ class House extends Controller
     {
         $data  = db('house')->select();
         dump($data);exit;
-        return $this->fetch('house/house_list',['data'=>$data]);
+        return $this->fetch('house_list',['data'=>$data]);
     }
 
     /**

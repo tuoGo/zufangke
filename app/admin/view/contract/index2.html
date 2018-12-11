@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>合同页面</title>
+    <link rel="stylesheet" href="../../../../public/static/style/sui/sui.min.css">
+    <link rel="stylesheet" href="../../../../public/static/style/sui/sui-append.min.css">
+    <link rel="stylesheet" href="../../../../public/static/style/contract/contract.css">
+    <script src="../../../../public/static/scripts/jquery/jquery.min.js"></script>
+    <script src="../../../../public/static/scripts/sui/sui.min.js"></script>
 </head>
 <body>
-
+    <div class="sui-container">
+        <div class="sign">
+            <div class="title">
+                <h3>租客信息</h3>
+            </div>
+            <div class="house">
+                <h4>房源信息</h4>
+                <span class="sui-dropdown dropdown-bordered dropdown-large select">
+                    <span class="dropdown-inner">
+                        <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                            <input type="hidden" name="house-msg" value="A_401"><i class="caret"></i><span>请选择房源</span>
+                        </a>
+                        <ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
+                            <li role="presentation"><a href="javascript:void(0);" tabindex="-1" role="menuitem" value="A_401">A栋401</a></li>
+                            <li role="presentation"><a href="javascript:void(0);" tabindex="-1" role="menuitem" value="A_402">A栋402</a></li>
+                        </ul>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
