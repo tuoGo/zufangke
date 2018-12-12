@@ -17,6 +17,7 @@ class House extends Controller
     public function index()
     {
         $data  = db('house')->select();
+        dump($data);exit;
         return $this->fetch('house_list',['data'=>$data]);
     }
 
