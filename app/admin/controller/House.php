@@ -64,7 +64,7 @@ class House extends Controller
         }else{
             $hid = input('get.hid');//主键
             $data = db('house')->where('hid','=',$hid)->select()[0];
-            return $this->fetch('admin/index');
+            return $this->fetch('admin/index',['data'=>$data]);
         }
     }
 
