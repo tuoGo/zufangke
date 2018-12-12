@@ -10,7 +10,6 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Exception;
 use think\Request;
-use think\Db;
 
 class House extends Controller
 {
@@ -72,7 +71,7 @@ class House extends Controller
     /**
      * 删除
      */
-    public function delete(){
+    public function del(){
         try{
             $hid = input('get.hid');
             db('house')->delete($hid);
