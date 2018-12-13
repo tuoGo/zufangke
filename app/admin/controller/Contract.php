@@ -7,7 +7,7 @@
  */
 
 namespace app\admin\controller;
-use app\admin\model;
+
 use think\Controller;
 use think\Request;
 
@@ -40,6 +40,7 @@ class Contract extends Controller
                 'chargeday' => $data['chargeday'],
                 'water'     => $data['water'],
                 'elec'      => $data['elec'],
+                'sms_time'  => time(),
             ];
             $rel = model('contract')->allowField(true)->save($contData);
             if ($rel)
@@ -51,17 +52,17 @@ class Contract extends Controller
     }
 
     /*
-     * 删除合同
+     * 软删除合同
      */
     public function del(Request $request)
     {
         if ($request->isPost())
         {
             $contid = input('post.contid');
-            $rel = model('contract')->where('contid','=',$contid)->save(['status' => 0]);
+            $rel = db('contract')->where("contid = $contid")->update(['status' => 0]);
             if ($rel)
             {
-                return json(['data'=>'','status'=>200,'msg'=>'合同删除成功!']);
+                return json(['data'=>'','status'=>200,'msg'=>'合同已软删除!']);
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
