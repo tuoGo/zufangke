@@ -2,316 +2,302 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>合同页面</title>
-    <link rel="stylesheet" href="../css/H-ui.reset.css">
-    <link rel="stylesheet" href="../css/H-ui.min.css">
-    <link rel="stylesheet" href="../lib/Hui-iconfont/1.0.8/iconfont.min.css">
-    <link rel="stylesheet" href="../css/contract.css">
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/H-ui.min.js"></script>
+    <link rel="stylesheet" href="../../../../public/static/style/sui/sui.min.css">
+    <link rel="stylesheet" href="../../../../public/static/style/sui/sui-append.min.css">
+    <link rel="stylesheet" href="../../../../public/static/style/pure/grids-responsive.css">
+    <link rel="stylesheet" href="../../../../public/static/style/contract/contract.css">
+    <script src="../../../../public/static/scripts/jquery/jquery.min.js"></script>
+    <script src="../../../../public/static/scripts/sui/sui.min.js"></script>
 </head>
 <body>
-    <div id="box">
-        <form action="">
-            <div class="row">
-                <div class="col-8 col-offset-2">
-                    <!--租客信息-->
-                    <div class="sign">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="title">
-                                    租客信息
-                                </div>
+    <div class="pure-g">
+        <form action="" class="sui-form">
+            <!--租客信息-->
+            <div class="pure-u-1-1 sign">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 title">
+                        <h2>租客信息</h2>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-1">
+                    <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                        <span class="dropdown-inner">
+                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                            <input type="hidden" value="A_401" name="house_msg"><i class="caret"></i><span>请选择房源</span>
+                            </a>
+                            <ul role="menu" aria-labelledby="drop3" class="sui-dropdown-menu">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="A_401">A栋401</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="A_402">A栋402</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="A_403">A栋403</a></li>
+                            </ul>
+                        </span>
+                    </span>
+                    </div>
+                    <div class="pure-u-1-1 information">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1 pure-u-lg-1-4 pure-u-xl-1-5">
+                                <h3>姓名</h3>
+                                <input type="text" class="input-default radius input-fat">
+                            </div>
+                            <div class="pure-u-1-1 pure-u-lg-1-4 pure-u-xl-1-5">
+                                <h3>电话</h3>
+                                <input type="text" class="input-default radius input-fat">
+                            </div>
+                            <div class="pure-u-1-1 pure-u-lg-1-4 pure-u-xl-1-5">
+                                <h3>性别</h3>
+                                <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                <span class="dropdown-inner">
+                                    <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                        <input type="hidden" value="male" name="sex"><i class="caret"></i><span>请选择性别</span>
+                                    </a>
+                                    <ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="male">男</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="female">女</a></li>
+                                    </ul>
+                                </span>
+                            </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="house">
-                                    <h4>房源信息</h4>
-                                    <div>
-                                        <select name="" class="select-box radius">
-                                            <option value="" selected>A栋401</option>
-                                            <option value="">A栋402</option>
-                                            <option value="">A栋403</option>
-                                        </select>
+                    </div>
+                    <div class="pure-u-1-1 papers">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>证件类型</h3>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                            <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                <span class="dropdown-inner">
+                                    <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                        <input type="hidden" name="paper_type" value="p_id"><i class="caret"></i><span>选择证件</span>
+                                    </a>
+                                    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="p_id">身份证</a></li>
+                                    </ul>
+                                </span>
+                            </span>
+                                <input type="text" class="input-fat input-large radius" placeholder="请填写对应证件号码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-u-1-1 pics">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1 pure-u-md-1-4 pure-u-lg-1-5 pure-u-xl-1-5">
+                                <h3>证件正面照</h3>
+                                <div class="dashed-box">
+                                    <div class="upload">
+                                        <div class="plus"><i class="sui-icon icon-touch-plus"></i></div>
+                                        <div class="text">添加上传图片</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="information">
-                                    <div class="row clearfix">
-                                        <div class="col-2">
-                                            <h4>姓名</h4>
-                                            <input type="text" class="input-text radius">
-                                        </div>
-                                        <div class="col-2">
-                                            <h4>电话</h4>
-                                            <input type="text" class="input-text radius">
-                                        </div>
-                                        <div class="col-1">
-                                            <h4>性别</h4>
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>男</option>
-                                                <option value="">女</option>
-                                            </select>
-                                        </div>
+                            <div class="pure-u-1-1 pure-u-md-1-4 pure-u-lg-1-5 pure-u-xl-1-5">
+                                <h3>证件反面照</h3>
+                                <div class="dashed-box">
+                                    <div class="upload">
+                                        <div class="plus"><i class="sui-icon icon-touch-plus"></i></div>
+                                        <div class="text">添加上传图片</div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="papers certificate">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>证件类型</h4>
-                                        </div>
-                                        <div class="col-2">
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>身份证</option>
-                                                <option value="">护照</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="text" class="input-text radius">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="pic">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>证件正面照</h4>
-                                            <div class="dashed-box">
-                                                <div>
-                                                    <div class="plus"><span>+</span></div>
-                                                    <h5>添加上传图片</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <h4>证件反面照</h4>
-                                            <div class="dashed-box">
-                                                <div>
-                                                    <div class="plus"><span>+</span></div>
-                                                    <h5>添加上传图片</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="last">
-                                    <div class="btn btn-secondary-outline radius">添加租客</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--签约资料-->
-                    <div class="sign">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="title">
-                                    签约资料
-                                </div>
+                    <div class="pure-u-1-1 new-member">
+                        <a href="javascript:void(0);" class="sui-btn btn-bordered btn-xlarge btn-info">添加租客</a>
+                    </div>
+                </div>
+            </div>
+            <!--签约资料-->
+            <div class="pure-u-1-1 sign">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 title">
+                        <h2>签约资料</h2>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-1 time">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>租赁时间</h3>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="papers">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>租赁时间</h4>
+                        <div class="pure-g">
+                            <div class="pure-u-1-1 less-time clearfix">
+                                <div class="pure-g">
+                                    <div class="pure-u-1-1 pure-u-xl-1-2">
+                                        <div data-toggle="datepicker" class="input-prepend date">
+                                            <span class="add-on"><i class="sui-icon icon-touch-todo"></i></span>
+                                            <input type="text" class="span2 input-xfat" placeholder="选择租赁开始时间">
                                         </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-secondary-outline radius lease-time">
-                                                点击选择租赁开始时间<i class="Hui-iconfont Hui-iconfont-jishiqi"></i></button>
-                                        </div>
-                                        <div class="col-1"></div>
-                                        <div class="col-1">
-                                            <button class="btn btn-secondary-outline radius checked">1个月</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-secondary-outline radius">3个月</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-secondary-outline radius">6个月</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-secondary-outline radius">9个月</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-secondary-outline radius">12个月</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="自定义月份">
-                                            <button class="btn disabled radius">月</button>
-                                        </div>
+                                        <input style="text-align:right;" type="text" class="input-default input-xfat" placeholder="输入要租赁的月份">
+                                        <span class="uneditable-input">月</span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="papers">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>付款方式</h4>
-                                        </div>
-                                        <div class="col-2">
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>押</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-2">
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>付</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="information">
-                                    <div class="row clearfix">
-                                        <div class="col-2">
-                                            <h4>租金</h4>
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
-                                            <button class="btn disabled radius">月/元</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <h4>押金</h4>
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
-                                            <button class="btn disabled radius">元</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <h4>每月收租日</h4>
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
-                                            <button class="btn disabled radius">日</button>
+                                    <div class="pure-u-1-1 pure-u-xl-1-2">
+                                        <p></p>
+                                        <div class="sui-btn-group">
+                                            <button class="sui-btn btn-primary btn-bordered btn-xlarge" onclick="return false;">1个月</button>
+                                            <button class="sui-btn btn-primary btn-bordered btn-xlarge" onclick="return false;">3个月</button>
+                                            <button class="sui-btn btn-primary btn-bordered btn-xlarge" onclick="return false;">6个月</button>
+                                            <button class="sui-btn btn-primary btn-bordered btn-xlarge" onclick="return false;">9个月</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--费用信息-->
-                    <div class="sign">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="title">
-                                    费用信息
-                                </div>
+                    <div class="pure-u-1-1 pay-type">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>付款方式</h3>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="papers">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>水费</h4>
-                                        </div>
-                                        <div class="col-3">
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>抄表水费</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
-                                            <button class="btn disabled radius">元/吨</button>
-                                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <div class="pure-g">
+                                    <div class="pure-u-1-1 pure-u-md-1-3 pure-u-xl-1-6">
+                                    <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                        <span class="dropdown-inner">
+                                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                                <input type="hidden" value="pledge" name="pay_type"><i class="caret"></i><span>押</span>
+                                            </a>
+                                            <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="pledge" class="active">押</a></li>
+                                            </ul>
+                                        </span>
+                                    </span>
+                                    </div>
+                                    <div class="pure-u-1-1 pure-u-md-1-3 pure-u-xl-1-6">
+                                    <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                        <span class="dropdown-inner">
+                                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                                <input type="hidden" value="pay" name="deposit"><i class="caret"></i><span>付</span>
+                                            </a>
+                                            <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="pay" class="active">付</a></li>
+                                            </ul>
+                                        </span>
+                                    </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="papers">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>电费</h4>
-                                        </div>
-                                        <div class="col-3">
-                                            <select name="" class="select-box radius">
-                                                <option value="" selected>抄表电费</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <input style="text-align:right;width:86px;" type="text" class="input-text radius" placeholder="">
-                                            <button class="btn disabled radius">元/度</button>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="last">
-                                                <div class="btn btn-secondary-outline radius">添加费用</div>
-                                            </div>
-                                        </div>
+                            <div class="pure-u-1-1">
+                                <div class="pure-g">
+                                    <div class="pure-u-1-1 pure-u-md-1-3 pure-u-xl-1-6">
+                                        <h3>租金</h3>
+                                        <input style="text-align:right;" type="text" class="input-medium input-fat">
+                                        <span class="uneditable-input">月/元</span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="note">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <h4>备注</h4>
-                                        </div>
+                                    <div class="pure-u-1-1 pure-u-md-1-3 pure-u-xl-1-6">
+                                        <h3>押金</h3>
+                                        <input style="text-align:right;" type="text" class="input-medium input-fat">
+                                        <span class="uneditable-input">元</span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="note">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <textarea name="" cols="50" rows="80" class="textarea radius"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="pic">
-                                    <div class="row clearfix">
-                                        <div class="col-3">
-                                            <h4>上传合同</h4>
-                                            <div class="dashed-box">
-                                                <div>
-                                                    <div class="plus"><span>+</span></div>
-                                                    <h5>添加上传图片</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--按钮区-->
-                    <div class="sign btn-area">
-                        <div class="row clearfix">
-                            <div class="col-2">
-                                <div class="last">
-                                    <div class="btn btn-secondary radius">提交</div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="last">
-                                    <div class="btn btn-danger radius">取消</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--费用信息-->
+            <div class="pure-u-1-1 sign">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 title">
+                        <h2>费用信息</h2>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-1 water">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>水费</h3>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                            <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                <span class="dropdown-inner">
+                                    <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                        <input type="hidden" value="toll" name="water_type"><i class="caret"></i><span>抄表收费</span>
+                                    </a>
+                                    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="toll" class="active">抄表收费</a></li>
+                                    </ul>
+                                </span>
+                            </span>
+                                <input style="text-align:right;" type="text" class="input-small input-fat">
+                                <span class="uneditable-input">元/吨</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>电费</h3>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                            <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
+                                <span class="dropdown-inner">
+                                    <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                        <input type="hidden" value="toll" name="water_type"><i class="caret"></i><span>抄表收费</span>
+                                    </a>
+                                    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="toll" class="active">抄表收费</a></li>
+                                    </ul>
+                                </span>
+                            </span>
+                                <input style="text-align:right;" type="text" class="input-small input-fat">
+                                <span class="uneditable-input">元/度</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1 new-pay">
+                                <a href="javascript:void(0);" class="sui-btn btn-bordered btn-xlarge btn-info">添加费用</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <h3>备注</h3>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <textarea style="font-size:16px;" name="" cols="30" rows="10" class="radius"></textarea>
+                        </div>
+                    </div>
+                    <div class="pure-u-1-1">
+                        <div class="pure-g">
+                            <div class="pure-u-1-1">
+                                <div class="pure-u-1-1 pics">
+                                    <div class="pure-g">
+                                        <div class="pure-u-1-1">
+                                            <h3>上传合同</h3>
+                                            <div class="dashed-box">
+                                                <div class="upload">
+                                                    <div class="plus"><i class="sui-icon icon-touch-plus"></i></div>
+                                                    <div class="text">添加上传图片</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--按钮提交-->
+            <div class="pure-u-1-1 sign btn-area">
+                <a href="javascript:void(0);" class="sui-btn btn-xlarge btn-info">提交</a>
+                <a href="javascript:void(0);" class="sui-btn btn-danger btn-xlarge">取消</a>
             </div>
         </form>
     </div>
