@@ -10,7 +10,6 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Exception;
 use think\Request;
-use think\Db;
 
 class House extends Controller
 {
@@ -28,10 +27,10 @@ class House extends Controller
     public function add(Request $request){
         $result = input('post');
         $data = array(
-            'address'   => 123,//$result['address']
-            'area'      => 123,//$result['area']
-            'doormodel' => 123,//$result['doormodel']
-            'status'    => 123,//$result['status']
+            'address'   => $result['address'],//$result['address']
+            'area'      => $result['area'],//$result['area']
+            'doormodel' => $result['doormodel'],//$result['doormodel']
+            'status'    => $result['status'],//$result['status']
         );
 
         try{
@@ -65,8 +64,22 @@ class House extends Controller
         }else{
             $hid = input('get.hid');//主键
             $data = db('house')->where('hid','=',$hid)->select()[0];
-            return $this->fetch('admin/index');
+            return $this->fetch('admin/index',['data'=>$data]);
         }
+    }
+
+    /**
+     * 删除
+     */
+    public function del(){
+        try{
+            $hid = input('get.hid');
+            db('house')->delete($hid);
+            return json(['data'=>'','status'=>200,'msg'=>'删除用户成功!']);
+        }catch (Exception $e){
+            return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
+        }
+
     }
 
 }
