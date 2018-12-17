@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use Think\Controller;
+use think\Controller;
 
 class Base extends Controller{
 
@@ -9,56 +9,53 @@ class Base extends Controller{
         $adid   = cookie('adid');
 
         if (!isset($adid) && !isset($adname)){
-            header('location:'.U('Log/index'));
+            header('location: http://'.$_SERVER['HTTP_HOST'].'Log/index');
             die;
         }
         // 登录用户进行再次验证
         $where = array(
-            'adname' => passport_decrypt($adname,C('PASSWORD_KEY')),
-            'adid'	 => passport_decrypt($adid,C('PASSWORD_KEY')),
+            'adname' => ['=',$adname],
+            'adid' => ['=',$adid],
         );
-        $admin = D('Admin');
-        $adminArr = $admin->where($where)->find();
+        $adminArr = db('admin')->where($where)->select()[0];
         if(empty($adminArr)){
             // 判断是否为合法数据
-            header('location:'.U('Home/Index/index'));
+            header('location: http://'.$_SERVER['HTTP_HOST'].'index');
             die;
         }
         // 对角色进行管理
         // 得到对应的角色以及权限
-        $role = D('role');
-        $roleArr = $role->find($adminArr['rid']);
+        $roleArr = db('role')->where('roleid','=',$adminArr['rid'])->select()[0];
         if(empty($roleArr)){
             // 若没有对应的权限则为非法用户
-            header('location:'.U('Home/Index/index'));
+            header('location: http://'.$_SERVER['HTTP_HOST'].'index');
             die;
         }
-        $power = D('Power');
+
         $powerid = explode('|', $roleArr['powerid']);
 
-        $where['powerid'] = ':powerid';
         foreach ($powerid as $k => $v) {
-            $powerTotalArr[] = $power->field('controller,action')->where($where)->bind(':powerid',$v['powerid'])->find();
+            $powerTotalArr[] = db('power')->field('controller,action')->where('powerid','=',$v)->select()[0];
         }
 
-        // 做两层判断
         // 对路径进行判断
-        $controller = strtolower(CONTROLLER_NAME);
-        $action = strtolower(ACTION_NAME);
+        $action = strtolower($_SERVER['REDIRECT_URL']);
         $flag = false;
         foreach ($powerTotalArr as $k => $v) {
-            if(strtolower($v['controller']) == $controller && strtolower($v['action']) == $action){
+            $url = strtolower('/'.$v['controller'].'/'.$v['action']);
+            if($url == $action){
                 $flag = true;
             }
         }
-        if(!$flag) exit('您没有权限');
-
-        // 重组控制器和方法
-        foreach ($powerTotalArr as $k => $v) {
-            if(!in_array($v['controller'],$powerTotalArrStr)) $powerTotalArrStr[] = strtolower($v['controller']);
-            $powerTotalArrStr[] = strtolower($v['controller']).'/'.strtolower($v['action']);
+        if(!$flag){
+            return json(['data'=>'','status'=>400,'msg'=>'您没有权限']);
         }
 
-        $this->assign('powerTotalArrStr',$powerTotalArrStr);
+        // 重组控制器和方法
+//        foreach ($powerTotalArr as $k => $v) {
+//            if(!in_array($v['controller'],$powerTotalArrStr)) $powerTotalArrStr[] = strtolower($v['controller']);
+//            $powerTotalArrStr[] = strtolower($v['controller']).'/'.strtolower($v['action']);
+//        }
+//        $this->assign('powerTotalArrStr',$powerTotalArrStr);
     }
 }
