@@ -91,9 +91,11 @@ class Remind extends Controller
             }
         }
     }
+
     //验证码验证接口
     public function verification(Request $request)
     {
+        //前端post传递
         if ($request->isPost())
         {
             $vercode = input('post.vercode');
@@ -106,6 +108,7 @@ class Remind extends Controller
             return json(['data'=>'','status'=>400,'msg'=>'验证码错误!']);
         }
     }
+
     //合同删除通知接口
     public function notice(Request $request)
     {

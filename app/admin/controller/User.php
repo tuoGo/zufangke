@@ -8,7 +8,7 @@
 
 namespace app\admin\controller;
 
-use app\admin\model;
+use app\admin\controller\Remind;
 use think\Controller;
 use think\Exception;
 use think\Request;
@@ -21,16 +21,16 @@ class User extends Controller
     /*
      * 租客登录
      */
-    public function login(){
-        $remind = new Remind();
-        $remind->verification();
+    public function login(Request $request){
         $phone = input('post.phone');
-        if(!empty($data)){//数据库存在此用户
+        $remind = new Remind();
+        $rel = $remind->verification($request);
+        $json = json_decode($rel,true);
+        if ($json['status'] == 200){
             Cookie::set('phone',$phone,3600);
             return $this->fetch('admin/index');//跳转首页
-        }else{
-            return json(['data'=>'','status'=>400,'msg'=>'手机号输入错误或验证码错误']);
         }
+        return $rel;
     }
 
     /*
