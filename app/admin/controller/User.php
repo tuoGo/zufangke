@@ -13,8 +13,26 @@ use think\Controller;
 use think\Exception;
 use think\Request;
 use think\Db;
+use think\Cookie;
+
 class User extends Controller
 {
+
+    /*
+     * 租客登录
+     */
+    public function login(){
+        $remind = new Remind();
+        $remind->verification();
+        $phone = input('post.phone');
+        if(!empty($data)){//数据库存在此用户
+            Cookie::set('phone',$phone,3600);
+            return $this->fetch('admin/index');//跳转首页
+        }else{
+            return json(['data'=>'','status'=>400,'msg'=>'手机号输入错误或验证码错误']);
+        }
+    }
+
     /*
      * 用户列表
      */
