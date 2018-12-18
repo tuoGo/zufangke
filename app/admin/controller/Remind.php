@@ -75,16 +75,20 @@ class Remind extends Controller
         {
             $phone = input('post.phone');
             $muber = mt_rand(100000,999999);
-            $url = "http://yun.movek.net:83/api/sms/send.json";
-            $sms = [
-                'apikey'   => '4218ce5136404fe695b62f0c18b70130',
-                'tpl_id'   => '527',
-                'content'  => '您的验证码是'.$muber.'，如非本人操作请忽略本短信。【租房客】',
-                'mobile'   => $phone,
-            ];
-            db('vercode')->insert(['phone' => $phone ,'vercode' => $muber]);
-            $common = new Common();
-            $common->request_post($url,$sms); //调用短信接口
+            $user = db('user')->where('phone',$phone)->find();
+            if ($user)
+            {
+                $url = "http://yun.movek.net:83/api/sms/send.json";
+                $sms = [
+                    'apikey'   => '4218ce5136404fe695b62f0c18b70130',
+                    'tpl_id'   => '527',
+                    'content'  => '您的验证码是'.$muber.'，如非本人操作请忽略本短信。【租房客】',
+                    'mobile'   => $phone,
+                ];
+                db('vercode')->insert(['phone' => $phone ,'vercode' => $muber]);
+                $common = new Common();
+                $common->request_post($url,$sms); //调用短信接口
+            }
         }
     }
     //验证码验证接口
