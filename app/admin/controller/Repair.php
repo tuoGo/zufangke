@@ -25,7 +25,7 @@ class Repair extends Controller
             $info  = [
                 'repid'     => $v['repid'],
                 'address'   => $house['address'],
-                'name'      => $user['name'],
+                'name'      => $user['name'],               //---------数据拼接展示
                 'phone'     => $user['phone'],
                 'content'   => $v['content'],
             ];
