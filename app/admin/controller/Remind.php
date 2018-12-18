@@ -127,7 +127,6 @@ class Remind extends Controller
             $common = new Common();
             $rel = $common->request_post($url,$sms); //调用短信接口
             $relArr = json_decode($rel,true);
-            print_r($relArr);
             if ($relArr['code'] == 0) //结果判断
             {
                 return json(['data'=>'','status'=>200,'msg'=>'已短信通知租客!']);
