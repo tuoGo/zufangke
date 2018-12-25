@@ -223,6 +223,9 @@ html,body{
 .mobile .sim_user .h_content .mobile_input{
     bottom:20%;
 }
+.mobile input{
+    border-radius:5px !important;
+}
 .mobile .h_content .mobile_input form > div{
     margin-bottom:20px;
 }
