@@ -19,7 +19,7 @@ input{
 @media (min-width:1280px){
     .sign{
         width:1230px;
-        margin:auto;
+        margin:20px auto;
         padding:20px 50px;
         box-shadow:0 0 10px #bbb;
     }

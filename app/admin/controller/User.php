@@ -8,13 +8,31 @@
 
 namespace app\admin\controller;
 
-use app\admin\model;
+use app\admin\controller\Remind;
 use think\Controller;
 use think\Exception;
 use think\Request;
 use think\Db;
+use think\Cookie;
+
 class User extends Controller
 {
+
+    /*
+     * 租客登录
+     */
+    public function login(Request $request){
+        $phone = input('post.phone');
+        $remind = new Remind();
+        $rel = $remind->verification($request);
+        $json = json_decode($rel,true);
+        if ($json['status'] == 200){
+            Cookie::set('phone',$phone,3600);
+            return $this->fetch('admin/index');//跳转首页
+        }
+        return $rel;
+    }
+
     /*
      * 用户列表
      */

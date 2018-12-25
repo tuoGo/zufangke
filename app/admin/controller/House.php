@@ -16,8 +16,15 @@ class House extends Controller
     //房源列表
     public function index()
     {
-        $data  = db('house')->select();
-        dump($data);exit;
+        $data = db('house')->select();
+        $nowTime = time();//当前时间
+        foreach ($data as $k => $v){
+            $difference = $nowTime-$v['update_time'];//时间差
+            if($v['status'] == 2 && $difference >= (60*60*24*30)){
+                $v['status'] = 4;//当同时满足两种条件时,标注为着火房(4代表着火房)
+            }
+            $data[$k] = $v;
+        }
         return $this->fetch('house_list',['data'=>$data]);
     }
 
@@ -25,7 +32,7 @@ class House extends Controller
      * 添加
      */
     public function add(Request $request){
-        $result = input('post');
+        $result = input('post.');
         $data = array(
             'address'   => $result['address'],//$result['address']
             'area'      => $result['area'],//$result['area']
@@ -48,7 +55,7 @@ class House extends Controller
     public function edit(Request $request){
         if($request->isPost()){
             $hid = input('post.hid');//主键
-            $result = input('post');//数据
+            $result = input('post.');//数据
             $data = array(
                 'address'   => $result['address'],
                 'area'      => $result['area'],
