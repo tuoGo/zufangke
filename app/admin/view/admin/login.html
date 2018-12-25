@@ -1,49 +1,155 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>SCT-后台系统</title>
-<link href="../../../../public/static/style/authority/login_css.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../../../../public/static/scripts/jquery/jquery-1.7.1.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#login_sub").click(function(){
-			$("#submitForm").attr("action", "index.html").submit();
-		});
-	});
-	
-	/*回车事件*/
-	function EnterPress(e){ //传入 event 
-		var e = e || window.event; 
-		if(e.keyCode == 13){ 
-			$("#submitForm").attr("action", "index.html").submit();
-		} 
-	} 
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>租房客后台系统</title>
+	<link rel="stylesheet" href="../../../../public/static/style/sui/sui.min.css">
+	<link rel="stylesheet" href="../../../../public/static/style/sui/sui-append.min.css">
+	<link rel="stylesheet" href="../../../../public/static/style/init/init.css">
+	<link rel="stylesheet" href="../../../../public/static/style/pure/grids-responsive.css">
+	<link rel="stylesheet" href="../../../../public/static/style/login/login.css">
+	<script src="../../../../public/static/scripts/jquery/jquery.min.js"></script>
+	<script src="../../../../public/static/scripts/sui/sui.min.js"></script>
 </head>
 <body>
-	<div id="login_center">
-		<div id="login_area">
-			<div id="login_box">
-				<div id="login_form">
-					<form id="submitForm" action="" method="post">
-						<div id="login_tip">
-							<span id="login_err" class="sty_txt2"></span>
+	<!--移动端页面-->
+	<div class="pure-g mobile">
+		<div class="pure-u-1-1 box house_user">
+			<div class="h_content">
+				<div class="pure-u-1-1">
+					<img class="pure-img" src="../../../../public/static/images/login/bg/house_user.png" alt="">
+				</div>
+				<div class="pure-u-1-1 mobile_input">
+					<form action="" class="sui-form">
+						<div class="user"><i class="sui-icon icon-tb-myfill"></i>
+							<input type="text" class="input-xfat input-large" placeholder="请输入账号">
 						</div>
-						<div>
-							 用户名：<input type="text" name="userEntity.userCode" class="username" id="name">
+						<div class="pwd"><i class="sui-icon icon-tb-lock"></i>
+							<input type="password" class="input-xfat input-large" placeholder="请输入密码">
 						</div>
-						<div>
-							密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="userEntity.password" class="pwd" id="pwd" onkeypress="EnterPress(event)" onkeydown="EnterPress()">
+						<div class="btn_login">
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-danger">登录</a>
 						</div>
-						<div id="btn_area">
-							<input type="button" class="login_btn" id="login_sub"  value="登  录">
-							<input type="reset" class="login_btn" id="login_ret" value="重 置">
+					</form>
+				</div>
+			</div>
+			<div class="tips">
+				<div class="tips_btn">
+				房东登录<i class="sui-icon icon-double-angle-up"></i>
+				</div>
+			</div>
+		</div>
+		<div class="pure-u-1-1 box sim_user">
+			<div class="h_content">
+				<div class="pure-u-1-1">
+					<img class="pure-img" src="../../../../public/static/images/login/bg/sim_user.png" alt="">
+				</div>
+				<div class="pure-u-1-1 mobile_input">
+					<form action="" class="sui-form">
+						<div class="user"><i class="sui-icon icon-tablet"></i>
+							<input type="text" class="input-xfat input-large" placeholder="请输入手机号码">
+						</div>
+						<div class="btn_login">
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-primary">登录</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="tips">
+				<div class="tips_btn">
+					租客登录<i class="sui-icon icon-double-angle-up"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--电脑端页面-->
+	<div class="login_box computer">
+		<div class="left slide">
+			<div class="bg_box">
+				<div class="bg"></div>
+				<div class="grey"></div>
+			</div>
+			<div class="login_content">
+				<div class="pure-g">
+					<div class="pure-u-1-1">
+						<img class="pure-img" src="../../../../public/static/images/login/bg/house_user.png" alt="">
+					</div>
+				</div>
+				<div class="input_area">
+					<form action="" class="sui-form form-horizontal">
+						<div class="user"><i class="sui-icon icon-tb-myfill"></i>
+							<input type="text" class="input-xfat input-large" placeholder="请输入账号">
+						</div>
+						<div class="pwd"><i class="sui-icon icon-tb-lock"></i>
+							<input type="password" class="input-xfat input-large" placeholder="请输入密码">
+						</div>
+						<div class="btn_login">
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-danger">登录</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="right slide">
+			<div class="bg_box">
+				<div class="bg"></div>
+				<div class="grey"></div>
+			</div>
+			<div class="login_content">
+				<div class="pure-g">
+					<div class="pure-u-1-1">
+						<img class="pure-img" src="../../../../public/static/images/login/bg/sim_user.png" alt="">
+					</div>
+				</div>
+				<div class="input_area">
+					<form action="" class="sui-form form-horizontal">
+						<div class="user"><i class="sui-icon icon-tablet"></i>
+							<input type="text" class="input-xfat input-large" placeholder="请输入手机号登录">
+						</div>
+						<div class="btn_login">
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-primary">登录</a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+            $(".right .login_content .input_area").css("opacity","0");
+            $(".left .login_content .input_area").css("opacity","0");
+			$(".left").mouseenter(function(){
+                $(".right .login_content .input_area").css("opacity","0");
+                $(".left .login_content .input_area").css("opacity","1");
+			});
+            $(".left").mouseleave(function(){
+                $(".left .login_content .input_area").css("opacity","0");
+            });
+            $(".right").mouseenter(function(){
+                $(".right .login_content .input_area").css("opacity","1");
+                $(".left .login_content .input_area").css("opacity","0");
+            });
+            $(".right").mouseleave(function(){
+                $(".right .login_content .input_area").css("opacity","0");
+            });
+            $(".mobile .house_user").click(function(){
+				$(this).css("height","70%");
+                $(this).find(".mobile_input").css("opacity","1");
+                $(this).find(".tips").css("display","none");
+                $(".mobile .sim_user .tips").css("display","block");
+				$(".mobile .sim_user").css("height","30%");
+                $(".mobile .sim_user .mobile_input").css("opacity","0");
+			});
+            $(".mobile .sim_user").click(function(){
+                $(this).css("height","70%");
+                $(this).find(".mobile_input").css("opacity","1");
+                $(this).find(".tips").css("display","none");
+                $(".mobile .house_user .tips").css("display","block");
+                $(".mobile .house_user").css("height","30%");
+                $(".mobile .house_user .mobile_input").css("opacity","0");
+			});
+		});
+	</script>
 </body>
 </html>
