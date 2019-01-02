@@ -23,6 +23,9 @@ class User extends Controller
      */
     public function login(Request $request){
         $phone = input('post.phone');
+        if(!is_numeric($phone)){//过滤非数字字符串
+            return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
+        }
         $data = db('user')->where('phone',$phone)->find();
         if (!empty($data)){
             Cookie::set('phone',$phone,3600);
