@@ -34,7 +34,7 @@ class Adinfo extends Controller
     public function login(){
         $admin = input('post.admin');
         $pwd = input('post.pwd');
-        if (empty($pwd) && empty($admin)){
+        if (empty($pwd) || empty($admin)){
             return json(['data'=>'','status'=>400,'msg'=>'请输入账户密码']);
         }
         $where = array(

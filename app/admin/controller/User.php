@@ -23,14 +23,13 @@ class User extends Controller
      */
     public function login(Request $request){
         $phone = input('post.phone');
-        $remind = new Remind();
-        $rel = $remind->verification($request);
-        $json = json_decode($rel,true);
-        if ($json['status'] == 200){
+        $data = db('user')->where('phone',$phone)->find();
+        if (!empty($data)){
             Cookie::set('phone',$phone,3600);
             return $this->fetch('admin/index');//跳转首页
+        }else{
+            return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
         }
-        return $rel;
     }
 
     /*
