@@ -16,10 +16,13 @@ class Contract extends Controller
     /*
      * 显示合同列表
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = db('contract')->select();
-        return $this->fetch('index',['data' => $data]);
+        if ($request->isPost()){
+            $adid = input('post.');
+            $data = db('contract')->where('adid',$adid)->select();
+            return $this->fetch('index',['data' => $data]);
+        }
     }
 
     /*
@@ -31,8 +34,9 @@ class Contract extends Controller
         {
             $data = input('post.');
             $contData = [
-                'uid'       => $data['uid'],
+                'adid'      => $data['adid'],
                 'hid'       => $data['hid'],
+                'uid'       => $data['uid'],
                 'bet'       => $data['bet'],
                 'pay'       => $data['pay'],
                 'deposit'   => $data['deposit'],
@@ -59,7 +63,7 @@ class Contract extends Controller
         if ($request->isPost())
         {
             $contid = input('post.contid');
-            $rel = db('contract')->where("contid = $contid")->update(['status' => 0]);
+            $rel = db('contract')->where('contid',$contid)->update(['status' => 0]);
             if ($rel)
             {
                 return json(['data'=>'','status'=>200,'msg'=>'合同已软删除!']);

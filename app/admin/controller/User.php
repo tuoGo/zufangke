@@ -51,6 +51,7 @@ class User extends Controller
         {
             $userInfo = input('post.');
             $data = [
+                'adid'   => $userInfo['adid'],
                 'name'   => $userInfo['name'],
                 'phone'  => $userInfo['phone'],
                 'idcard' => $userInfo['idcard'],
