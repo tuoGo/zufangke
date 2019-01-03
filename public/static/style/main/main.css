@@ -1,0 +1,293 @@
+body,html{
+    height:100%;
+}
+body{
+    overflow:auto;
+    background:rgb(233,237,242);
+}
+/*电脑端*/
+.computer{
+    display:none;
+    height:100%;
+}
+.computer .top-banner{
+    position:fixed;
+    width:100%;
+    height:80px;
+    background:white;
+    box-shadow:0 0 30px #DDDDDD;
+}
+.computer .top-banner .logo{
+    position:absolute;
+    top:50%;
+    left:40px;
+    width:50px;
+    height:40px;
+    background:url("../../images/main-banner/logo.png") no-repeat 0/cover;
+    transform:translateY(-50%);
+}
+.computer .top-banner .logo:after{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:55px;
+    width:120px;
+    height:40px;
+    transform:translateY(-50%);
+    background:url("../../images/main-banner/logoFont.png") no-repeat 0/cover;
+}
+.computer .top-banner .user{
+    position:absolute;
+    top:50%;
+    right:40px;
+    height:60px;
+    transform:translateY(-50%);
+}
+.computer .top-banner .user:hover{
+    cursor:pointer;
+}
+.computer .top-banner .user:before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:-30%;
+    transform:translateY(-50%);
+    width:50px;
+    height:40px;
+    background:url("../../images/main-banner/user_sm.png") no-repeat 0/cover;
+}
+.computer .top-banner .user > div{
+    display:inline-block;
+}
+.computer .top-banner .user .text{
+    position:relative;
+    height:60px;
+    margin-right:20px;
+    line-height:60px;
+    font-size:24px;
+    color:rgb(2,96,196);
+    font-weight:bold;
+}
+.computer .top-banner .user .text .sui-icon{
+    margin-left:20px;
+}
+.computer .top-banner .user .line{
+    position:absolute;
+    top:50%;
+    right:60px;
+    width:2px;
+    height:25px;
+    transform:translateY(-50%);
+    background:rgb(2,96,196);
+}
+.computer .top-banner .user .quit a{
+    font-size:24px;
+    color:rgb(2,96,196);
+    font-weight:bold;
+}
+.computer .top-banner .user .quit a:active{
+    text-decoration:none;
+}
+.computer .left-banner{
+    position:fixed;
+    top:80px;
+    left:0;
+    width:130px;
+    height:100%;
+    background:rgb(60,63,63);
+}
+.computer .hide-box{
+    width:100%;
+    height:80px;
+    margin-bottom:25px;
+}
+.computer .main-content{
+    width:90%;
+    height:80%;
+    margin-left:160px;
+    min-height:500px;
+    background:white;
+}
+.computer .left-banner{
+    padding-top:18px;
+}
+.computer .left-banner .banner-slide{
+    padding:15px 0;
+    color:white;
+    font-size:20px;
+    text-align:center;
+}
+.computer .left-banner .banner-slide a{
+    color:inherit;
+}
+.computer .left-banner .banner-slide:hover{
+    cursor:pointer;
+}
+.computer .left-banner .banner-slide:hover p{
+    color:#1296db;
+}
+.computer .left-banner .banner-slide p:nth-child(1){
+    margin-bottom:8px;
+}
+.computer .left-banner .banner-slide p:nth-child(1) img{
+    width:30px;
+    height:30px;
+}
+.computer .main-content{
+    overflow:hidden;
+}
+.computer .main-content .show-content{
+    position:relative;
+    top:0;
+    min-height:500px;
+}
+@media (min-width:1280px){
+    body{
+        overflow:hidden;
+    }
+    .mobile{
+        display:none;
+    }
+    .computer{
+        display:block;
+    }
+}
+/*移动端*/
+.mobile .top-banner{
+    position:fixed;
+    width:100%;
+    height:80px;
+    background:white;
+    box-shadow:0 0 30px #DDDDDD;
+    z-index:10;
+}
+.mobile .top-banner .logo{
+    margin:20px auto;
+    text-align:center;
+}
+.mobile .left-banner{
+    position:fixed;
+    top:80px;
+    left:-85%;
+    width:85%;
+    height:450px;
+    background:rgb(60,63,63);
+    transition:left .5s ease;
+    z-index:10;
+}
+.mobile .left-banner .arrow_b{
+    position:fixed;
+    top:50%;
+    left:0px;
+    width:10%;
+    height:8%;
+    transition:left .5s ease;
+    z-index:10;
+}
+.mobile .left-banner .ar{
+    background:url("../../images/main-banner/banner-icon/mobile/arrow-r.png") no-repeat 0/cover;
+    background-position-x:-5px;
+}
+.mobile .left-banner .al{
+    background:url("../../images/main-banner/banner-icon/mobile/arrow-l.png") no-repeat 0/cover;
+    background-position-x:-9px;
+}
+.mobile .left-banner .user{
+    text-align:center;
+    background:white;
+    border:1px solid #eee;
+}
+.mobile .left-banner .user .text{
+    font-size:24px;
+    color:rgb(2,96,196);
+    font-weight:bold;
+    vertical-align:middle;
+}
+.mobile .banner-list .banner-slide{
+    position:relative;
+    width:100%;
+    height:50px;
+    border-bottom:1px solid #eee;
+    font-size:30px;
+    color:white;
+    text-align:center;
+    line-height:50px;
+}
+.mobile .banner-list .banner-slide .text{
+    margin:auto;
+}
+.mobile .banner-list .banner-slide .text:before{
+    content:"";
+    position:absolute;
+    top:5px;
+    left:25px;
+    width:40px;
+    height:40px;
+}
+.mobile .banner-list .tb .text:before{
+    background:url("../../images/main-banner/banner-icon/tb.png") no-repeat center/cover;
+}
+.mobile .banner-list .wareHouse .text:before{
+    background:url("../../images/main-banner/banner-icon/icons_warehouse.png") no-repeat center/cover;
+}
+.mobile .banner-list .contract .text:before{
+     background:url("../../images/main-banner/banner-icon/contract.png") no-repeat center/cover;
+}
+.mobile .banner-list .post .text:before{
+    background:url("../../images/main-banner/banner-icon/post.png") no-repeat center/cover;
+}
+.mobile .banner-list .sleep .text:before{
+    background:url("../../images/main-banner/banner-icon/sleep.png") no-repeat center/cover;
+}
+.mobile .banner-list .ct_con .text:before{
+    background:url("../../images/main-banner/banner-icon/ct_con.png") no-repeat center/cover;
+}
+.mobile .banner-list .system .text:before{
+    background:url("../../images/main-banner/banner-icon/system.png") no-repeat center/cover;
+}
+.mobile .hide-box{
+    width:100%;
+    height:80px;
+}
+.mobile .main-content{
+    width:100%;
+    background:white;
+}
+@media (min-width:360px){
+    .mobile .left-banner .arrow_b{
+        top:44%;
+    }
+}
+@media (min-width:360px) and (min-height:812px){
+    .mobile .left-banner .arrow_b{
+        top:35%;
+    }
+    .mobile .left-banner .ar{
+        background-position-x:-13px;
+    }
+}
+@media (min-width:411px){
+    .mobile .left-banner .arrow_b{
+        top:39%;
+    }
+    .mobile .left-banner .ar{
+        background-position-x:-7px;
+    }
+}
+@media (min-width:411px) and (min-height:823px){
+    .mobile .left-banner .arrow_b{
+        width:12%;
+    }
+}
+@media (min-width:768px){
+    .mobile .left-banner .arrow_b{
+        width:8%;
+        top:28%;
+    }
+}
+@media (min-width:1024px){
+    .mobile .left-banner .arrow_b{
+        top:21%;
+    }
+}
+
