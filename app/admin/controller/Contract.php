@@ -19,9 +19,10 @@ class Contract extends Controller
     public function index(Request $request)
     {
         if ($request->isPost()){
-            $adid = input('post.');
+            $adid = input('post.adid');
             $data = db('contract')->where('adid',$adid)->select();
-            return $this->fetch('index',['data' => $data]);
+            print_r($data);
+//            return $this->fetch('index',['data' => $data]);
         }
     }
 
@@ -33,23 +34,40 @@ class Contract extends Controller
         if ($request->isPost())
         {
             $data = input('post.');
-            $contData = [
-                'adid'      => $data['adid'],
-                'hid'       => $data['hid'],
-                'uid'       => $data['uid'],
-                'bet'       => $data['bet'],
-                'pay'       => $data['pay'],
-                'deposit'   => $data['deposit'],
-                'payment'   => $data['payment'],
-                'chargeday' => $data['chargeday'],
-                'water'     => $data['water'],
-                'elec'      => $data['elec'],
-                'sms_time'  => time(),
+            $time = time();
+            $userData = [
+                'adid'          => $data['adid'],
+                'hid'           => $data['hid'],
+                'name'          => $data['name'],
+                'phone'         => $data['phone'],
+                'idcard'        => $data['idcard'],
+                'create_time'   => $time,
+                'update_time'   => $time,
             ];
-            $rel = model('contract')->allowField(true)->save($contData);
-            if ($rel)
+            $uid = model('user')->insertGetId($userData);
+            if ($uid)
             {
-                return json(['data'=>'','status'=>200,'msg'=>'合同添加成功!']);
+                $contData = [
+                    'adid'              => $data['adid'],
+                    'hid'               => $data['hid'],
+                    'uid'               => $uid,
+                    'bet'               => $data['bet'],
+                    'pay'               => $data['pay'],
+                    'deposit'           => $data['deposit'],
+                    'payment'           => $data['payment'],
+                    'chargeday'         => $data['chargeday'],
+                    'water'             => $data['water'],
+                    'elec'              => $data['elec'],
+                    'idcard_img_front'  => $data['idcard_img_front'],
+                    'idcard_img_behind' => $data['idcard_img_behind'],
+                    'contract_img'      => $data['contract_img'],
+                    'sms_time'  => $time,
+                ];
+                $rel = model('contract')->allowField(true)->save($contData);
+                if ($rel)
+                {
+                    return json(['data'=>'','status'=>200,'msg'=>'合同添加成功!']);
+                }
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同添加失败!']);
         }
@@ -70,5 +88,10 @@ class Contract extends Controller
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
+    }
+    //显示合同添加页
+    public function addpage()
+    {
+        return $this->fetch('index');
     }
 }

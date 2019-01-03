@@ -32,6 +32,7 @@ class Remind extends Controller
                     $phone = db('user')->where('uid',$v['uid'])->find()['phone'];
                     //调用短信接口 更新数据库合同已提醒状态和sms_time
                     $url = "http://yun.movek.net:83/api/sms/send.json";
+                    //短信参数
                     $sms = [
                         'apikey'   => '4218ce5136404fe695b62f0c18b70130',
                         'tpl_id'   => '529',
