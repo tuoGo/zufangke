@@ -179,7 +179,7 @@ body{
     position:fixed;
     top:50%;
     left:0px;
-    width:10%;
+    width:12%;
     height:8%;
     transition:left .5s ease;
     z-index:10;
@@ -190,7 +190,7 @@ body{
 }
 .mobile .left-banner .al{
     background:url("../../images/main-banner/banner-icon/mobile/arrow-l.png") no-repeat 0/cover;
-    background-position-x:-9px;
+    background-position-x:-4px;
 }
 .mobile .left-banner .user{
     text-align:center;
@@ -281,7 +281,7 @@ body{
 }
 @media (min-width:768px){
     .mobile .left-banner .arrow_b{
-        width:8%;
+        width:9%;
         top:28%;
     }
 }
