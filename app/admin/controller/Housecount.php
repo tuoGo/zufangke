@@ -19,7 +19,8 @@ class Housecount extends Controller
      */
     public function index()
     {
-        $count = Db::query("select hid,count(hid) from zfk_user group by hid");
+        $count = db('user')->field('hid',count('hid'))->group('hid')->select();//Db::query("select hid,count(hid) from zfk_user group by hid");
+        print_r($count);exit;
         return $this->fetch('index',['data',$count]);
     }
 

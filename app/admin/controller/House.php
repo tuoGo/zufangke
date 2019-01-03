@@ -48,7 +48,7 @@ class House extends Controller
             try{
                 //数据库存储操作
                 model('house')->save($data);
-                return json(['data'=>'','status'=>200,'msg'=>'用户编辑成功!']);
+                return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
             }catch (Exception $e){
                 return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
             }
@@ -70,7 +70,7 @@ class House extends Controller
             );
             try{
                 model('house')->allowField(true)->save($data,['hid' => $hid]);
-                return json(['data'=>'','status'=>200,'msg'=>'用户编辑成功!']);
+                return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
             }catch (Exception $e){
                 return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
             }
@@ -86,9 +86,9 @@ class House extends Controller
      */
     public function del(){
         try{
-            $hid = input('get.hid');
+            $hid = input('post.hid');
             db('house')->delete($hid);
-            return json(['data'=>'','status'=>200,'msg'=>'删除用户成功!']);
+            return json(['data'=>'','status'=>200,'msg'=>'删除房源成功!']);
         }catch (Exception $e){
             return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
         }
