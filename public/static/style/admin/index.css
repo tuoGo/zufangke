@@ -15,6 +15,7 @@
     font-family:"楷体";
     font-size:24px;
     text-align:center;
+    font-weight:bold;
 }
 .main-content .show-content .contact{
     width:100%;
@@ -32,9 +33,11 @@
     font-size:18px;
     text-align:center;
     line-height:40px;
+    font-weight:bold;
 }
 .computer .main-content .show-content .developer ul li h1{
     font-family:"楷体";
+    font-size:27px;
 }
 /*移动端*/
 .mobile .main-content .show-content .contact{
@@ -51,4 +54,9 @@
     font-size:18px;
     text-align:center;
     line-height:40px;
+    font-weight:bold;
+}
+.mobile .main-content .show-content .developer ul li h1{
+    font-family:"楷体";
+    font-size:27px;
 }
