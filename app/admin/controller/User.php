@@ -14,26 +14,10 @@ use think\Exception;
 use think\Request;
 use think\Db;
 use think\Cookie;
+use think\Session;
 
 class User extends Controller
 {
-
-    /*
-     * 租客登录
-     */
-    public function login(Request $request){
-        $phone = input('post.phone');
-        if(!is_numeric($phone)){//过滤非数字字符串
-            return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
-        }
-        $data = db('user')->where('phone',$phone)->find();
-        if (!empty($data)){
-            Cookie::set('phone',$phone,3600);
-            return $this->fetch('admin/index');//跳转首页
-        }else{
-            return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
-        }
-    }
 
     /*
      * 用户列表

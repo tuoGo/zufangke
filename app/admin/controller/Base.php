@@ -1,46 +1,41 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
+use think\Session;
 
 class Base extends Controller{
 
     function _initialize(){
-        //判断房东
-        $adname = cookie('adname');
-        $adid   = cookie('adid');
-        //判断普通租客
-        $phone = cookie('phone');
-
-        if (!isset($adid) && !isset($phone)){
-            header('location: http://'.$_SERVER['HTTP_HOST'].'Log/index');
-            die;
+        //检查是否登录
+        if(!session('adname') && !session('username')){
+            $this->error('请先登录！',url('/admin/login/index'));
         }
+        //判断房东
+        $adname = Session::get('adname');
+        $adid   = Session::get('adid');
+        //判断普通租客
+        $phone = Session::get('phone');
+
+
         // 登录用户进行再次验证
         if(empty($adname)){//若房东为空
             $where = array(
                 'phone' => ['=',$phone],
             );
-            $adminArr = db('user')->where($where)->select()[0];
+            $adminArr = db('user')->where($where)->find();
         }else{
             $where = array(
                 'adname' => ['=',$adname],
                 'adid' => ['=',$adid],
             );
-            $adminArr = db('admin')->where($where)->select()[0];
-        }
-
-        if(empty($adminArr)){
-            // 判断是否为合法数据
-            header('location: http://'.$_SERVER['HTTP_HOST'].'index');
-            die;
+            $adminArr = db('admin')->where($where)->find();
         }
         // 对角色进行管理
         // 得到对应的角色以及权限
-        $roleArr = db('role')->where('roleid','=',$adminArr['rid'])->select()[0];
+        $roleArr = db('role')->where('roleid','=',$adminArr['rid'])->find();
         if(empty($roleArr)){
             // 若没有对应的权限则为非法用户
-            header('location: http://'.$_SERVER['HTTP_HOST'].'index');
-            die;
+            return json(); //提示开通权限
         }
 
         $powerid = explode('|', $roleArr['powerid']);

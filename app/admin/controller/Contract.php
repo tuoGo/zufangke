@@ -21,9 +21,14 @@ class Contract extends Controller
         if ($request->isPost()){
             $adid = input('post.adid');
             $data = db('contract')->where('adid',$adid)->select();
-            print_r($data);
-//            return $this->fetch('index',['data' => $data]);
+            return $this->fetch('index',['data' => $data]);
         }
+    }
+
+    //显示合同添加页
+    public function addpage()
+    {
+        return $this->fetch();
     }
 
     /*
@@ -73,6 +78,12 @@ class Contract extends Controller
         }
     }
 
+    //显示合同删除页
+    public function delpage()
+    {
+        return $this->fetch();
+    }
+
     /*
      * 软删除合同
      */
@@ -88,10 +99,5 @@ class Contract extends Controller
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
-    }
-    //显示合同添加页
-    public function addpage()
-    {
-        return $this->fetch('index');
     }
 }

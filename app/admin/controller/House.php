@@ -11,7 +11,7 @@ use think\Controller;
 use think\Exception;
 use think\Request;
 
-class House extends Controller
+class House extends Base
 {
     //房源列表
     public function index(Request $request)
@@ -29,7 +29,13 @@ class House extends Controller
             }
             return $this->fetch('house_list',['data'=>$data]);
         }
+        return $this->fetch('house_list');
 
+    }
+
+    public function addpage()
+    {
+        return $this->fetch();
     }
 
     /**
@@ -53,6 +59,11 @@ class House extends Controller
                 return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
             }
         }
+    }
+
+    public function editpage()
+    {
+        return $this->fetch();
     }
 
     /**
@@ -79,6 +90,11 @@ class House extends Controller
             $data = db('house')->where('hid','=',$hid)->select()[0];
             return $this->fetch('admin/index',['data'=>$data]);
         }
+    }
+
+    public function delpage()
+    {
+        return $this->fetch();
     }
 
     /**
