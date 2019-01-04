@@ -42,8 +42,6 @@ class Adinfo extends Base
 
             }
         }
-        $info = Db::table('zfk_admin')->field('adname,phone')->select();
-        $info = $info[0];
-        return $this->fetch('index',['data' => $info]);
+        return $this->fetch('index',['data' => '']);
     }
 }
