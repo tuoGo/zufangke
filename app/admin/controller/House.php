@@ -7,7 +7,6 @@
  */
 namespace app\admin\controller;
 
-use think\Controller;
 use think\Exception;
 use think\Request;
 

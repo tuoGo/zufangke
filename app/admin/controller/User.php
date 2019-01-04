@@ -8,15 +8,12 @@
 
 namespace app\admin\controller;
 
-use app\admin\controller\Remind;
 use think\Controller;
 use think\Exception;
 use think\Request;
 use think\Db;
-use think\Cookie;
-use think\Session;
 
-class User extends Controller
+class User extends Base
 {
 
     /*

@@ -10,6 +10,7 @@ namespace app\admin\controller;
 
 
 use think\Controller;
+use think\Session;
 
 class Login extends Controller
 {

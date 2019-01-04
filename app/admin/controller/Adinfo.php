@@ -10,12 +10,10 @@ namespace app\admin\controller;
 
 
 use think\Controller;
-use think\Cookie;
 use think\Request;
 use think\Db;
-use think\Session;
 
-class Adinfo extends Controller
+class Adinfo extends Base
 {
 
     /*

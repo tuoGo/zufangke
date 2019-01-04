@@ -10,7 +10,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 
-class Introduce extends Controller
+class Introduce extends Base
 {
     public function index()
     {

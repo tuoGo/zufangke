@@ -11,7 +11,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 
-class Contract extends Controller
+class Contract extends Base
 {
     /*
      * 显示合同列表
