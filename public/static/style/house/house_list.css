@@ -1,0 +1,208 @@
+.computer .show-content{
+    padding:20px;
+}
+.computer .show-content .title{
+    padding-bottom:10px;
+    border-bottom:1px solid rgb(238,238,238);
+    font-size:30px;
+    color:rgb(2,96,196);
+    line-height:30px;
+}
+.computer .show-content .title span{
+    margin:0 5px;
+}
+.computer .show-content .title a{
+    margin-bottom:5px;
+}
+.computer .show-content .house-title{
+    padding:20px 0;
+}
+.computer .show-content .house-title .banner-box{
+    position:relative;
+    margin-right:100px;
+}
+.computer .show-content .house-title .banner-box .title_s:hover{
+    color:rgb(2,96,196);
+    cursor:pointer;
+}
+.computer .show-content .house-title .banner-box .list{
+    margin-right:18px;
+    line-height:36px;
+}
+.computer .show-content .house-title .banner-box .bor-b{
+    padding-bottom:6px;
+    font-family:"黑体";
+    font-size:30px;
+    font-weight:bold;
+}
+.computer .show-content .house-title .banner-box .chose{
+    color:rgb(2,96,196);
+    border-bottom:3px solid #0099ff;
+}
+.computer .show-content .house-title .banner-box .search{
+    position:relative;
+    display:inline-block;
+    border-radius:5px;
+}
+.computer .show-content .house-title .banner-box .search-icon{
+    position:absolute;
+    top:8px;
+    right:5px;
+    width:25px;
+    height:25px;
+    background:url("../../images/main-banner/banner-icon/Search.png") no-repeat 0/cover;
+    cursor:pointer;
+}
+.computer .show-content .house-title .fr{
+    padding-top:5px;
+    margin-right:15px;
+}
+.computer .show-content .house-title .fr a{
+    margin-top:2px;
+}
+.computer .show-content .house-box{
+    margin-bottom:20px;
+}
+.computer .show-content .house-box .top-title .area-title{
+    margin-right:18px;
+    font-size:20px;
+    font-weight:bold;
+    line-height:25px;
+}
+.computer .show-content .house-box .top-title .area-menu{
+    width:20px;
+    border:2px solid #0099ff;
+    border-radius:50%;
+    font-size:18px;
+    color:#0099ff;
+    text-align:center;
+    cursor:pointer;
+}
+.computer .show-content .house-box .top-title .pack,.computer .show-content .house-box .mid-content .m-top-title .room-pack{
+    transform:rotate(180deg);
+    transition:transform .2s linear;
+}
+.computer .show-content .house-box .top-title .zero,
+.computer .show-content .house-box .mid-content .m-top-title .zero{
+    transform:rotate(0deg);
+}
+.computer .show-content .house-box .top-title .pack:hover,
+.computer .show-content .house-box .mid-content .m-top-title .room-pack:hover{
+    color:#0099ff;
+    cursor:pointer;
+}
+.computer .show-content .house-box .top-title .house-msg{
+    font-size:20px;
+    margin-right:18px;
+}
+.computer .show-content .house-box .top-title .house-msg .number{
+    color:#0099ff;
+}
+.computer .show-content .house-box .mid-content{
+    overflow:hidden;
+    padding:10px;
+    height:290px;
+    transition:all .3s linear;
+    border-bottom:1px solid rgb(238,238,238);
+}
+.computer .show-content .house-box .mid-content .m-top-title{
+    margin-top:15px;
+    font-size:20px;
+}
+.computer .show-content .house-box .mid-content .m-top-title .room-title{
+    color:#0099ff;
+    font-weight:bold;
+    margin-right:50px;
+}
+.computer .show-content .house-box .mid-content .m-top-title .room-command{
+    margin-right:25px;
+}
+.computer .show-content .house-box .mid-content .m-top-title .room-command:hover,.computer .show-content .house-box .mid-content .m-top-title .room-pack:hover{
+    color:#0099ff;
+    cursor:pointer;
+}
+.computer .show-content .house-box .mid-content .m-top-title .room-command i{
+    color:#0099ff;
+}
+.computer .show-content .house-box .mid-content .m-mid-content{
+    overflow:hidden;
+    height:220px;
+    padding:10px;
+    margin-top:10px;
+    transition:all .3s linear;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room{
+    width:153px;
+    height:219px;
+    margin-right:20px;
+    border:1px solid #eee;
+    box-shadow:0 0 10px #ddd;
+    text-align:center;
+    cursor:pointer;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap{
+    position:relative;
+    width:153px;
+    height:63px;
+    font-size:20px;
+    color:white;
+    line-height:52px;
+    text-align:center;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .non-empty{
+    background:url("../../images/main-banner/house-blue.png") no-repeat 0/cover;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .empty{
+    background:url("../../images/main-banner/house-orange.png") no-repeat 0/cover;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap .pointer{
+    position:absolute;
+    top:7px;
+    right:10px;
+    width:2px;
+    height:15px;
+    background:url("../../images/main-banner/house-oper-icon.png") no-repeat 0/cover;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap .sign{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:32px;
+    height:32px;
+    margin:45px auto;
+    text-align:center;
+    border-radius:50%;
+    color:white;
+    font-size:20px;
+    line-height:32px;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap .overdue{
+    background:rgb(250,130,130);
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap .null{
+    background:rgb(170,170,170);
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .cap .live{
+    background:rgb(128,194,105);
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-info{
+    margin:23px 0;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .show-msg{
+    margin:12px 0;
+    color:#777;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .warning-msg{
+    color:red;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .price{
+    color:#0099ff;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-info .fire-icon{
+    width:40px;
+    height:40px;
+    margin:0 auto;
+    background:url("../../images/main-banner/fire.png") no-repeat 0/cover;
+}
