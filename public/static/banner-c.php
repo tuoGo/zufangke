@@ -3,7 +3,7 @@
                         '<div class="slide clearfix">'.
                             '<div class="logo"></div>'.
                             '<div class="user">'.
-                                '<div class="text">老王管理员</div>'.
+                                '<div class="text"></div>'.
                                 '<div class="line"></div>'.
                                 '<div class="quit"><a href="#">退出</a></div>'.
                             '</div>'.

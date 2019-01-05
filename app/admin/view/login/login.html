@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="__STATIC__/style/login/login.css">
 	<script src="__STATIC__/scripts/jquery/jquery.min.js"></script>
 	<script src="__STATIC__/scripts/sui/sui.min.js"></script>
+	<script src="__STATIC__/scripts/ajax/synthesize.js"></script>
 </head>
 <body>
 	<!--移动端页面-->
@@ -77,15 +78,15 @@
 					</div>
 				</div>
 				<div class="input_area">
-					<form action="" class="sui-form form-horizontal">
+					<form action="" class="sui-form form-horizontal" id="adloginFrom">
 						<div class="user"><i class="sui-icon icon-tb-myfill"></i>
-							<input type="text" class="input-xfat input-large" placeholder="请输入账号">
+							<input type="text" name="adminphone" class="input-xfat input-large" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入账号">
 						</div>
 						<div class="pwd"><i class="sui-icon icon-tb-lock"></i>
-							<input type="password" class="input-xfat input-large" placeholder="请输入密码">
+							<input type="password" name="adminpwd" class="input-xfat input-large" placeholder="请输入密码">
 						</div>
 						<div class="btn_login">
-							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-danger">登录</a>
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-danger" onclick="adlogin()">登录</a>
 						</div>
 					</form>
 				</div>
@@ -103,12 +104,12 @@
 					</div>
 				</div>
 				<div class="input_area">
-					<form action="" class="sui-form form-horizontal">
+					<form action="" class="sui-form form-horizontal"  id="useloginFrom">
 						<div class="user"><i class="sui-icon icon-tablet"></i>
-							<input type="text" class="input-xfat input-large" placeholder="请输入手机号登录">
+							<input type="text" name="userphone" class="input-xfat input-large" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入手机号登录">
 						</div>
 						<div class="btn_login">
-							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-primary">登录</a>
+							<a href="javascript:void(0);" class="sui-btn btn-xlarge btn-block btn-primary" onclick="uselogin()">登录</a>
 						</div>
 					</form>
 				</div>

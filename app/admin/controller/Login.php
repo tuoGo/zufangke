@@ -10,6 +10,7 @@ namespace app\admin\controller;
 
 
 use think\Controller;
+use think\Exception;
 use think\Session;
 
 class Login extends Controller
@@ -33,20 +34,16 @@ class Login extends Controller
      * 房东登录
      */
     public function adlogin(){
-        $admin = input('post.admin');
+        $admin = input('post.phone');
         $pwd = input('post.pwd');
         if (empty($pwd) || empty($admin)){
             return json(['data'=>'','status'=>400,'msg'=>'请输入账户密码']);
         }
-        $where = array(
-            'adname' => ['=',$admin],
-            'password' => ['=',md5($pwd)],
-        );
-        $data = db('admin')->where($where)->find();
+        $data = db('admin')->where('phone',$admin)->where('password',md5($pwd))->find();
         if(!empty($data)){
             Session::set('adid',$data['adid']);
-            Session::set('adname',$data['adname']);
-            return $this->fetch('admin/index');//跳转首页
+            Session::set('name',$data['adname']);
+            return json(['data'=>$data,'status'=> 200 , 'msg'=> '']);
         }else{
             return json(['data'=>'','status'=>400,'msg'=>'账户密码错误']);
         }
@@ -56,15 +53,19 @@ class Login extends Controller
     /*
      * 租客登录
      */
-    public function uselogin(Request $request){
+    public function uselogin(){
         $phone = input('post.phone');
+        if (empty($phone)){
+            return json(['data' => '','status' => 400, 'msg' => '请输入账号!']);
+        }
         if(!is_numeric($phone)){//过滤非数字字符串
-            return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
+            return json(['data'=>'','status'=>400,'msg'=>'请输入正确手机号!']);
         }
         $data = db('user')->where('phone',$phone)->find();
         if (!empty($data)){
             Session::set('phone',$phone);
-            return $this->fetch('admin/index');//跳转首页
+            Session::set('name',$data['name']);
+            return json(['data'=>$data,'status'=> 200 , 'msg'=> '']);
         }else{
             return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
         }

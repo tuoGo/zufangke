@@ -10,7 +10,7 @@
                       '<div class="left-banner">'.
                             '<div class="user">'.
                                 '<img src="static/images/main-banner/user_sm.png" alt="" width="50" height="40">'.
-                                '<span class="text">老王管理员</span>'.
+                                '<span class="text">{$Request.session.username}</span>'.
                                 '<a href="javascript:void(0)" class="sui-btn btn-large btn-danger">退出</a>'.
                             '</div>'.
                             '<div class="banner-list">'.
