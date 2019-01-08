@@ -49,12 +49,16 @@ class Base extends Controller{
         $flag = false;
         foreach ($powerTotalArr as $k => $v) {
             $url = strtolower('/'.$v['controller'].'/'.$v['action']);
+            if(substr($url, -1) == '/'){
+                $url = substr($url,0,strlen($url)-1);
+            }
             if($url == $action){
                 $flag = true;
             }
         }
         if(!$flag){
-            return json(['data'=>'','status'=>400,'msg'=>'您没有权限']);
+            json(['data'=>'','status'=>400,'msg'=>'您没有权限'])->send();
+            exit;
         }
 
         // 重组控制器和方法
