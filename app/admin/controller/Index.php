@@ -7,10 +7,7 @@ class Index extends Base
 {
     public function index()
     {
-        $data = [
-            'name'  => Session::get('name'),
-            'phone' => Session::get('phone'),
-        ];
+        $data = Session::get();
         $this->assign('data',$data);
         return $this->fetch('admin/index');
     }

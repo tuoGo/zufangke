@@ -24,9 +24,7 @@ class Login extends Controller
      * 全部退出
      */
     public function out(){
-        Session::delete('adid');
-        Session::delete('adname');
-        Session::delete('phone');
+        Session::clear();
         return $this->fetch('Log/index');//跳转登录页
     }
 
@@ -41,8 +39,10 @@ class Login extends Controller
         }
         $data = db('admin')->where('phone',$admin)->where('password',md5($pwd))->find();
         if(!empty($data)){
+            Session::clear();
             Session::set('adid',$data['adid']);
             Session::set('name',$data['adname']);
+            Session::set('phone',$data['phone']);
             return json(['data'=>$data,'status'=> 200 , 'msg'=> '']);
         }else{
             return json(['data'=>'','status'=>400,'msg'=>'账户密码错误']);
@@ -63,8 +63,10 @@ class Login extends Controller
         }
         $data = db('user')->where('phone',$phone)->find();
         if (!empty($data)){
-            Session::set('phone',$phone);
+            Session::clear();
+            Session::set('uid',$data['uid']);
             Session::set('name',$data['name']);
+            Session::set('phone',$phone);
             return json(['data'=>$data,'status'=> 200 , 'msg'=> '']);
         }else{
             return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
