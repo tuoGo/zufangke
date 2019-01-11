@@ -31,13 +31,13 @@ class Financial extends Base
      */
     public function add(){
         $data = array(
-            'rent'         => input('post.rent'),
-            'deposit'      => input('post.deposit'),
-            'water'        => input('post.deposit'),
-            'adid'         => Session::get('adid'),
-            'amount'       => input('post.amount'),
-            'electricity'  => input('post.electricity'),
-            'trading_time' => time(),
+            'rent'         => input('post.rent'),//租金
+            'deposit'      => input('post.deposit'),//押金
+            'water'        => input('post.deposit'),//水费
+            'adid'         => Session::get('adid'),//房东主键
+            'amount'       => input('post.amount'),//总金额
+            'electricity'  => input('post.electricity'),//电费
+            'trading_time' => time(),//交易时间
         );
         try{
             db('financial')->insert($data);
@@ -54,12 +54,12 @@ class Financial extends Base
         if($request->isPost()){
             $fid = input('post.fid');//主键
             $data = array(
-                'rent'         => input('post.rent'),
-                'deposit'      => input('post.deposit'),
-                'water'        => input('post.deposit'),
-                'amount'       => input('post.amount'),
-                'electricity'  => input('post.electricity'),
-                'trading_time' => time(),
+                'rent'         => input('post.rent'),//租金
+                'deposit'      => input('post.deposit'),//押金
+                'water'        => input('post.deposit'),//水费
+                'amount'       => input('post.amount'),//总金额
+                'electricity'  => input('post.electricity'),//电费
+                'trading_time' => time(),//交易时间
             );
             try{
                 db('financial')->where('fid',$fid)->update($data);

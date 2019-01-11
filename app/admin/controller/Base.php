@@ -46,6 +46,8 @@ class Base extends Controller{
 
         // 对路径进行判断
         $action = strtolower($_SERVER['REDIRECT_URL']);
+        $count = strpos($action,".html");
+        $action = substr_replace($action,"",$count,5);
         $flag = false;
         foreach ($powerTotalArr as $k => $v) {
             $url = strtolower('/'.$v['controller'].'/'.$v['action']);
@@ -55,6 +57,9 @@ class Base extends Controller{
             if($url == $action){
                 $flag = true;
             }
+        }
+        if(empty($action)){
+            $flag = true;
         }
         if(!$flag){
             json(['data'=>'','status'=>400,'msg'=>'您没有权限'])->send();
