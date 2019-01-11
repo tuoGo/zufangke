@@ -47,7 +47,9 @@ class Base extends Controller{
         // 对路径进行判断
         $action = strtolower($_SERVER['REDIRECT_URL']);
         $count = strpos($action,".html");
-        $action = substr_replace($action,"",$count,5);
+        if($count){
+            $action = substr_replace($action,"",$count,5);
+        }
         $flag = false;
         foreach ($powerTotalArr as $k => $v) {
             $url = strtolower('/'.$v['controller'].'/'.$v['action']);
