@@ -70,6 +70,7 @@
     line-height:25px;
 }
 .computer .show-content .house-box .top-title .area-menu{
+    position:relative;
     width:20px;
     border:2px solid #0099ff;
     border-radius:50%;
@@ -77,6 +78,35 @@
     color:#0099ff;
     text-align:center;
     cursor:pointer;
+}
+.computer .show-content .house-box .top-title .area-menu .c-list{
+    display:none;
+    position:absolute;
+    top:32px;
+    left:-43px;
+    width:90px;
+    padding:10px;
+    text-align:center;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:white;
+    z-index:10;
+}
+.computer .show-content .house-box .top-title .area-menu .c-list .list-arrow{
+    position:absolute;
+    top:-20px;
+    left:42px;
+    width:0;
+    height:0;
+    border:10px solid;
+    border-color:transparent transparent #eee transparent;
+    z-index:11;
+}
+.computer .show-content .house-box .top-title .area-menu .c-list ul li{
+    color:#777;
+}
+.computer .show-content .house-box .top-title .area-menu .c-list ul li:hover{
+    color:#0099ff;
 }
 .computer .show-content .house-box .top-title .pack,.computer .show-content .house-box .mid-content .m-top-title .room-pack{
     transform:rotate(180deg);
@@ -100,8 +130,8 @@
 }
 .computer .show-content .house-box .mid-content{
     overflow:hidden;
+    max-height:290px;
     padding:10px;
-    height:290px;
     transition:all .3s linear;
     border-bottom:1px solid rgb(238,238,238);
 }
@@ -132,6 +162,7 @@
     transition:all .3s linear;
 }
 .computer .show-content .house-box .mid-content .m-mid-content .house-room{
+    position:relative;
     width:153px;
     height:219px;
     margin-right:20px;
@@ -205,4 +236,132 @@
     height:40px;
     margin:0 auto;
     background:url("../../images/main-banner/fire.png") no-repeat 0/cover;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle{
+    display:none;
+    position:absolute;
+    bottom:0;
+    left:153px;
+    width:437px;
+    background:white;
+    border:1px solid #ddd;
+    box-shadow:0 0 15px #ddd;
+    text-align:left;
+    text-indent:15px;
+    z-index:15;
+    cursor:default;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg{
+    border-right:1px solid #ddd;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg > div{
+    padding-right:15px;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg-top{
+    border-bottom:1px solid #ddd;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg-title{
+    line-height:40px;
+    font-size:20px;
+    font-weight:bold;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg .all-msg-house{
+    padding-bottom:10px;
+    border-bottom:1px dashed #ddd;
+    line-height:22px;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .all-msg .all-msg-contract{
+    min-height:85px;
+    padding-bottom:10px;
+    line-height:22px;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area{
+    position:relative;
+    width:150px;
+    background:#eee;
+    text-align:left;
+    text-indent:15px;
+    z-index:15;
+    cursor:default;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list{
+    padding-top:10px;
+    line-height:30px;
+    color:#0099ff;
+    cursor:pointer;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-contract-handle{
+    position:absolute;
+    bottom:2%;
+}
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-contract-handle > div:hover,
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-controll > div:hover{
+    color:orange;
+}
+/*模态框*/
+#housing{
+    width:1300px;
+    margin-left:-650px;
+}
+#rooming{
+    width:1240px;
+    margin-left:-620px;
+}
+#housing .modal-content .modal-body,
+#rooming .modal-content .modal-body{
+    overflow:initial;
+    max-height:2000px;
+}
+#housing .modal-body .house-type,
+#housing .modal-body .plot,
+#housing .modal-body .house-number{
+    margin-bottom:20px;
+    font-size:16px;
+    color:#0099ff;
+}
+#rooming .modal-body .house-type,
+#rooming .modal-body .plot,
+#rooming .modal-body .house-number{
+    margin-bottom:20px;
+    font-size:16px;
+    color:#0099ff;
+}
+#rooming .modal-body .plot p{
+    border:1px solid #ddd;
+}
+#housing .modal-body .table-area thead th,
+#rooming .modal-body .table-area thead th{
+    text-align:center;
+}
+#housing .modal-body .table-area tbody td input{
+    width:90%;
+    text-align:center;
+}
+#rooming .modal-body .table-area tbody td input{
+    display:block;
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+}
+#rooming .modal-body .table-area tbody td.room-size,#rooming .modal-body .table-area tbody td.room-price{
+    width:100px;
+}
+#housing .modal-body .table-area td span.dropdown-inner,
+#rooming .modal-body .table-area td span.dropdown-inner{
+    width:63px;
+}
+#housing .modal-body .table-area td span.dropdown-inner a.dropdown-toggle,
+#rooming .modal-body .table-area td span.dropdown-inner a.dropdown-toggle{
+    min-width:0;
+}
+#housing .modal-body .table-area tbody td.fitment span.dropdown-inner,
+#rooming .modal-body .table-area tbody td.fitment span.dropdown-inner{
+    width:120px;
+}
+#rooming .modal-body .table-area tbody td.room-type span.dropdown-inner{
+    width:105px;
+}
+#rooming .modal-body .table-area tbody td.room-comment{
+    font-size:18px;
+    text-align:center;
 }

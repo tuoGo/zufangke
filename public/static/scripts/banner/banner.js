@@ -134,4 +134,10 @@ $(function(){
         }
     }
     browserRedirect();
+    function init(){
+        var adId = $(".adId").html();
+        var adName = $(".adName").html();
+        $(".top-banner .slide .text").html(adName);
+    }
+    init();
 });

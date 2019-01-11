@@ -8,7 +8,7 @@ class Base extends Controller{
 
     function _initialize(){
         //检查是否登录
-        if(!session('adname') && !session('username')){
+        if(!session('name')){
             $this->error('请先登录！',url('/admin/login/index'));
         }
         //判断房东
