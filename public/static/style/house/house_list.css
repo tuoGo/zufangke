@@ -65,7 +65,7 @@
 }
 .computer .show-content .house-box .top-title .area-title{
     margin-right:18px;
-    font-size:20px;
+    font-size:23px;
     font-weight:bold;
     line-height:25px;
 }
@@ -318,6 +318,9 @@
     margin-bottom:20px;
     font-size:16px;
     color:#0099ff;
+}
+#housing .modal-body .add-plot{
+    display:none;
 }
 #rooming .modal-body .house-type,
 #rooming .modal-body .plot,

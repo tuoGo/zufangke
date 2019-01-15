@@ -46,20 +46,17 @@ $(function(){
             that.parent().parent().css("overflow","hidden");
         });
     });
+    //添加房源按钮事件
+    $(".big-add").click(function(){
+        $("#housing .plot").hide();
+        $("#housing .add-plot").show();
+    });
     //小区区域的添加房源按钮(自动选择小区)
     $(".plot-add").click(function(){
         var title = $(this).parents(".top-title").find(".area-title").html();
-        var lis = $("#housing .plot ul li");
-        var liTitle = "";
-        var el = "";
-        $.each(lis,function(index,value){
-            el = $(value);
-            liTitle = trim(el.find("a").html());
-            if(liTitle === title){
-                el.find("a").click();
-                return false;
-            }
-        });
+        $("#housing .plot input[name=plot]").val(title);
+        $("#housing .plot").show();
+        $("#housing .add-plot").hide();
     });
     //房源数目更换事件
     $("#housing .house-number input[name=plot_number]").change(trChange);
@@ -85,6 +82,7 @@ $(function(){
             }
         }
     }
+    //添加房源小区模板
     function addPlotTr(num){
         var inner = '';
         inner += '<tr>';
@@ -234,8 +232,8 @@ $(function(){
             $("#housing .add").append(inner);
         }
     }
+    //添加房源房间模板
     function addRoomTr(num){
-
         var inner = '';
         inner += '<tr>';
         inner += '<td class="room-t"><input type="text" readonly="readonly" value="" name="build_name"></td>';
@@ -438,6 +436,25 @@ $(function(){
             $("#rooming .add").append(inner);
         }
     }
+    //房源小区编辑事件
+    $(".room-edit").click(function(){
+        var house = $("#housing");
+        var input = $("#housing .plot input[name=plot]");
+        input.val($(this).parents(".house-box").find(".top-title .area-title").html());
+        input.bind("input propertychange change",inputResize(input));
+        /*
+        *  ajax 请求获取小区下该单元各类参数并显示到表格上
+        * */
+        house.find(".house-number").hide();
+        house.modal("show");
+    });
+    //房源房间编辑事件
+    $(".house-room .edit").click(function(){
+        var room = $("#rooming");
+        room.find(".house-number").hide();
+        room.find(".plot").hide();
+        room.modal("show");
+    });
     //房间添加事件
     $(".room-plus").click(function(){
         var input = $("#rooming .plot input");
@@ -475,5 +492,19 @@ $(function(){
                 return $("#rooming").modal("shadeOut");
             }
         });
+    }
+    //删除操作
+    $(".del-plot").click(popup.bind(null,1));
+    $(".del-unit").click(popup.bind(null,2));
+    $(".del-room").click(popup.bind(null,3));
+    function popup(rank){
+        return $.confirm({
+            title : "请确认您的操作",
+            body : "确定要执行删除的操作吗！？",
+            okHide : del.bind(null,rank)
+        });
+    }
+    function del(rank){
+        console.log(rank);
     }
 });
