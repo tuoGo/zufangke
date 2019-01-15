@@ -1,3 +1,4 @@
+//房东登录
 function adlogin() {
     var phone = $("input[name = 'adminphone']").val();
     var pwd   = $("input[name = 'adminpwd']").val();
@@ -24,7 +25,7 @@ function adlogin() {
         }
     });
 }
-
+//用户登录
 function uselogin() {
     var phone = $("input[name='userphone']").val();
     if (phone == ''){
@@ -44,7 +45,7 @@ function uselogin() {
         }
     });
 }
-
+//检测手机号
 function checkPhone(phone){
     var phone = phone;
     if(!(/^1(3|4|5|7|8)\d{9}$/.test(phone))){
@@ -52,4 +53,21 @@ function checkPhone(phone){
         return false;
     }
 }
+//合租房or整租房or全部显示
+function leaseType(type,status) {
+    var type   = type;      //整租or合租 1整租 2合租                不传为全部
+    var status = status;    //房源状态 1为已租 2为未租 3为逾期 4着火房 不传为全部
+    $.ajax({
+        url:"/house/leasetype",
+        data:{'adid':adid,'type':type,'status':status},
+        type:"post",
+        dataType:"json",
+        success:function (data){
+            if (data.status == 200){
+                console.log(data)
+            }
+        }
+    });
+}
+//
 

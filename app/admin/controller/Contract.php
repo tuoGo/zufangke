@@ -23,6 +23,8 @@ class Contract extends Base
             $data = db('contract')->where('adid',$adid)->select();
             return $this->fetch('index',['data' => $data]);
         }
+        $Data = db('contract')->select();
+        return $this->fetch('index',['data' => $Data]);
     }
 
     //显示合同添加页
