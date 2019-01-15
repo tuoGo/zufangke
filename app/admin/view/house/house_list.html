@@ -71,10 +71,11 @@
 					</div>
 				</div>
 				<!--房源列表-->
+				{foreach name="data" item="item" key="key"}
 				<div class="house-box">
 					<div class="top-title clearfix">
 						<!--区域-->
-						<div class="area-title fl">劲松3区(北京朝阳劲松桥西南角50米路南)</div>
+						<div class="area-title fl" data-id="{$item.hid}">{$item.address}</div>
 						<div class="area-menu fl">
 							<i class="sui-icon icon-tb-more"></i>
 							<div class="c-list">
@@ -102,12 +103,14 @@
 							</p>
 						</div>
 					</div>
+					<!--第二层-->
+					{foreach name="data[$key]['father']" item="val" key="ky"}
 					<div class="mid-content">
 						<!--小区单元-->
 						<div class="m-top-title clearfix">
-							<div class="room-title fl">
+							<div class="room-title fl" data-id="{$val.roomid}">
 								<p>
-									307栋6单元503室
+									{$val.room}
 								</p>
 							</div>
 							<div class="room-command fl room-plus">
@@ -134,47 +137,78 @@
 								</p>
 							</div>
 						</div>
+
 						<div class="m-mid-content clearfix">
-							<!--房间-->
+
+							<!--第三层-->
+							{foreach name="data[$key]['father'][$ky]['child']" item="vv" key="kk"}
 							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
+								<div class="cap {if $vv.status==1||$vv.status==2}non-empty{else}empty{/if}" data-id="{$vv.underid}">
 									<p>
-										01
+										{$vv['tag']}
 									</p>
+
 									<div class="pointer"></div>
+									{if $vv.status==1}
+									<div class="sign live">
+										<p>
+											住
+										</p>
+									</div>
+									{elseif $vv.status==2}
 									<div class="sign overdue">
 										<p>
 											逾
 										</p>
 									</div>
+									{else /}
+									<div class="sign null">
+										<p>
+											空
+										</p>
+									</div>
+									{/if}
 								</div>
+								{if $vv.status==0||$vv.status==4}
 								<div class="house-info">
-									<div class="show-msg other"></div>
-									<div class="show-msg phone">18974933220</div>
-									<div class="show-msg warning-msg">逾期63天</div>
-									<div class="show-msg room-user">陈金</div>
-									<div class="show-msg price">800元/月</div>
+									<div class="show-msg other">已空置{$vv.vacancy}天</div>
+									{if $vv.status==4}<div class="fire-icon"></div>{/if}
+									<div class="show-msg price">{$vv.amount}元/月</div>
 								</div>
+								{else /}
+								<div class="house-info">
+									<div class="show-msg phone">{$vv['user']['phone']}</div>
+									{if $vv.status==2}<div class="show-msg warning-msg">逾期{$vv.vacancy}天</div>{/if}
+									<div class="show-msg room-user">{$vv['user']['name']}</div>
+									<div class="show-msg price">{$vv.amount}元/月</div>
+								</div>
+								{/if}
 								<div class="house-handle clearfix">
 									<div class="all-msg fl">
 										<div class="all-msg-top">
-											<div class="all-msg-title">307栋6单元503室01</div>
+											<div class="all-msg-title">{$val.room}{$vv.tag}</div>
 										</div>
 										<div class="all-msg-house">
 											<div class="all-msg-title">房间详情</div>
-											<div class="house-price">房间租金 : 2200元/月</div>
-											<div class="pay-type">付款方式 : 押1付3</div>
-											<div class="house-cash">房间押金 : 2200元</div>
-											<div class="fitment">装修状态 : 中等装修</div>
-											<div class="contact">联系电话 : 13001047286</div>
+											<div class="house-price">房间租金 : {$vv.amount}元/月</div>
+											<div class="pay-type">付款方式 : 押{$vv['contract']['bet']}付{$vv['contract']['pay']}</div>
+											<div class="house-cash">房间押金 : {$vv['contract']['deposit']}元</div>
+											<div class="fitment">装修状态 : {$vv.decorate}</div>
+											<div class="contact">联系电话 : {$Think.session.phone}</div>
 										</div>
+										{if $vv.status==0||$vv.status==4}
+										<div class="all-msg-contract">
+											<div class="house-status">空置情况 : 已空置{$vv.vacancy}天</div>
+										</div>
+										{else /}
 										<div class="all-msg-contract">
 											<div class="all-msg-title">租约详情</div>
 											<div class="house-status">合同状态 : 租住中</div>
-											<div class="user-name">租客姓名 : 陈金</div>
-											<div class="user-phone">租客手机 : 18974933220</div>
-											<div class="contract-time">租约起始 : 2018.05.01-2019.04.30</div>
+											<div class="user-name">租客姓名 : {$vv['user']['name']}</div>
+											<div class="user-phone">租客手机 : {$vv['user']['phone']}</div>
+											<div class="contract-time">租约起始 : {$vv['contract']['start_time']}-{$vv['contract']['end_time']}</div>
 										</div>
+										{/if}
 									</div>
 									<div class="handle-area fr">
 										<div class="all-msg-top">
@@ -185,82 +219,36 @@
 												<div class="edit">编辑房源</div>
 												<div class="delete">删除房源</div>
 											</div>
+											{if $vv.status==1||$vv.status==2}
 											<div class="house-contract-handle">
-												<div class="enter"></div>
-												<div class="launch"></div>
 												<div class="exit">退房</div>
 												<div class="relet">续租</div>
-												<div class="change">换房</div>
 												<div class="check">查看合同</div>
 											</div>
+											{else /}
+											<div class="house-contract-handle">
+												<div class="enter">录入预定信息</div>
+												<div class="launch">发起电子合同</div>
+												<div class="check">查看合同</div>
+											</div>
+											{/if}
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
-									<p>
-										02
-									</p>
-									<div class="pointer"></div>
-									<div class="sign overdue">
-										<p>
-											逾
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other"></div>
-									<div class="show-msg phone">15147718000</div>
-									<div class="show-msg warning-msg">逾期2天</div>
-									<div class="show-msg room-user">刘</div>
-									<div class="show-msg price">1元/月</div>
-								</div>
-								<div class="house-handle clearfix">
-									<div class="all-msg fl">
-										<div class="all-msg-top">
-											<div class="all-msg-title">307栋6单元503室02</div>
-										</div>
-										<div class="all-msg-house">
-											<div class="all-msg-title">房间详情</div>
-											<div class="house-price">房间租金 : 2200元/月</div>
-											<div class="pay-type">付款方式 : 押1付3</div>
-											<div class="house-cash">房间押金 : 2200元</div>
-											<div class="fitment">装修状态 : 中等装修</div>
-											<div class="contact">联系电话 : 13001047286</div>
-										</div>
-										<div class="all-msg-contract">
-											<div class="all-msg-title">租约详情</div>
-											<div class="house-status">合同状态 : 租住中</div>
-											<div class="user-name">租客姓名 : 刘</div>
-											<div class="user-phone">租客手机 : 15147718000</div>
-											<div class="contract-time">租约起始 : 2019.01.05-2020.03.26</div>
-										</div>
-									</div>
-									<div class="handle-area fr">
-										<div class="all-msg-top">
-											<div class="all-msg-title">编辑操作</div>
-										</div>
-										<div class="house-handle-list">
-											<div class="house-controll">
-												<div class="edit">编辑房源</div>
-												<div class="delete">删除房源</div>
-											</div>
-											<div class="house-contract-handle">
-												<div class="enter"></div>
-												<div class="launch"></div>
-												<div class="exit">退房</div>
-												<div class="relet">续租</div>
-												<div class="change">换房</div>
-												<div class="check">查看合同</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							{/foreach}
+							<!--第三层结束-->
 						</div>
 					</div>
+					{/foreach}
+					<!--第二层结束-->
 				</div>
+				{/foreach}
+				<!--第一层结束-->
+
+
+
+
 				<div class="house-box">
 					<div class="top-title clearfix">
 						<!--区域-->

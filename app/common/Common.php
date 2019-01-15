@@ -196,5 +196,14 @@ class Common{
         return socket_close($this->_sockets);
     }
 
+    function date_format($a){
+        return date('Y-m-d H:i:s',$a);
+    }
+
+    function conversion($time){
+        $day = ($time / 60 / 60 / 24);
+        return $day;
+    }
+
 
 }
