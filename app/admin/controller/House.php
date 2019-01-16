@@ -209,6 +209,7 @@ class House extends Base
      */
     public function search(Request $request){
         if ($request->isPost()){
+            $nowTime = time();//当前时间
             $text = input('post.text');
             $area = db('house')->where('address','like','%'.$text.'%')->select();
             foreach ($area as $key=>$val){
@@ -217,6 +218,16 @@ class House extends Base
                 foreach ($room as $ky => $vl){
                     $underlying = db('underlying')->where('roomid',$vl['roomid'])->select();
                     $area[$key]['father'][$ky]['child'] = $underlying;
+                    foreach ($underlying as $k => $v){
+                        $userinfo = db('user')->where('underid',$v['underid'])->where('status','1')->find();
+                        $contract = db('contract')->where('underid',$v['underid'])->find();
+                        $time = $nowTime - $v['update_time'];
+                        $area[$key]['father'][$ky]['child'][$k]['user'] = $userinfo;
+                        $area[$key]['father'][$ky]['child'][$k]['contract'] = $contract;
+                        $area[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                        $area[$key]['father'][$ky]['child'][$k]['contract']['start_time'] = date('Y.m.d',$area[$key]['father'][$ky]['child'][$k]['contract']['start_time']);
+                        $area[$key]['father'][$ky]['child'][$k]['contract']['end_time']   = date('Y.m.d',$area[$key]['father'][$ky]['child'][$k]['contract']['end_time']);
+                    }
                 }
             }
             return $this->fetch('house_list',['data'=>$area]);
