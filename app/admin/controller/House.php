@@ -8,6 +8,7 @@
 namespace app\admin\controller;
 
 use app\common\Common;
+use think\Db;
 use think\Exception;
 use think\Request;
 use think\Session;
@@ -203,5 +204,22 @@ class House extends Base
         }
 
     }
-
+    /**
+     * 搜索
+     */
+    public function search(Request $request){
+        if ($request->isPost()){
+            $text = input('post.text');
+            $area = db('house')->where('address','like','%'.$text.'%')->select();
+            foreach ($area as $key=>$val){
+                $room = db('room')->where('hid',$val['hid'])->select();
+                $area[$key]['father'] = $room;
+                foreach ($room as $ky => $vl){
+                    $underlying = db('underlying')->where('roomid',$vl['roomid'])->select();
+                    $area[$key]['father'][$ky]['child'] = $underlying;
+                }
+            }
+            return $this->fetch('house_list',['data'=>$area]);
+        }
+    }
 }

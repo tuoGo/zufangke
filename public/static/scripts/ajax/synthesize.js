@@ -45,6 +45,22 @@ function uselogin() {
         }
     });
 }
+
+//房源搜索
+function search(text) {
+    var text = text;
+    $.ajax({
+        url:"/house/search",
+        data:{'text':text},
+        type:"post",
+        dataType:"json",
+        success:function (data){
+            if (data.status == 200){
+                console.log(data)
+            }
+        }
+    });
+}
 //检测手机号
 function checkPhone(phone){
     var phone = phone;
@@ -69,5 +85,12 @@ function leaseType(type,status) {
         }
     });
 }
-//
+$(function () {
+    $(".search").click(function () {
+        var text = $(".house-title .banner-box .sui-form input").val();
+        if (text) {
+            $(".house-title .banner-box .sui-form").submit();
+        }
+    });
+});
 
