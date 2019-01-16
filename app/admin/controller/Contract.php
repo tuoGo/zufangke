@@ -10,21 +10,18 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
+use think\Session;
 
 class Contract extends Base
 {
     /*
      * 显示合同列表
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->isPost()){
-            $adid = input('post.adid');
+            $adid = Session::get('adid');
             $data = db('contract')->where('adid',$adid)->select();
             return $this->fetch('index',['data' => $data]);
-        }
-        $Data = db('contract')->select();
-        return $this->fetch('index',['data' => $Data]);
     }
 
     //显示合同添加页

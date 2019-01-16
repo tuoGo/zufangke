@@ -33,52 +33,52 @@ $(function(){
             //PC端样式
             var tb = $(".tb");
             tb.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/tb_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/tb_blue.png")
             });
             tb.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/tb.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/tb.png")
             });
             var wh = $(".wareHouse");
             wh.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/icons_warehouse_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/icons_warehouse_blue.png")
             });
             wh.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/icons_warehouse.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/icons_warehouse.png")
             });
             var ct = $(".contract");
             ct.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/contract_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/contract_blue.png")
             });
             ct.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/contract.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/contract.png")
             });
             var post = $(".post");
             post.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/post_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/post_blue.png")
             });
             post.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/post.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/post.png")
             });
             var sl = $(".sleep");
             sl.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/sleep_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/sleep_blue.png")
             });
             sl.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/sleep.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/sleep.png")
             });
             var ct_con = $(".ct_con");
             ct_con.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/ct_con_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/ct_con_blue.png")
             });
             ct_con.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/ct_con.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/ct_con.png")
             });
             var system = $(".system");
             system.mouseenter(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/system_blue.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/system_blue.png")
             });
             system.mouseleave(function(){
-                $(this).find("img").attr("src","static/images/main-banner/banner-icon/system.png")
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/system.png")
             });
             window.onresize = function(){
                 handleWheel(0,true);
