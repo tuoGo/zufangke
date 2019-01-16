@@ -15,6 +15,7 @@
 	<script src="__STATIC__/scripts/sui/sui.min.js"></script>
 	<script src="__STATIC__/scripts/banner/banner.js"></script>
 	<script src="__STATIC__/scripts/house/house_list.js"></script>
+	<script src="__STATIC__/scripts/ajax/synthesize.js"></script>
 </head>
 <body>
 	<div class="mobile">
@@ -34,7 +35,7 @@
 					<p>
 						<i class="sui-icon icon-tb-home"></i>
 						<span>房源列表</span>
-						<a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary"
+						<a href="javascript:void(0)" class="big-add sui-btn btn-bordered btn-large btn-primary"
 						data-toggle="modal" data-target="#housing">添加房源</a>
 					</p>
 				</div>
@@ -61,11 +62,11 @@
 						<a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary">重置</a>
 					</div>
 					<div class="banner-box fr">
-						<a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary">搜索</a>
+						<a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary search">搜索</a>
 					</div>
 					<div class="banner-box fr">
-						<form action="" class="sui-form">
-							<input type="text" placeholder="请输入房源名称" class="search input-large input-xfat">
+						<form action="/house/search" method="post" class="sui-form">
+							<input type="text" placeholder="请输入小区名称" name="text" class="search input-large input-xfat">
 							<i class="search-icon"></i>
 						</form>
 					</div>
@@ -82,7 +83,7 @@
 								<ul>
 									<li><a class="plot-add" href="javascript:void(0);" data-toggle="modal" data-target="#housing">添加房源</a></li>
 									<li><hr style="width:70px;margin:10px auto;"></li>
-									<li><a href="javascript:void(0);">删除小区</a></li>
+									<li><a href="javascript:void(0);" class="del-plot">删除小区</a></li>
 								</ul>
 								<div class="list-arrow"></div>
 							</div>
@@ -94,12 +95,12 @@
 						</div>
 						<div class="house-msg fr">
 							<p>
-								空置：<span class="number">0</span>间
+								空置：<span class="number empty-all">0</span>间
 							</p>
 						</div>
 						<div class="house-msg fr">
 							<p>
-								房源总数：<span class="number">2</span>间
+								房源总数：<span class="number house-all">2</span>间
 							</p>
 						</div>
 					</div>
@@ -119,13 +120,13 @@
 									<span>添加</span>
 								</p>
 							</div>
-							<div class="room-command fl">
+							<div class="room-command fl room-edit">
 								<p>
 									<i class="sui-icon icon-tb-edit"></i>
 									<span>编辑</span>
 								</p>
 							</div>
-							<div class="room-command fl">
+							<div class="room-command fl del-unit">
 								<p>
 									<i class="sui-icon icon-tb-delete"></i>
 									<span>删除</span>
@@ -217,7 +218,7 @@
 										<div class="house-handle-list">
 											<div class="house-controll">
 												<div class="edit">编辑房源</div>
-												<div class="delete">删除房源</div>
+												<div class="del-room">删除房源</div>
 											</div>
 											{if $vv.status==1||$vv.status==2}
 											<div class="house-contract-handle">
@@ -245,308 +246,6 @@
 				</div>
 				{/foreach}
 				<!--第一层结束-->
-
-
-
-
-				<div class="house-box">
-					<div class="top-title clearfix">
-						<!--区域-->
-						<div class="area-title fl">郦景东城(四川省成都市成华区八里小区镇/街道郦景东城)</div>
-						<div class="area-menu fl">
-							<i class="sui-icon icon-tb-more"></i>
-							<div class="c-list">
-								<ul>
-									<li><a class="plot-add" href="javascript:void(0);" data-toggle="modal" data-target="#housing">添加房源</a></li>
-									<li><hr style="width:70px;margin:10px auto;"></li>
-									<li><a href="javascript:void(0);">删除小区</a></li>
-								</ul>
-								<div class="list-arrow"></div>
-							</div>
-						</div>
-						<div class="pack fr">
-							<p>
-								<i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
-							</p>
-						</div>
-						<div class="house-msg fr">
-							<p>
-								空置：<span class="number">1</span>间
-							</p>
-						</div>
-						<div class="house-msg fr">
-							<p>
-								房源总数：<span class="number">3</span>间
-							</p>
-						</div>
-					</div>
-					<div class="mid-content">
-						<!--小区单元-->
-						<div class="m-top-title clearfix">
-							<div class="room-title fl">
-								<p>
-									2栋3单元510室
-								</p>
-							</div>
-							<div class="room-command fl room-plus">
-								<p>
-									<i class="sui-icon icon-tb-roundadd"></i>
-									<span>添加</span>
-								</p>
-							</div>
-							<div class="room-command fl">
-								<p>
-									<i class="sui-icon icon-tb-edit"></i>
-									<span>编辑</span>
-								</p>
-							</div>
-							<div class="room-command fl">
-								<p>
-									<i class="sui-icon icon-tb-delete"></i>
-									<span>删除</span>
-								</p>
-							</div>
-							<div class="room-pack fl">
-								<p>
-									<i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
-								</p>
-							</div>
-						</div>
-						<div class="m-mid-content clearfix">
-							<!--房间-->
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap empty">
-									<p>
-										独卫+飘窗
-									</p>
-									<div class="pointer"></div>
-									<div class="sign null">
-										<p>
-											空
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other">空置47天</div>
-									<div class="fire-icon"></div>
-									<div class="show-msg phone"></div>
-									<div class="show-msg warning-msg"></div>
-									<div class="show-msg room-user"></div>
-									<div class="show-msg price">1050元/月</div>
-								</div>
-								<div class="house-handle clearfix">
-									<div class="all-msg fl">
-										<div class="all-msg-top">
-											<div class="all-msg-title">2栋3单元510室独卫+飘窗</div>
-										</div>
-										<div class="all-msg-house">
-											<div class="all-msg-title">房间详情</div>
-											<div class="house-price">房间租金 : 1050元/月</div>
-											<div class="pay-type">付款方式 : 押1付3</div>
-											<div class="house-cash">房间押金 : 1050元</div>
-											<div class="fitment">装修状态 : 精装修</div>
-											<div class="contact">联系电话 : 13001047286</div>
-										</div>
-										<div class="all-msg-contract">
-											<div class="all-msg-title">租约详情</div>
-											<div class="house-status">空置情况 : 当前已空置47天</div>
-											<div class="user-name"></div>
-											<div class="user-phone"></div>
-											<div class="contract-time"></div>
-										</div>
-									</div>
-									<div class="handle-area fr">
-										<div class="all-msg-top">
-											<div class="all-msg-title">编辑操作</div>
-										</div>
-										<div class="house-handle-list">
-											<div class="house-controll">
-												<div class="edit">编辑房源</div>
-												<div class="delete">删除房源</div>
-											</div>
-											<div class="house-contract-handle">
-												<div class="enter">录入预定信息</div>
-												<div class="launch">发起电子合同</div>
-												<div class="exit"></div>
-												<div class="relet"></div>
-												<div class="change"></div>
-												<div class="check">查看合同</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
-									<p>
-										次卧+飘窗
-									</p>
-									<div class="pointer"></div>
-									<div class="sign overdue">
-										<p>
-											逾
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other"></div>
-									<div class="show-msg phone">13001047286</div>
-									<div class="show-msg warning-msg">逾期21天</div>
-									<div class="show-msg room-user">芳</div>
-									<div class="show-msg price">1元/月</div>
-								</div>
-							</div>
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
-									<p>
-										次卧+飘窗
-									</p>
-									<div class="pointer"></div>
-									<div class="sign live">
-										<p>
-											住
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other">已出租</div>
-									<div class="show-msg phone"></div>
-									<div class="show-msg warning-msg"></div>
-									<div class="show-msg room-user">黄红林</div>
-									<div class="show-msg price">1元/月</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="house-box">
-					<div class="top-title clearfix">
-						<!--区域-->
-						<div class="area-title fl">春柳社区(辽宁省大连市沙河口区周水子街道镇/街道春柳社区)</div>
-						<div class="area-menu fl">
-							<i class="sui-icon icon-tb-more"></i>
-							<div class="c-list">
-								<ul>
-									<li><a class="plot-add" href="javascript:void(0);" data-toggle="modal" data-target="#housing">添加房源</a></li>
-									<li><hr style="width:70px;margin:10px auto;"></li>
-									<li><a href="javascript:void(0);">删除小区</a></li>
-								</ul>
-								<div class="list-arrow"></div>
-							</div>
-						</div>
-						<div class="pack fr">
-							<p>
-								<i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
-							</p>
-						</div>
-						<div class="house-msg fr">
-							<p>
-								空置：<span class="number">1</span>间
-							</p>
-						</div>
-						<div class="house-msg fr">
-							<p>
-								房源总数：<span class="number">3</span>间
-							</p>
-						</div>
-					</div>
-					<div class="mid-content">
-						<!--小区单元-->
-						<div class="m-top-title clearfix">
-							<div class="room-title fl">
-								<p>
-									12栋3单元301室
-								</p>
-							</div>
-							<div class="room-command fl room-plus">
-								<p>
-									<i class="sui-icon icon-tb-roundadd"></i>
-									<span>添加</span>
-								</p>
-							</div>
-							<div class="room-command fl">
-								<p>
-									<i class="sui-icon icon-tb-edit"></i>
-									<span>编辑</span>
-								</p>
-							</div>
-							<div class="room-command fl">
-								<p>
-									<i class="sui-icon icon-tb-delete"></i>
-									<span>删除</span>
-								</p>
-							</div>
-							<div class="room-pack fl">
-								<p>
-									<i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
-								</p>
-							</div>
-						</div>
-						<div class="m-mid-content clearfix">
-							<!--房间-->
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
-									<p>
-										A
-									</p>
-									<div class="pointer"></div>
-									<div class="sign live">
-										<p>
-											住
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other"></div>
-									<div class="show-msg phone">已出租</div>
-									<div class="show-msg warning-msg"></div>
-									<div class="show-msg room-user"></div>
-									<div class="show-msg price">2500元/月</div>
-								</div>
-							</div>
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap empty">
-									<p>
-										B
-									</p>
-									<div class="pointer"></div>
-									<div class="sign null">
-										<p>
-											空
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other">空置29天</div>
-									<div class="show-msg phone"></div>
-									<div class="show-msg warning-msg"></div>
-									<div class="show-msg room-user"></div>
-									<div class="show-msg price">2500元/月</div>
-								</div>
-							</div>
-							<div class="house-room fl" title="点击查看更多信息">
-								<div class="cap non-empty">
-									<p>
-										C
-									</p>
-									<div class="pointer"></div>
-									<div class="sign live">
-										<p>
-											住
-										</p>
-									</div>
-								</div>
-								<div class="house-info">
-									<div class="show-msg other">已出租</div>
-									<div class="show-msg phone"></div>
-									<div class="show-msg warning-msg"></div>
-									<div class="show-msg room-user">芳芳</div>
-									<div class="show-msg price">1元/月</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!--添加房源-->
@@ -568,36 +267,13 @@
 									<input type="radio" name="house_type"><span>整租</span>
 								</label>
 							</div>
+							<div class="plot add-plot">
+								添加小区 :
+								<input type="text" placeholder="输入您要添加的小区名" class="input-xlarge" name="plot_name">
+							</div>
 							<div class="plot">
 								选择小区 :
-								<span class="sui-dropdown dropdown-bordered select">
-									<span class="dropdown-inner">
-										<a role="button" href="javascript:void(0);" data-toggle="dropdown"
-										   class="dropdown-toggle">
-											<input type="hidden" value="劲松3区(北京朝阳劲松桥西南角50米路南)" name="plot_name"><i class="caret"></i>
-											<span>劲松3区(北京朝阳劲松桥西南角50米路南)</span>
-										</a>
-										<ul role="menu" aria-labelledby="drop3" class="sui-dropdown-menu">
-											<li role="presentation" class="active">
-												<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="劲松3区(北京朝阳劲松桥西南角50米路南)">
-													劲松3区(北京朝阳劲松桥西南角50米路南)
-												</a>
-											</li>
-											<li role="presentation">
-												<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="郦景东城(四川省成都市成华区八里小区镇/街道郦景东城)">
-													郦景东城(四川省成都市成华区八里小区镇/街道郦景东城)
-												</a>
-											</li>
-											<li role="presentation">
-												<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="春柳社区(辽宁省大连市沙河口区周水子街道镇/街道春柳社区)">
-													春柳社区(辽宁省大连市沙河口区周水子街道镇/街道春柳社区)
-												</a>
-											</li>
-										</ul>
-									</span>
-								</span>
-								<input type="text" placeholder="输入您要添加的小区名" class="input-large">
-								<a href="javascript:void(0);" class="sui-btn btn-primary">添加小区</a>
+								<input type="text" placeholder="输入您要添加的小区名" readonly="readonly" class="input-large" name="plot">
 							</div>
 							<div class="house-number">
 								选择房源数 :
@@ -871,7 +547,7 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认添加</button>
+						<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认</button>
 						<button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
 					</div>
 				</div>
@@ -1261,8 +937,45 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认添加</button>
+						<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认</button>
 						<button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--退房-->
+		<div id="checkOut" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">X</button>
+						<h4 class="modal-title">请确认房源信息</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" class="sui-form">
+							<div class="msg-box clearfix">
+								<div class="house-msg fl"></div>
+								<div class="house-contract fr"></div>
+							</div>
+							<div class="msg-box clearfix">
+								<div class="user fl"></div>
+								<div class="user-contact fr"></div>
+							</div>
+							<div class="msg-box clearfix">
+								<div class="house-pay fl"></div>
+								<div class="house-cash fr"></div>
+							</div>
+							<div class="msg-box clearfix">
+								<div class="cause">
+									<h2>退租原因</h2>
+									<textarea name="" id="" cols="50" rows="5"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认退房</button>
+						<button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消退房</button>
 					</div>
 				</div>
 			</div>

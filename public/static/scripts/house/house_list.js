@@ -50,6 +50,7 @@ $(function(){
     $(".big-add").click(function(){
         $("#housing .plot").hide();
         $("#housing .add-plot").show();
+        $("#housing .house-number").show();
     });
     //小区区域的添加房源按钮(自动选择小区)
     $(".plot-add").click(function(){
@@ -57,6 +58,7 @@ $(function(){
         $("#housing .plot input[name=plot]").val(title);
         $("#housing .plot").show();
         $("#housing .add-plot").hide();
+        $("#housing .house-number").show();
     });
     //房源数目更换事件
     $("#housing .house-number input[name=plot_number]").change(trChange);
@@ -234,9 +236,10 @@ $(function(){
     }
     //添加房源房间模板
     function addRoomTr(num){
+        var text = $("#rooming .add tr:first-child .room-t input").val();
         var inner = '';
         inner += '<tr>';
-        inner += '<td class="room-t"><input type="text" readonly="readonly" value="" name="build_name"></td>';
+        inner += '<td class="room-t"><input type="text" readonly="readonly" value="'+text+'" name="build_name"></td>';
         inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
         inner += '<td class="room-type">';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
@@ -440,24 +443,38 @@ $(function(){
     $(".room-edit").click(function(){
         var house = $("#housing");
         var input = $("#housing .plot input[name=plot]");
+        $("#housing .plot").show();
+        $("#housing .add-plot").hide();
+        $("#housing .house-number ul li:first-child a").click();
+        trChange.call($("#housing .house-number input[name=plot_number]"));
         input.val($(this).parents(".house-box").find(".top-title .area-title").html());
         input.bind("input propertychange change",inputResize(input));
+        house.find(".house-number").hide();
         /*
         *  ajax 请求获取小区下该单元各类参数并显示到表格上
         * */
-        house.find(".house-number").hide();
+
         house.modal("show");
     });
     //房源房间编辑事件
     $(".house-room .edit").click(function(){
         var room = $("#rooming");
+        $("#rooming .house-number ul li:first-child a").click();
         room.find(".house-number").hide();
         room.find(".plot").hide();
+        var text = trim($(this).parents(".mid-content").find(".room-title p").html());
+        room.find(".add .room-t input").val(text);
+        /*
+        *  ajax 发起请求获取房间数据渲染页面
+        * */
+
         room.modal("show");
     });
     //房间添加事件
     $(".room-plus").click(function(){
         var input = $("#rooming .plot input");
+        $("#rooming .house-number").show();
+        $("#rooming .plot").show();
         $("#rooming").modal("show");
         input.val($(this).parents(".house-box").find(".top-title .area-title").html());
         $("#rooming .add .room-t input").val(trim($(this).parent().find(".room-title").text()));
@@ -497,6 +514,7 @@ $(function(){
     $(".del-plot").click(popup.bind(null,1));
     $(".del-unit").click(popup.bind(null,2));
     $(".del-room").click(popup.bind(null,3));
+    //弹窗确认
     function popup(rank){
         return $.confirm({
             title : "请确认您的操作",
@@ -505,6 +523,36 @@ $(function(){
         });
     }
     function del(rank){
+        //rank代表要删除的级别
+        /*
+        *  发起ajax请求后台删除指定数据
+        * */
         console.log(rank);
     }
+    $.each($(".house-box"),function(index,el){
+        //显示该小区下房间总数
+        $(el).find(".house-msg .house-all").html(($(el).find(".house-room").length));
+        $(el).find(".house-msg .empty-all").html($(el).find(".house-room .cap .null").length);
+    });
+    //退房操作
+    $(".house-box .house-room .handle-area .exit").click(function(){
+        var that = $(this);
+        var title = '';
+        title += trim(that.parents(".house-room").find(".cap p:first-child").html());
+        title = trim(that.parents(".mid-content").find(".m-top-title .room-title p").html()) + title;
+        title = that.parents(".house-box").find(".top-title .area-title").html() + title;
+        var room = that.parents(".house-room");
+        var con = room.find(".all-msg-contract .contract-time").html();
+        var user = room.find(".all-msg-contract .user-name").html();
+        var phone = room.find(".all-msg-contract .user-phone").html();
+        var pay = room.find(".house-handle .all-msg-house .house-price").html();
+        var cash = room.find(".house-handle .all-msg-house .house-cash").html();
+        $("#checkOut .msg-box .house-msg").html(title);
+        $("#checkOut .msg-box .house-contract").html(con);
+        $("#checkOut .msg-box .user").html(user);
+        $("#checkOut .msg-box .user-contact").html(phone);
+        $("#checkOut .msg-box .house-pay").html(pay);
+        $("#checkOut .msg-box .house-cash").html(cash);
+        $("#checkOut").modal("show");
+    });
 });
