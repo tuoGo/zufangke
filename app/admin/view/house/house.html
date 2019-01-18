@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>租房客房源列表</title>
+    <link rel="stylesheet" href="__STATIC__/style/sui/sui.min.css">
+    <link rel="stylesheet" href="__STATIC__/style/sui/sui-append.min.css">
+    <link rel="stylesheet" href="__STATIC__/style/init/init.css">
+    <link rel="stylesheet" href="__STATIC__/style/pure/grids-responsive.css">
+    <link rel="stylesheet" href="__STATIC__/style/main/main.css">
+    <link rel="stylesheet" href="__STATIC__/style/house/house_list.css">
+    <script src="__STATIC__/scripts/jquery/jquery.min.js"></script>
+    <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
+    <script src="__STATIC__/scripts/sui/sui.min.js"></script>
+    <script src="__STATIC__/scripts/banner/banner.js"></script>
+    <script src="__STATIC__/scripts/house/house_list.js"></script>
+    <script src="__STATIC__/scripts/ajax/synthesize.js"></script>
+</head>
+<body>
+<div class="mobile">
+    <div class="main-content">
+        <div class="show-content">
+            <!--业务界面-->
+        </div>
+    </div>
+</div>
+<div class="computer">
+    {include file="banner/banner" /}
+    <div class="main-content">
+        <div class="show-content">
+            <!--业务界面-->
+            <div class="title">
+                <p>
+                    <i class="sui-icon icon-tb-home"></i>
+                    <span>房源列表</span>
+                    <a href="javascript:void(0)" class="big-add sui-btn btn-bordered btn-large btn-primary"
+                       data-toggle="modal" data-target="#housing">添加房源</a>
+                </p>
+            </div>
+            <div class="house-title clearfix">
+                <div class="banner-box fl">
+                    <p>
+                        <span class="title_s bor-b chose" data-type="2" onclick="leaseType()">合租</span>
+                        <span class="title_s bor-b" data-type="1" onclick="leaseType()">整租</span>
+                    </p>
+                </div>
+                <div class="banner-box fl">
+                    <p>
+                        <span class="title_s list all">全部</span>
+                        <span class="title_s list null" onclick="leaseType(0)">空置</span>
+                        <span class="title_s list overdue" onclick="leaseType(2)">逾期</span>
+                        <span class="title_s list rentout" onclick="leaseType(1)">已租</span>
+                        <span class="title_s list fire" onclick="leaseType(4)">着火房</span>
+                        <span class="title_s list expiring" onclick="leaseType(3)">将到期</span>
+                    </p>
+                </div>
+                <div class="banner-box fr">
+                    <a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary">重置</a>
+                </div>
+                <div class="banner-box fr">
+                    <a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary search">搜索</a>
+                </div>
+                <div class="banner-box fr">
+                    <form action="/house/search" method="post" class="sui-form">
+                        <input type="text" placeholder="请输入小区名称" name="text" class="search input-large input-xfat">
+                        <i class="search-icon"></i>
+                    </form>
+                </div>
+            </div>
+            <!--房源列表-->
+            {foreach name="data" item="item" key="key"}
+            <div class="house-box">
+                <div class="top-title clearfix">
+                    <!--区域-->
+                    <div class="area-title fl" data-id="{$item.hid}">{$item.address}</div>
+                    <div class="area-menu fl">
+                        <i class="sui-icon icon-tb-more"></i>
+                        <div class="c-list">
+                            <ul>
+                                <li><a class="plot-add" href="javascript:void(0);" data-toggle="modal" data-target="#housing">添加房源</a></li>
+                                <li><hr style="width:70px;margin:10px auto;"></li>
+                                <li><a href="javascript:void(0);" class="del-plot">删除小区</a></li>
+                            </ul>
+                            <div class="list-arrow"></div>
+                        </div>
+                    </div>
+                    <div class="pack fr">
+                        <p>
+                            <i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
+                        </p>
+                    </div>
+                    <div class="house-msg fr">
+                        <p>
+                            空置：<span class="number empty-all">0</span>间
+                        </p>
+                    </div>
+                    <div class="house-msg fr">
+                        <p>
+                            房源总数：<span class="number house-all">2</span>间
+                        </p>
+                    </div>
+                </div>
+                <!--第二层-->
+                {foreach name="data[$key]['father']" item="val" key="ky"}
+                <div class="mid-content">
+                    <!--小区单元-->
+                    <div class="m-top-title clearfix">
+                        <div class="room-title fl" data-id="{$val.roomid}">
+                            <p>
+                                {$val.room}
+                            </p>
+                        </div>
+                        <div class="room-command fl room-plus">
+                            <p>
+                                <i class="sui-icon icon-tb-roundadd"></i>
+                                <span>添加</span>
+                            </p>
+                        </div>
+                        <div class="room-command fl room-edit">
+                            <p>
+                                <i class="sui-icon icon-tb-edit"></i>
+                                <span>编辑</span>
+                            </p>
+                        </div>
+                        <div class="room-command fl del-unit">
+                            <p>
+                                <i class="sui-icon icon-tb-delete"></i>
+                                <span>删除</span>
+                            </p>
+                        </div>
+                        <div class="room-pack fl">
+                            <p>
+                                <i class="sui-icon icon-tb-unfold" style="font-size:20px;"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="m-mid-content clearfix">
+
+                        <!--第三层-->
+                        {foreach name="data[$key]['father'][$ky]['child']" item="vv" key="kk"}
+                        <div class="house-room fl" title="点击查看更多信息">
+                            <div class="cap {if $vv.status==1||$vv.status==2}non-empty{else}empty{/if}" data-id="{$vv.underid}">
+                                <p>
+                                    {$vv['tag']}
+                                </p>
+
+                                <div class="pointer"></div>
+                                {if $vv.status==1}
+                                <div class="sign live">
+                                    <p>
+                                        住
+                                    </p>
+                                </div>
+                                {elseif $vv.status==2}
+                                <div class="sign overdue">
+                                    <p>
+                                        逾
+                                    </p>
+                                </div>
+                                {else /}
+                                <div class="sign null">
+                                    <p>
+                                        空
+                                    </p>
+                                </div>
+                                {/if}
+                            </div>
+                            {foreach name="user" item="value" key="u"}
+                            {if $value['underid'] == $vv['underid']}
+                            {if $vv.status==0||$vv.status==4}
+                            <div class="house-info">
+                                <div class="show-msg other">已空置{$vv.vacancy}天</div>
+                                {if $vv.status==4}<div class="fire-icon"></div>{/if}
+                                <div class="show-msg price">{$vv.amount}元/月</div>
+                            </div>
+                            {else /}
+                            <div class="house-info">
+                                <div class="show-msg phone">{$value['phone']}</div>
+                                {if $vv.status==2}<div class="show-msg warning-msg">逾期{$vv.vacancy}天</div>{/if}
+                                <div class="show-msg room-user">{$value['name']}</div>
+                                <div class="show-msg price">{$vv.amount}元/月</div>
+                            </div>
+                            {/if}
+                            {foreach name="contract" item="cont" key="c"}
+                            {if $cont['underid'] == $vv['underid']}
+                            <div class="house-handle clearfix">
+                                <div class="all-msg fl">
+                                    <div class="all-msg-top">
+                                        <div class="all-msg-title">{$val.room}{$vv.tag}</div>
+                                    </div>
+                                    <div class="all-msg-house">
+                                        <div class="all-msg-title">房间详情</div>
+                                        <div class="house-price">房间租金 : {$vv.amount}元/月</div>
+                                        <div class="pay-type">付款方式 : 押{$cont['bet']}付{$cont['pay']}</div>
+                                        <div class="house-cash">房间押金 : {$cont['deposit']}元</div>
+                                        <div class="fitment">装修状态 : {$vv.decorate}</div>
+                                        <div class="contact">联系电话 : {$Think.session.phone}</div>
+                                    </div>
+                                    {if $vv.status==0||$vv.status==4}
+                                    <div class="all-msg-contract">
+                                        <div class="house-status">空置情况 : 已空置{$vv.vacancy}天</div>
+                                    </div>
+                                    {else /}
+                                    <div class="all-msg-contract">
+                                        <div class="all-msg-title">租约详情</div>
+                                        <div class="house-status">合同状态 : 租住中</div>
+                                        <div class="user-name">租客姓名 : {$value['name']}</div>
+                                        <div class="user-phone">租客手机 : {$value['phone']}</div>
+                                        <div class="contract-time">租约起始 : {$cont['start_time']}-{$cont['end_time']}</div>
+                                    </div>
+                                    {/if}
+                                </div>
+                                {/if}
+                                {/foreach}
+                                {/if}
+                                {/foreach}
+                                <div class="handle-area fr">
+                                    <div class="all-msg-top">
+                                        <div class="all-msg-title">编辑操作</div>
+                                    </div>
+                                    <div class="house-handle-list">
+                                        <div class="house-controll">
+                                            <div class="edit">编辑房源</div>
+                                            <div class="del-room">删除房源</div>
+                                        </div>
+                                        {if $vv.status==1||$vv.status==2}
+                                        <div class="house-contract-handle">
+                                            <div class="exit">退房</div>
+                                            <div class="relet">续租</div>
+                                            <div class="check">查看合同</div>
+                                        </div>
+                                        {else /}
+                                        <div class="house-contract-handle">
+                                            <div class="enter">录入预定信息</div>
+                                            <div class="launch">发起电子合同</div>
+                                            <div class="check">查看合同</div>
+                                        </div>
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                        <!--第三层结束-->
+                    </div>
+                </div>
+                {/foreach}
+                <!--第二层结束-->
+            </div>
+            {/foreach}
+            <!--第一层结束-->
+        </div>
+    </div>
+    <!--添加房源-->
+    <div id="housing" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">X</button>
+                    <h4 class="modal-title">请填写房源的详细信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="sui-form">
+                        <div class="house-type">
+                            出租方式 :
+                            <label data-toggle="radio" class="radio-pretty inline checked">
+                                <input type="radio" checked="checked" name="house_type"><span>合租</span>
+                            </label>
+                            <label data-toggle="radio" class="radio-pretty inline">
+                                <input type="radio" name="house_type"><span>整租</span>
+                            </label>
+                        </div>
+                        <div class="plot add-plot">
+                            添加小区 :
+                            <input type="text" placeholder="输入您要添加的小区名" class="input-xlarge" name="plot_name">
+                        </div>
+                        <div class="plot">
+                            选择小区 :
+                            <input type="text" placeholder="输入您要添加的小区名" readonly="readonly" class="input-large" name="plot">
+                        </div>
+                        <div class="house-number">
+                            选择房源数 :
+                            <span class="sui-dropdown dropdown-bordered select">
+									<span class="dropdown-inner">
+										<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                           class="dropdown-toggle">
+											<input type="hidden" value="1" name="plot_number"><i class="caret"></i>
+											<span>1</span>
+										</a>
+										<ul role="menu" aria-labelledby="drop5" class="sui-dropdown-menu">
+											<li role="presentation" class="active">
+												<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="1">
+													1
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="2">
+													2
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="3">
+													3
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="4">
+													4
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="5">
+													5
+												</a>
+											</li>
+										</ul>
+									</span>
+								</span>
+                            套<span style="color:red;">(最多可选择5套)</span>
+                        </div>
+                        <div class="table-area">
+                            <table class="sui-table table-primary">
+                                <thead>
+                                <tr>
+                                    <th>楼栋号(栋)</th>
+                                    <th>单元</th>
+                                    <th>房间号</th>
+                                    <th>室</th>
+                                    <th>厅</th>
+                                    <th>卫</th>
+                                    <th>总面积㎡</th>
+                                    <th>总层数</th>
+                                    <th>所在层数</th>
+                                    <th>有无电梯</th>
+                                    <th>装修状态</th>
+                                </tr>
+                                </thead>
+                                <tbody class="add">
+                                <tr>
+                                    <td><input type="text" placeholder="请填写" name="build"></td>
+                                    <td><input type="text" placeholder="请填写" name="unit"></td>
+                                    <td><input type="text" placeholder="请填写" name="room_name"></td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="1" name="room_number"><i class="caret"></i>
+															<span>1</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop5" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="1">
+																	1
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="2">
+																	2
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="3">
+																	3
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="4">
+																	4
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="5">
+																	5
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="6">
+																	6
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="7">
+																	7
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="1" name="lobby_number"><i class="caret"></i>
+															<span>1</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop7" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="1">
+																	1
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="2">
+																	2
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="3">
+																	3
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="4">
+																	4
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="5">
+																	5
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="6">
+																	6
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="7">
+																	7
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="1" name="toilet_number"><i class="caret"></i>
+															<span>1</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop7" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="1">
+																	1
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="2">
+																	2
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="3">
+																	3
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="4">
+																	4
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="5">
+																	5
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="6">
+																	6
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="7">
+																	7
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td><input type="text" placeholder="请填写" name="acreage"></td>
+                                    <td><input type="text" placeholder="请填写" name="floors"></td>
+                                    <td><input type="text" placeholder="请填写" name="now_floor"></td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="无" name="has_elevator"><i class="caret"></i>
+															<span>无</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="无">
+																	无
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="有">
+																	有
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td class="fitment">
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="" name="fitment_status"><i class="caret"></i>
+															<span>精装修</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="精装修">
+																	精装修
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="中等装修">
+																	中等装修
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="简单装修">
+																	简单装修
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="豪华装修">
+																	豪华装修
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认</button>
+                    <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加房间-->
+    <div id="rooming" tabindex="-1" role="dialog" data-hasfoot="false" data-backdrop="static" class="sui-modal hide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">X</button>
+                    <h4 class="modal-title">请填写房间的详细信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="sui-form">
+                        <div class="house-type">
+                            出租方式 :
+                            <label data-toggle="radio" class="radio-pretty inline checked">
+                                <input type="radio" checked="checked" name="house_type"><span>合租</span>
+                            </label>
+                            <label data-toggle="radio" class="radio-pretty inline">
+                                <input type="radio" name="house_type"><span>整租</span>
+                            </label>
+                        </div>
+                        <div class="plot">
+                            小区 :
+                            <input type="text" readonly="readonly" value="" name="plot_name">
+                        </div>
+                        <div class="house-number">
+                            选择房间数 :
+                            <span class="sui-dropdown dropdown-bordered select">
+									<span class="dropdown-inner">
+										<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                           class="dropdown-toggle">
+											<input type="hidden" value="1" name="room_number"><i class="caret"></i>
+											<span>1</span>
+										</a>
+										<ul role="menu" aria-labelledby="drop5" class="sui-dropdown-menu">
+											<li role="presentation" class="active">
+												<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="1">
+													1
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="2">
+													2
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="3">
+													3
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="4">
+													4
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="5">
+													5
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" href="javascript:void(0);" tabindex="-1" value="6">
+													6
+												</a>
+											</li>
+										</ul>
+									</span>
+								</span>
+                        </div>
+                        <div class="table-area">
+                            <table class="sui-table table-primary">
+                                <thead>
+                                <tr>
+                                    <th>门牌号</th>
+                                    <th>房间名称</th>
+                                    <th>房间类型</th>
+                                    <th>房间面积㎡</th>
+                                    <th>朝向</th>
+                                    <th>出租状态</th>
+                                    <th>付款方式</th>
+                                    <th>租金</th>
+                                    <th>押金</th>
+                                    <th>房间描述</th>
+                                </tr>
+                                </thead>
+                                <tbody class="add">
+                                <tr>
+                                    <td class="room-t"><input type="text" readonly="readonly" value="" name="build_name"></td>
+                                    <td><input type="text" placeholder="请填写" name="room_name"></td>
+                                    <td class="room-type">
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="主卧" name="room_type"><i class="caret"></i>
+															<span>主卧</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="主卧">
+																	主卧
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="次卧">
+																	次卧
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="床位">
+																	床位
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="主卧(带独卫)">
+																	主卧(带独卫)
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td class="room-size"><input type="text" placeholder="请填写"></td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="东" name="direction"><i class="caret"></i>
+															<span>东</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop10" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东">
+																	东
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南">
+																	南
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西">
+																	西
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="北">
+																	北
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东南">
+																	东南
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东西">
+																	东西
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东北">
+																	东北
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西南">
+																	西南
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西北">
+																	西北
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南北">
+																	南北
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="未租" name="lease_status"><i class="caret"></i>
+															<span>未租</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="未租">
+																	未租
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="已租">
+																	已租
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td>
+												<span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="押0" name="cash"><i class="caret"></i>
+															<span>押0</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="押0">
+																	押0
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="押1">
+																	押1
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="押2">
+																	押2
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="押3">
+																	押3
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                        <span class="sui-dropdown dropdown-bordered select">
+													<span class="dropdown-inner">
+														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                           class="dropdown-toggle">
+															<input type="hidden" value="付1" name="pay"><i class="caret"></i>
+															<span>付1</span>
+														</a>
+														<ul role="menu" aria-labelledby="drop24" class="sui-dropdown-menu">
+															<li role="presentation" class="active">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付1">
+																	付1
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付2">
+																	付2
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付3">
+																	付3
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付4">
+																	付4
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付5">
+																	付5
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付6">
+																	付6
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付7">
+																	付7
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付8">
+																	付8
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付9">
+																	付9
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付10">
+																	付10
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付11">
+																	付11
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付12">
+																	付12
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付13">
+																	付13
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付14">
+																	付14
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付15">
+																	付15
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付16">
+																	付16
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付17">
+																	付17
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付18">
+																	付18
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付19">
+																	付19
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付20">
+																	付20
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付21">
+																	付21
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付22">
+																	付22
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付23">
+																	付23
+																</a>
+															</li>
+															<li role="presentation">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="付24">
+																	付24
+																</a>
+															</li>
+														</ul>
+													</span>
+												</span>
+                                    </td>
+                                    <td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>
+                                    <td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>
+                                    <td class="room-comment">
+                                        <input type="hidden" class="r-comment" name="comment">
+                                        <a href="javascript:void(0);"><i class="sui-icon icon-pc-plus-circle"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认</button>
+                    <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--退房-->
+    <div id="checkOut" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">X</button>
+                    <h4 class="modal-title">请确认房源信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="sui-form">
+                        <div class="msg-box clearfix">
+                            <div class="house-msg fl"></div>
+                            <div class="house-contract fr"></div>
+                        </div>
+                        <div class="msg-box clearfix">
+                            <div class="user fl"></div>
+                            <div class="user-contact fr"></div>
+                        </div>
+                        <div class="msg-box clearfix">
+                            <div class="house-pay fl"></div>
+                            <div class="house-cash fr"></div>
+                        </div>
+                        <div class="msg-box clearfix">
+                            <div class="cause">
+                                <h2>退租原因</h2>
+                                <textarea name="" id="" cols="50" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认退房</button>
+                    <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消退房</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

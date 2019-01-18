@@ -7,8 +7,6 @@
  */
 namespace app\admin\controller;
 
-use app\common\Common;
-use think\Db;
 use think\Exception;
 use think\Request;
 use think\Session;
@@ -20,30 +18,44 @@ class House extends Base
     {
         $nowTime = time();//当前时间
         $adid = Session::get('adid');
-        $region = db('house')->where('adid',$adid)->select();//查询个人下的房源小区
-        foreach ($region as $ky => &$vl){ //一层循环
-            $region[$ky]['father'] = db('room')->where('hid',$vl['hid'])->select(); //查询单元/室
-            foreach ($region[$ky]['father'] as $key => &$val){ //二层循环
-                $region[$ky]['father'][$key]['child'] = db('underlying')->where('roomid',$val['roomid'])->select(); //查询房间
-                foreach ($region[$ky]['father'][$key]['child'] as $k => $v){ //三层循环
-                    $userinfo = db('user')->where('underid',$v['underid'])->where('status','1')->find(); //查询合同签署者信息
-                    $contract = db('contract')->where('underid',$v['underid'])->find(); //每个房间的合同查询
-                    $time = $nowTime - $v['update_time'];//时间差
-                    $region[$ky]['father'][$key]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
-                    $region[$ky]['father'][$key]['child'][$k]['user'] = $userinfo; //用户信息
-                    $region[$ky]['father'][$key]['child'][$k]['contract'] = $contract;  //合同信息
-                    $region[$ky]['father'][$key]['child'][$k]['contract']['start_time'] = date('Y.m.d',$region[$ky]['father'][$key]['child'][$k]['contract']['start_time']);
-                    $region[$ky]['father'][$key]['child'][$k]['contract']['end_time']   = date('Y.m.d',$region[$ky]['father'][$key]['child'][$k]['contract']['end_time']);
-                    if ($v['status'] == 0 && $time >= (60 * 60 * 24 * 30)){
-                        $region[$ky]['father'][$key]['child'][$k]['status'] = 4; //着火房的状态标记
+        $nowTime = time();
+        $house = db('house')->where('adid', $adid)->select();
+        foreach ($house as $k => $v) {
+            $hid[$k] = $v['hid'];
+        }
+        unset($k, $v);//解除house循环变量
+        $room = db('room')->where('hid', 'in', $hid)->select();
+        foreach ($room as $ky => $vl) {
+            $roomid[$ky] = $vl['roomid'];
+        }
+        unset($ky, $vl);//解除room循环变量
+        $underlying = db('underlying')->where('roomid', 'in', $roomid)->select();
+        foreach ($underlying as $kk => $vv) {
+            $underid[$kk] = $vv['underid'];
+        }
+        unset($kk, $vv);//解除underlying循环变量
+        $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
+        $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
+        foreach ($contract as $c => $cc) {
+            $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
+            $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
+        }
+        foreach ($house as $key => $val) {
+            $data[$key] = $val;
+            foreach ($room as $ky => $vl) {
+                if ($house[$key]['hid'] == $room[$ky]['hid']) {
+                    $data[$key]['father'][$ky] = $vl;
+                }
+                foreach ($underlying as $k => $v) {
+                    if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
+                        $data[$key]['father'][$ky]['child'][$k] = $v;
+                        $time = $nowTime - $v['update_time'];//时间差
+                        $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
                     }
                 }
-                unset($k,$v);
             }
-            unset($key,$val);
         }
-        unset($ky,$vl);
-        return $this->fetch('house_list',['data'=>$region]);
+        return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
     }
     /**
      * 添加页展示
@@ -164,73 +176,95 @@ class House extends Base
      */
     public function leaseType(Request $request)
     {
-        if ($request->isPost())
-        {
-            $adid   = input('post.adid');
-            $type   = input('post.type');
-            $status = input('post.status');
-            if (empty($type) && empty($status)) {
-
-                $data = db('house')->where('adid',$adid)->select();
-
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-
-            }else if (empty($type) && !empty($status)) {
-
-                $data = db('house')->where('adid',$adid)->where('status',$status)->select();
-
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-
-            }else if (!empty($type) && empty($status)){
-
-                $data = db('house')->where('adid',$adid)->where('lease_type',$type)->select();
-
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-
-            }else if (!empty($type) && !empty($status)){
-
-                $where = array(
-                    'adid'          => ['=',$adid],
-                    'lease_type'    => ['=',$type],
-                    'status'        => ['=',$status],
-                );
-
-                $data = db('house')->where($where)->select();
-
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-
+        if ($request->isPost()) {
+            $adid = Session::get('adid');
+            $type = input('post.type');  //房间状态
+            $status = input('post.status'); //房间是整租或合租
+            $nowTime = time();
+            $house = db('house')->where('adid', $adid)->select();
+            foreach ($house as $k => $v) {
+                $hid[$k] = $v['hid'];
             }
-
+            unset($k, $v);//解除house循环变量
+            $room = db('room')->where('hid', 'in', $hid)->where('type',$status)->select();
+            foreach ($room as $ky => $vl) {
+                $roomid[$ky] = $vl['roomid'];
+            }
+            unset($ky, $vl);//解除room循环变量
+            $underlying = db('underlying')->where('roomid', 'in', $roomid)->where('status',$type)->select();
+            foreach ($underlying as $kk => $vv) {
+                $underid[$kk] = $vv['underid'];
+            }
+            unset($kk, $vv);//解除underlying循环变量
+            $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
+            $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
+            foreach ($contract as $c => $cc) {
+                $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
+                $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
+            }
+            foreach ($house as $key => $val) {
+                $data[$key] = $val;
+                foreach ($room as $ky => $vl) {
+                    if ($house[$key]['hid'] == $room[$ky]['hid']) {
+                        $data[$key]['father'][$ky] = $vl;
+                    }
+                    foreach ($underlying as $k => $v) {
+                        if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
+                            $data[$key]['father'][$ky]['child'][$k] = $v;
+                            $time = $nowTime - $v['update_time'];//时间差
+                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                        }
+                    }
+                }
+            }
+            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
         }
-
     }
     /**
      * 搜索
      */
     public function search(Request $request){
         if ($request->isPost()){
-            $nowTime = time();//当前时间
-            $text = input('post.text');
-            $area = db('house')->where('address','like','%'.$text.'%')->select();
-            foreach ($area as $key=>$val){
-                $room = db('room')->where('hid',$val['hid'])->select();
-                $area[$key]['father'] = $room;
-                foreach ($room as $ky => $vl){
-                    $underlying = db('underlying')->where('roomid',$vl['roomid'])->select();
-                    $area[$key]['father'][$ky]['child'] = $underlying;
-                    foreach ($underlying as $k => $v){
-                        $userinfo = db('user')->where('underid',$v['underid'])->where('status','1')->find();
-                        $contract = db('contract')->where('underid',$v['underid'])->find();
-                        $time = $nowTime - $v['update_time'];
-                        $area[$key]['father'][$ky]['child'][$k]['user'] = $userinfo;
-                        $area[$key]['father'][$ky]['child'][$k]['contract'] = $contract;
-                        $area[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
-                        $area[$key]['father'][$ky]['child'][$k]['contract']['start_time'] = date('Y.m.d',$area[$key]['father'][$ky]['child'][$k]['contract']['start_time']);
-                        $area[$key]['father'][$ky]['child'][$k]['contract']['end_time']   = date('Y.m.d',$area[$key]['father'][$ky]['child'][$k]['contract']['end_time']);
+            $adid    = Session::get('adid');
+            $text    = input('post.text');
+            $nowTime = time();
+            $house   = db('house')->where('adid', $adid)->where('address','like','%'.$text.'%')->select();
+            foreach ($house as $k => $v) {
+                $hid[$k] = $v['hid'];
+            }
+            unset($k, $v);//解除house循环变量
+            $room = db('room')->where('hid', 'in', $hid)->select();
+            foreach ($room as $ky => $vl) {
+                $roomid[$ky] = $vl['roomid'];
+            }
+            unset($ky, $vl);//解除room循环变量
+            $underlying = db('underlying')->where('roomid', 'in', $roomid)->select();
+            foreach ($underlying as $kk => $vv) {
+                $underid[$kk] = $vv['underid'];
+            }
+            unset($kk, $vv);//解除underlying循环变量
+            $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
+            $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
+            foreach ($contract as $c => $cc) {
+                $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
+                $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
+            }
+            foreach ($house as $key => $val) {
+                $data[$key] = $val;
+                foreach ($room as $ky => $vl) {
+                    if ($house[$key]['hid'] == $room[$ky]['hid']) {
+                        $data[$key]['father'][$ky] = $vl;
+                    }
+                    foreach ($underlying as $k => $v) {
+                        if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
+                            $data[$key]['father'][$ky]['child'][$k] = $v;
+                            $time = $nowTime - $v['update_time'];//时间差
+                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                        }
                     }
                 }
             }
-            return $this->fetch('house_list',['data'=>$area]);
+            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
         }
     }
 }

@@ -50,7 +50,7 @@ body{
     content:"";
     position:absolute;
     top:50%;
-    left:-30%;
+    left:-40%;
     transform:translateY(-50%);
     width:50px;
     height:40px;
@@ -59,7 +59,7 @@ body{
 .computer .top-banner .user > div{
     display:inline-block;
 }
-.computer .top-banner .user .text{
+.computer .top-banner .user .tt{
     position:relative;
     height:60px;
     margin-right:20px;
@@ -68,7 +68,7 @@ body{
     color:rgb(2,96,196);
     font-weight:bold;
 }
-.computer .top-banner .user .text .sui-icon{
+.computer .top-banner .user .tt .sui-icon{
     margin-left:20px;
 }
 .computer .top-banner .user .line{
@@ -109,6 +109,7 @@ body{
     background:white;
 }
 .computer .left-banner{
+    font-family: "Microsoft YaHei", "微软雅黑", "sans-serif";
     padding-top:18px;
 }
 .computer .left-banner .banner-slide{
