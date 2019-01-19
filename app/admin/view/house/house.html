@@ -41,17 +41,24 @@
             <div class="house-title clearfix">
                 <div class="banner-box fl">
                     <p>
-                        <form action="/house/leaseType" method="post" class="sui-form type">
+                    <form action="/house/leaseType" method="post" class="sui-form type">
                     {if $type==1}
                         <span class="title_s bor-b" data-type="2">合租</span>
                         <span class="title_s bor-b chose" data-type="1">整租</span>
+                        <span class="title_s bor-b" data-type="3">全部</span>
                         <input type="hidden" value="1" name="type">
+                    {else if $type==3}
+                        <span class="title_s bor-b" data-type="2">合租</span>
+                        <span class="title_s bor-b" data-type="1">整租</span>
+                        <span class="title_s bor-b chose" data-type="3">全部</span>
+                        <input type="hidden" value="3" name="type">
                     {else /}
                         <span class="title_s bor-b chose" data-type="2">合租</span>
                         <span class="title_s bor-b" data-type="1">整租</span>
+                        <span class="title_s bor-b" data-type="3">全部</span>
                         <input type="hidden" value="2" name="type">
                     {/if}
-                        </form>
+                    </form>
                     </p>
                 </div>
                 <!--<div class="banner-box fl">-->
