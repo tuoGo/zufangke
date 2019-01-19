@@ -39,42 +39,39 @@
                 </p>
             </div>
             <div class="house-title clearfix">
-                <div class="banner-box fl">
-                    <p>
-                    <form action="/house/leaseType" method="post" class="sui-form type">
-                    {if $type==1}
-                        <span class="title_s bor-b" data-type="2">合租</span>
-                        <span class="title_s bor-b chose" data-type="1">整租</span>
-                        <span class="title_s bor-b" data-type="3">全部</span>
-                        <input type="hidden" value="1" name="type">
-                    {elseif $type==3}
-                        <span class="title_s bor-b" data-type="2">合租</span>
-                        <span class="title_s bor-b" data-type="1">整租</span>
-                        <span class="title_s bor-b chose" data-type="3">全部</span>
-                        <input type="hidden" value="3" name="type">
-                    {else /}
-                        <span class="title_s bor-b chose" data-type="2">合租</span>
-                        <span class="title_s bor-b" data-type="1">整租</span>
-                        <span class="title_s bor-b" data-type="3">全部</span>
-                        <input type="hidden" value="2" name="type">
-                    {/if}
-                    </form>
-                    </p>
-                </div>
-                <div class="banner-box fl">
-                    <p>
-                    <form action="/house/leaseType" method="post" class="sui-form type-num">
-                        <span class="title_s list all">全部</span>
-                        <span class="title_s list null" onclick="leaseType(0)">空置</span>
-                        <span class="title_s list overdue" onclick="leaseType(2)">逾期</span>
-                        <span class="title_s list rentout" onclick="leaseType(1)">已租</span>
-                        <span class="title_s list fire" onclick="leaseType(4)">着火房</span>
-                        <span class="title_s list expiring" onclick="leaseType(3)">将到期</span>
-                        <input type="hidden" value="" name="type">
-                        <input type="hidden" value="" name="status">
-                    </form>
-                    </p>
-                </div>
+                <form action="/house/leaseType" method="post" class="sui-form type">
+                    <div class="banner-box fl">
+                        <p>
+                        {if $type==1}
+                            <span class="title_s bor-b" data-type="2">合租</span>
+                            <span class="title_s bor-b chose" data-type="1">整租</span>
+                            <span class="title_s bor-b" data-type="3">全部</span>
+                            <input type="hidden" value="1" name="type">
+                        {elseif $type==3}
+                            <span class="title_s bor-b" data-type="2">合租</span>
+                            <span class="title_s bor-b" data-type="1">整租</span>
+                            <span class="title_s bor-b chose" data-type="3">全部</span>
+                            <input type="hidden" value="3" name="type">
+                        {else /}
+                            <span class="title_s bor-b chose" data-type="2">合租</span>
+                            <span class="title_s bor-b" data-type="1">整租</span>
+                            <span class="title_s bor-b" data-type="3">全部</span>
+                            <input type="hidden" value="2" name="type">
+                        {/if}
+                        </p>
+                    </div>
+                    <div class="banner-box fl">
+                        <p>
+                            <span class="title_s list all" data-status="3">全部</span>
+                            <span class="title_s list null" data-status="0">空置</span>
+                            <span class="title_s list overdue" data-status="2">逾期</span>
+                            <span class="title_s list rentout" data-status="1">已租</span>
+                            <!--<span class="title_s list fire">着火房</span>-->
+                            <!--<span class="title_s list expiring">将到期</span>-->
+                            <input type="hidden" value="3" name="status">
+                        </p>
+                    </div>
+                </form>
                 <div class="banner-box fr">
                     <a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary">重置</a>
                 </div>

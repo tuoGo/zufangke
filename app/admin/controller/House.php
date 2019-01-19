@@ -174,8 +174,7 @@ class House extends Base
     {
         if ($request->isPost()) {
             $adid    = Session::get('adid');
-//            $status  = input('post.status'); //房间的状态 0空置 1已租 2逾期 3全部
-            $status  = '3';
+            $status  = input('post.status'); //房间的状态 0空置 1已租 2逾期 3全部
             $type    = input('post.type'); //单元/室 1整租 2合租 3全部
             $typestr = $type;
             if($type == '3'){
