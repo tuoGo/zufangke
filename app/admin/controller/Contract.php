@@ -99,4 +99,7 @@ class Contract extends Base
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
     }
+    public function checkIn(){
+//        return $this->fetch();
+    }
 }

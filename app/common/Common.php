@@ -353,9 +353,8 @@ class Common{
 
         if (in_array($keyword, $stop_words_list))
         {
-            return false;
+            return json(['data'=>'','status'=>400,'msg'=>'无效词汇!']);
         }
-
         return true;
     }
 

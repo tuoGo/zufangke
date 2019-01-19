@@ -3,6 +3,9 @@
         <div class="logo"></div>
         <div class="user">
             <div class="tt">{$Think.session.name}</div>
+            <div class="adid" style="display: none;">{$Think.session.adid}</div>
+            <div class="uid" style="display: none;">{$Think.session.uid}</div>
+            <div class="phone" style="display: none;">{$Think.session.phone}</div>
             <div class="line"></div>
             <div class="quit"><a href="#">退出</a></div>
         </div>
@@ -33,8 +36,10 @@
             <p>租金核算</p>
         </div>
         <div class="pure-u-1-1 banner-slide sleep">
-            <p><img src="/static/images/main-banner/banner-icon/sleep.png" alt=""></p>
-            <p>入住确认</p>
+            <a href="/contract/checkIn">
+                <p><img src="/static/images/main-banner/banner-icon/sleep.png" alt=""></p>
+                <p>入住确认</p>
+            </a>
         </div>
         <div class="pure-u-1-1 banner-slide ct_con">
             <p><img src="/static/images/main-banner/banner-icon/ct_con.png" alt=""></p>
