@@ -173,22 +173,39 @@ class House extends Base
     public function leaseType(Request $request)
     {
         if ($request->isPost()) {
-            $adid = Session::get('adid');
-            $status = input('post.type'); //房间是整租或合租
+            $adid    = Session::get('adid');
+            $status  = input('post.status'); //房间的状态 0空置 1已租 2逾期 3全部
+            $type    = input('post.type'); //单元/室 1整租 2合租 3全部
+            if($type == '3'){
+                $type = array('0'=>'1','1'=>'2');
+            }
             $nowTime = time();
-            $room = db('room')->where('adid',$adid)->where('type',$status)->select();
-            foreach ($room as $ky => $vl) {
-                $hid[$ky]    = $vl['hid'];
-                $roomid[$ky] = $vl['roomid'];
-            }unset($ky, $vl);//解除room循环变量
-
-            $house = db('house')->where('hid','in', $hid)->select();
-
-            $underlying = db('underlying')->where('roomid', 'in', $roomid)->select();
-            foreach ($underlying as $kk => $vv) {
-                $underid[$kk] = $vv['underid'];
-            }unset($kk, $vv);//解除underlying循环变量
-
+            //筛选
+            if ($status == '0' || $status == '2'){
+                $underlyingStr = db('underlying')->where('adid',$adid)->where('status',$status)->select();
+            }elseif($status == '1'){
+                $status = array('0'=>'1','1'=>'2');
+                $underlyingStr = db('underlying')->where('adid',$adid)->where('status','in',$status)->select();
+            }else{
+                $underlyingStr = db('underlying')->where('adid',$adid)->select();
+            }
+            foreach ($underlyingStr as $uk => $uv){
+                $roomid[$uk] = $uv['roomid'];
+            }unset($uk,$uv);//解除循环变量
+            $roomid = array_unique($roomid);
+            $room = db('room')->where('roomid','in',$roomid)->where('type','in',$type)->select();
+            foreach ($room as $rk => $rv){
+                $hid[$rk] = $rv['hid'];
+                $roomids[$rk] = $rv['roomid'];
+            }
+            $hid = array_unique($hid);
+            $roomids = array_unique($roomids);
+            $house = db('house')->where('hid','in',$hid)->select();
+            $underlying = db('underlying')->where('roomid','in',$roomids)->where('status','in',$status)->select();
+            foreach ($underlying as $undk => $undv){
+                $underid[$undk] = $undv['underid'];
+            }
+            //数据拼接
             $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
             $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
             foreach ($contract as $c => $cc) {
@@ -210,7 +227,7 @@ class House extends Base
                     }
                 }
             }
-            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract,'type'=>$status]);
+            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract,'type'=>$type]);
         }
     }
     /**
