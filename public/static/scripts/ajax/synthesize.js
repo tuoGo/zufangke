@@ -71,29 +71,22 @@ function checkPhone(phone){
 }
 //合租房or整租房or全部显示
 function leaseType(type) {
+
     if ($(this).hasClass("chose")){
         return false;
     }
+
     var status = $(".house-title .banner-box .chose").attr('data-type');//整租or合租 1整租 2合租               不传为全部
-    var type   = type;      //房源状态 1为已租 2为未租 3为逾期 4着火房 不传为全部
-    console.log(type)
-    $.ajax({
-        url:"/house/leasetype",
-        data:{'type':type,'status':status},
-        type:"post",
-        dataType:"json",
-        success:function (data){
-            if (data.status == 200){
-                console.log(data)
-            }
-        }
-    });
+    // var type   = type;      //房源状态 1为已租 2为未租 3为逾期 4着火房 不传为全部
+    // $(".house-title .banner-box input[name=type]").val(type);
+    $(".house-title .banner-box input[name=status]").val(status);
+    $(".house-title .banner-box .type-num").submit();
 }
 $(function () {
     $(".search").click(function () {
-        var text = $(".house-title .banner-box .sui-form input").val();
+        var text = $(".house-title .banner-box .content-text input").val();
         if (text) {
-            $(".house-title .banner-box .sui-form").submit();
+            $(".house-title .banner-box .content-text").submit();
         }
     });
 });

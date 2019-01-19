@@ -45,16 +45,20 @@
                         <span class="title_s bor-b" data-type="1" onclick="leaseType()">整租</span>
                     </p>
                 </div>
-                <div class="banner-box fl">
-                    <p>
-                        <span class="title_s list all">全部</span>
-                        <span class="title_s list null" onclick="leaseType(0)">空置</span>
-                        <span class="title_s list overdue" onclick="leaseType(2)">逾期</span>
-                        <span class="title_s list rentout" onclick="leaseType(1)">已租</span>
-                        <span class="title_s list fire" onclick="leaseType(4)">着火房</span>
-                        <span class="title_s list expiring" onclick="leaseType(3)">将到期</span>
-                    </p>
-                </div>
+                <!--<div class="banner-box fl">-->
+                    <!--<p>-->
+                    <!--<form action="/house/leaseType" method="post" class="sui-form type-num">-->
+                        <!--<span class="title_s list all">全部</span>-->
+                        <!--<span class="title_s list null" onclick="leaseType(0)">空置</span>-->
+                        <!--<span class="title_s list overdue" onclick="leaseType(2)">逾期</span>-->
+                        <!--<span class="title_s list rentout" onclick="leaseType(1)">已租</span>-->
+                        <!--<span class="title_s list fire" onclick="leaseType(4)">着火房</span>-->
+                        <!--<span class="title_s list expiring" onclick="leaseType(3)">将到期</span>-->
+                        <!--<input type="hidden" value="" name="type">-->
+                        <!--<input type="hidden" value="" name="status">-->
+                    <!--</form>-->
+                    <!--</p>-->
+                <!--</div>-->
                 <div class="banner-box fr">
                     <a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary">重置</a>
                 </div>
@@ -62,12 +66,15 @@
                     <a href="javascript:void(0)" class="sui-btn btn-bordered btn-large btn-primary search">搜索</a>
                 </div>
                 <div class="banner-box fr">
-                    <form action="/house/search" method="post" class="sui-form">
+                    <form action="/house/search" method="post" class="sui-form content-text">
                         <input type="text" placeholder="请输入小区名称" name="text" class="search input-large input-xfat">
                         <i class="search-icon"></i>
                     </form>
                 </div>
             </div>
+            {if $data==0}
+            <h1>沒有參數</h1>
+            {else /}
             <!--房源列表-->
             {foreach name="data" item="item" key="key"}
             <div class="house-box">
@@ -250,6 +257,7 @@
                 <!--第二层结束-->
             </div>
             {/foreach}
+            {/if}
             <!--第一层结束-->
         </div>
     </div>
