@@ -171,12 +171,8 @@ class House extends Base
     {
         if ($request->isPost()) {
             $adid = Session::get('adid');
-//            $type = input('post.type');  //房间状态
-            $status = input('post.status'); //房间是整租或合租
+            $status = input('post.type'); //房间是整租或合租
             $nowTime = time();
-//            if ($type == 1){
-//                $type = array('0'=>'1','1'=>'2');
-//            }
             $house = db('house')->where('adid', $adid)->select();
             foreach ($house as $k => $v) {
                 $hid[$k] = $v['hid'];
@@ -213,7 +209,7 @@ class House extends Base
                     }
                 }
             }
-            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
+            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract,'type'=>$status]);
         }
     }
     /**
