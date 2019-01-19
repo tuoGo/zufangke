@@ -74,9 +74,9 @@ function leaseType() {
     if ($(this).hasClass("chose")){
         return false;
     }
-    $(this).siblings(".bor-b").toggleClass("chose");
+    $(this).siblings(".chose").toggleClass("chose");
     $(this).toggleClass("chose");
-    var status = $(".house-title .banner-box .chose").attr('data-type');//整租or合租 1整租 2合租               不传为全部
+    var status = $(".house-title .banner-box .chose").attr('data-type');//整租or合租 1整租 2合租 3全部
     // var type   = type;      //房源状态 1为已租 2为未租 3为逾期 4着火房 不传为全部
     // $(".house-title .banner-box input[name=type]").val(type);
     $(this).siblings("input[name=type]").val(status);
