@@ -64,10 +64,11 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
+            $adid   = Session::get('adid');
             $time   = time();
             if (!empty($result['address'])){
                 $house = array(
-                    'adid'          => Session::get('adid'), //房东id
+                    'adid'          => $adid, //房东id
                     'address'       => $result['address'],//地址
                     'create_time'   => $time,
                     'update_time'   => $time,
@@ -75,6 +76,7 @@ class House extends Base
                 $hid = model('house')->insertGetId($house);
                 if ($hid){
                     $room = array(
+                        'adid'  => $adid,
                         'hid'   => $hid,
                         'room'  => $result['room'],
                         'type'  => $result['type'],
@@ -84,6 +86,7 @@ class House extends Base
                 }
             }else if (!empty($result['hid'])){
                 $data = array(
+                    'adid'      => $adid,
                     'hid'       => $result['hid'],
                     'room'      => $result['room'],
                     'type'      => $result['type'],
@@ -173,21 +176,19 @@ class House extends Base
             $adid = Session::get('adid');
             $status = input('post.type'); //房间是整租或合租
             $nowTime = time();
-            $house = db('house')->where('adid', $adid)->select();
-            foreach ($house as $k => $v) {
-                $hid[$k] = $v['hid'];
-            }
-            unset($k, $v);//解除house循环变量
-            $room = db('room')->where('hid', 'in', $hid)->where('type',$status)->select();
+            $room = db('room')->where('adid',$adid)->where('type',$status)->select();
             foreach ($room as $ky => $vl) {
+                $hid[$ky]    = $vl['hid'];
                 $roomid[$ky] = $vl['roomid'];
-            }
-            unset($ky, $vl);//解除room循环变量
+            }unset($ky, $vl);//解除room循环变量
+
+            $house = db('house')->where('hid','in', $hid)->select();
+
             $underlying = db('underlying')->where('roomid', 'in', $roomid)->select();
             foreach ($underlying as $kk => $vv) {
                 $underid[$kk] = $vv['underid'];
-            }
-            unset($kk, $vv);//解除underlying循环变量
+            }unset($kk, $vv);//解除underlying循环变量
+
             $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
             $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
             foreach ($contract as $c => $cc) {
