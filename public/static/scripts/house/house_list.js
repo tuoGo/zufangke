@@ -555,4 +555,9 @@ $(function(){
         $("#checkOut .msg-box .house-cash").html(cash);
         $("#checkOut").modal("show");
     });
+    //合租-整租更换
+    $(".house-title .banner-box .bor-b").click(function(){
+        $(this).siblings(".bor-b").toggleClass("chose");
+        $(this).toggleClass("chose");
+    });
 });

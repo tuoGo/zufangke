@@ -1,0 +1,25 @@
+.computer .show-content{
+    padding:20px;
+    font-family:"Microsoft YaHei 微软雅黑";
+}
+.computer .show-content .title{
+    padding-bottom:10px;
+    border-bottom:1px solid rgb(238,238,238);
+    font-size:30px;
+    color:rgb(2,96,196);
+    line-height:30px;
+}
+.computer .show-content .title span{
+    margin:0 5px;
+}
+.computer .show-content .title a{
+    margin-bottom:5px;
+}
+.computer .show-content .table-area thead th,
+.computer .show-content .table-area tbody td{
+    text-align:center;
+}
+.computer .show-content .table-area .handle-area{
+    width:150px;
+    margin:0 auto;
+}

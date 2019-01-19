@@ -1,3 +1,4 @@
 .idea
 composer.lock
 *.log
+app/admin/view/contract/index2.html
