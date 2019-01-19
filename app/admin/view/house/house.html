@@ -41,8 +41,11 @@
             <div class="house-title clearfix">
                 <div class="banner-box fl">
                     <p>
-                        <span class="title_s bor-b chose" data-type="2" onclick="leaseType()">合租</span>
-                        <span class="title_s bor-b" data-type="1" onclick="leaseType()">整租</span>
+                        <form action="/house/leaseType" method="post" class="sui-form type">
+                        <span class="title_s bor-b chose" data-type="2">合租</span>
+                        <span class="title_s bor-b" data-type="1">整租</span>
+                        <input type="hidden" value="" name="type">
+                        </form>
                     </p>
                 </div>
                 <!--<div class="banner-box fl">-->
