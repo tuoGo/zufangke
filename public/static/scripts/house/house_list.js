@@ -547,6 +547,10 @@ $(function(){
     $("#housing").on("okHide",function(){
         var trs = $("#housing .add tr");
         var length = trs.length;
+        var main = {
+            house_type : $("#housing .house-type input[name=house_type]").val(),
+            plot_name : $("#housing .add-plot input[name=plot_name]").val()
+        };
         var datas = [];
         for(var i = 0; i < length; i++){
             datas[i] = {
@@ -561,10 +565,10 @@ $(function(){
         }
         $.ajax({
             url:"/house/add",
-            data:{'data':datas},
+            data:{'main' : main,'datas':datas},
             type:"post",
             success:function (data){
-                
+
             }
         });
     });
