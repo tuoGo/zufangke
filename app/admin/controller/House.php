@@ -58,6 +58,7 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
+            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
             if (!empty($result['address'])){

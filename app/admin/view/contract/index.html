@@ -43,6 +43,7 @@
                     <table class="sui-table table-primary">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>房间信息</th>
                                 <th>承租人</th>
                                 <th>联系号码</th>
@@ -52,12 +53,14 @@
                             </tr>
                         </thead>
                         <tbody class="add">
+                        {foreach name="data" item="contract" key="ck"}
                             <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
+                                <td>{$contract.contid}</td>
+                                <td>{$contract.address}</td>
+                                <td data-id="{$contract.user.uid}">{$contract.user.name}</td>
+                                <td>{$contract.user.phone}</td>
+                                <td>{$contract.start_time}</td>
+                                <td>{$contract.end_time}</td>
                                 <td>
                                     <div class="handle-area">
                                         <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
@@ -65,188 +68,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>劲松三区(北京朝阳劲松桥西南角50米南)307栋6单元503室01</td>
-                                <td>范德萨</td>
-                                <td>23333333333</td>
-                                <td>2018年11月27日</td>
-                                <td>2019年01月28日</td>
-                                <td>
-                                    <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
-                                    </div>
-                                </td>
-                            </tr>
+                        {/foreach}
                         </tbody>
                     </table>
                 </div>
