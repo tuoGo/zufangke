@@ -572,17 +572,17 @@ $(function(){
         for(var i = 0; i < length; i++){
             house.datas[i] = {
                 //出租方式
-                house_type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
+                type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
                 //楼栋单元房间号
                 room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
                 //有几个房间
-                room_number : $(trs[i]).find("input[name=room_number]").val(),
+                num_room : $(trs[i]).find("input[name=room_number]").val(),
                 //有几个大厅
-                lobby_number : $(trs[i]).find("input[name=lobby_number]").val(),
+                num_hall : $(trs[i]).find("input[name=lobby_number]").val(),
                 //有几个厕所
-                toilet_number : $(trs[i]).find("input[name=toilet_number]").val(),
+                num_toilet : $(trs[i]).find("input[name=toilet_number]").val(),
                 //装修状态
-                fitment_status : $(trs[i]).find("input[name=fitment_status]").val()
+                decorate : $(trs[i]).find("input[name=fitment_status]").val()
             };
         }
         $.ajax({
