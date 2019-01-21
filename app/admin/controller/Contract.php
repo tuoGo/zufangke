@@ -20,7 +20,23 @@ class Contract extends Base
     public function index()
     {
             $adid = Session::get('adid');
-            $data = db('contract')->where('adid',$adid)->select();
+            $contract = db('contract')->where('adid',$adid)->select();
+            foreach ($contract as $key => $val){
+                $uid[$key]     = $val['uid'];
+                $underid[$key] = $val['underid'];
+            }unset($key,$val);
+            $userinfo   = db('user')->where('uid','in',$uid)->select();
+            foreach ($contract as $contk => $contv){
+                $data[$contk] = $contv;
+                foreach ($userinfo as $userk => $userv){
+                    if ($contract[$contk]['uid'] == $userinfo[$userk]['uid']){
+                        $data[$contk]['user'] = $userv;
+                        $data[$contk]['start_time'] = date('Y年m月d日',$data[$contk]['start_time']);
+                        $data[$contk]['end_time'] = date('Y年m月d日',$data[$contk]['end_time']);
+                        continue;
+                    }
+                }
+            }
             return $this->fetch('index',['data' => $data]);
     }
 
