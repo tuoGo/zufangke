@@ -555,6 +555,10 @@ $(function(){
         $("#checkOut .msg-box .house-cash").html(cash);
         $("#checkOut").modal("show");
     });
+    //添加房源的提交事件
+    $("#housing").on("okHide",function(){
+        $("#housing form").submit();
+    });
     //合租-整租更换
     // $(".house-title .banner-box .bor-b").click(function(){
     //     $(this).siblings(".bor-b").toggleClass("chose");
