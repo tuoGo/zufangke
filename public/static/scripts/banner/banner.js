@@ -80,6 +80,13 @@ $(function(){
             system.mouseleave(function(){
                 $(this).find("img").attr("src","/static/images/main-banner/banner-icon/system.png")
             });
+            var our = $(".our");
+            our.mouseenter(function(){
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/contact_blue.png")
+            });
+            our.mouseleave(function(){
+                $(this).find("img").attr("src","/static/images/main-banner/banner-icon/contact.png")
+            });
             window.onresize = function(){
                 handleWheel(0,true);
             };
