@@ -284,15 +284,15 @@
                 </div>
                 <div class="modal-body">
                     <form action="" class="sui-form" method="post">
-                        <div class="house-type">
-                            出租方式 :
-                            <label data-toggle="radio" class="radio-pretty inline checked">
-                                <input type="radio" checked="checked" name="house_type" value="2"><span>合租</span>
-                            </label>
-                            <label data-toggle="radio" class="radio-pretty inline">
-                                <input type="radio" name="house_type" value="1"><span>整租</span>
-                            </label>
-                        </div>
+                        <!--<div class="house-type">-->
+                            <!--出租方式 :-->
+                            <!--<label data-toggle="radio" class="radio-pretty inline checked">-->
+                                <!--<input type="radio" checked="checked" name="house_type" value="2"><span>合租</span>-->
+                            <!--</label>-->
+                            <!--<label data-toggle="radio" class="radio-pretty inline">-->
+                                <!--<input type="radio" name="house_type" value="1"><span>整租</span>-->
+                            <!--</label>-->
+                        <!--</div>-->
                         <div class="plot add-plot">
                             添加小区 :
                             <input type="text" placeholder="输入您要添加的小区名" class="input-xlarge" name="plot_name">
@@ -345,6 +345,7 @@
                             <table class="sui-table table-primary">
                                 <thead>
                                 <tr>
+                                    <th>出租方式</th>
                                     <th>楼栋号(栋)</th>
                                     <th>单元</th>
                                     <th>房间号</th>
@@ -356,6 +357,31 @@
                                 </thead>
                                 <tbody class="add">
                                 <tr>
+                                    <td>
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
+                                                <span class="dropdown-inner">
+                                                    <a role="button" href="javascript:void(0);" data-toggle="dropdown"
+                                                       class="dropdown-toggle">
+                                                        <input type="hidden" value="整租" name="house_type"><i class="caret"></i>
+                                                        <span>整租</span>
+                                                    </a>
+                                                    <ul role="menu" aria-labelledby="drop5" class="sui-dropdown-menu">
+                                                        <li role="presentation" class="active">
+                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);" value="整租">
+                                                                整租
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);" value="合租">
+                                                                合租
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </td>
                                     <td><input type="text" placeholder="请填写" name="build"></td>
                                     <td><input type="text" placeholder="请填写" name="unit"></td>
                                     <td><input type="text" placeholder="请填写" name="room_name"></td>

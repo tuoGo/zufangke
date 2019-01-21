@@ -88,6 +88,24 @@ $(function(){
     function addPlotTr(num){
         var inner = '';
         inner += '<tr>';
+        inner += '<td>';
+        inner += '<div>';
+        inner += '<span class="sui-dropdown dropdown-bordered select">';
+        inner += '<span class="dropdown-inner">';
+        inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
+        inner += '<input type="hidden" value="整租" name="house_type"><i class="caret"></i><span>整租</span>';
+        inner += '<ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">';
+        inner += '<li role="presentation" class="active">';
+        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="整租">整租</a>';
+        inner += '</li>';
+        inner += '<li role="presentation" class="active">';
+        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="合租">合租</a>';
+        inner += '</li>';
+        inner += '</ul>';
+        inner += '</span>';
+        inner += '</span>';
+        inner += '</div>';
+        inner += '</td>';
         inner += '<td><input type="text" placeholder="请填写" name="build"></td>';
         inner += '<td><input type="text" placeholder="请填写" name="unit"></td>';
         inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
@@ -547,25 +565,34 @@ $(function(){
     $("#housing").on("okHide",function(){
         var trs = $("#housing .add tr");
         var length = trs.length;
-        var main = {
-            house_type : $("#housing .house-type input[name=house_type]").val(),
+        var datas = [];
+        datas[0] = {
+            //添加的小区名
             plot_name : $("#housing .add-plot input[name=plot_name]").val()
         };
-        var datas = [];
         for(var i = 0; i < length; i++){
-            datas[i] = {
+            datas[i+1] = {
+                //出租方式
+                house_type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
+                //楼栋号
                 build : $(trs[i]).find("input[name=build]").val(),
+                //小区单元
                 unit : $(trs[i]).find("input[name=unit]").val(),
+                //房间号
                 room_name : $(trs[i]).find("input[name=room_name]").val(),
+                //有几个房间
                 room_number : $(trs[i]).find("input[name=room_number]").val(),
+                //有几个大厅
                 lobby_number : $(trs[i]).find("input[name=lobby_number]").val(),
+                //有几个厕所
                 toilet_number : $(trs[i]).find("input[name=toilet_number]").val(),
+                //装修状态
                 fitment_status : $(trs[i]).find("input[name=fitment_status]").val()
             };
         }
         $.ajax({
             url:"/house/add",
-            data:{'main' : main,'datas':datas},
+            data:{'datas':datas},
             type:"post",
             success:function (data){
 
