@@ -565,13 +565,12 @@ $(function(){
     $("#housing").on("okHide",function(){
         var trs = $("#housing .add tr");
         var length = trs.length;
-        var datas = [];
-        datas[0] = {
-            //添加的小区名
+        var house = {
             plot_name : $("#housing .add-plot input[name=plot_name]").val()
         };
+        house.datas = [];
         for(var i = 0; i < length; i++){
-            datas[i+1] = {
+            house.datas[i] = {
                 //出租方式
                 house_type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
                 //楼栋号
@@ -592,7 +591,7 @@ $(function(){
         }
         $.ajax({
             url:"/house/add",
-            data:{'datas':datas},
+            data:{'datas':house},
             type:"post",
             success:function (data){
 
