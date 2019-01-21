@@ -92,6 +92,7 @@ $(function(){
         inner += '<td><input type="text" placeholder="请填写" name="unit"></td>';
         inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
         inner += '<td>';
+        inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -122,8 +123,10 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
         inner += '<td>';
+        inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -154,8 +157,10 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
         inner += '<td>';
+        inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -186,28 +191,10 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
-        inner += '</td>';
-        inner += '<td><input type="text" placeholder="请填写" name="acreage"></td>';
-        inner += '<td><input type="text" placeholder="请填写" name="floors"></td>';
-        inner += '<td><input type="text" placeholder="请填写" name="now_floor"></td>';
-        inner += '<td>';
-        inner += '<span class="sui-dropdown dropdown-bordered select">';
-        inner += '<span class="dropdown-inner">';
-        inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
-        inner += '<input type="hidden" value="无" name="has_elevator"><i class="caret"></i><span>无</span>';
-        inner += '</a>';
-        inner += '<ul role="menu" aria-labelledby="drop5" class="sui-dropdown-menu">';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="无">无</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="有">有</a>';
-        inner += '</li>';
-        inner += '</ul>';
-        inner += '</span>';
-        inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
         inner += '<td class="fitment">';
+        inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -228,6 +215,7 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
         inner += '</tr>';
         for(var i = 0; i < num; i++){
@@ -557,7 +545,28 @@ $(function(){
     });
     //添加房源的提交事件
     $("#housing").on("okHide",function(){
-        $("#housing form").submit();
+        var trs = $("#housing .add tr");
+        var length = trs.length;
+        var datas = [];
+        for(var i = 0; i < length; i++){
+            datas[i] = {
+                build : $(trs[i]).find("input[name=build]").val(),
+                unit : $(trs[i]).find("input[name=unit]").val(),
+                room_name : $(trs[i]).find("input[name=room_name]").val(),
+                room_number : $(trs[i]).find("input[name=room_number]").val(),
+                lobby_number : $(trs[i]).find("input[name=lobby_number]").val(),
+                toilet_number : $(trs[i]).find("input[name=toilet_number]").val(),
+                fitment_status : $(trs[i]).find("input[name=fitment_status]").val()
+            };
+        }
+        $.ajax({
+            url:"/house/add",
+            data:{'data':datas},
+            type:"post",
+            success:function (data){
+                
+            }
+        });
     });
     //合租-整租更换
     // $(".house-title .banner-box .bor-b").click(function(){

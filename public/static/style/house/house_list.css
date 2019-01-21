@@ -323,6 +323,13 @@
 #housing .modal-body .add-plot{
     display:none;
 }
+#housing .modal-body .add td > div{
+    width:65px;
+    margin:0 auto;
+}
+#housing .modal-body .add td.fitment > div{
+    width:120px;
+}
 #rooming .modal-body .house-type,
 #rooming .modal-body .plot,
 #rooming .modal-body .house-number{

@@ -283,7 +283,7 @@
                     <h4 class="modal-title">请填写房源的详细信息</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="/house/add" class="sui-form" method="post">
+                    <form action="" class="sui-form" method="post">
                         <div class="house-type">
                             出租方式 :
                             <label data-toggle="radio" class="radio-pretty inline checked">
@@ -351,10 +351,6 @@
                                     <th>室</th>
                                     <th>厅</th>
                                     <th>卫</th>
-                                    <th>总面积㎡</th>
-                                    <th>总层数</th>
-                                    <th>所在层数</th>
-                                    <th>有无电梯</th>
                                     <th>装修状态</th>
                                 </tr>
                                 </thead>
@@ -364,7 +360,8 @@
                                     <td><input type="text" placeholder="请填写" name="unit"></td>
                                     <td><input type="text" placeholder="请填写" name="room_name"></td>
                                     <td>
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
@@ -410,9 +407,11 @@
 														</ul>
 													</span>
 												</span>
+                                        </div>
                                     </td>
                                     <td>
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
@@ -458,9 +457,11 @@
 														</ul>
 													</span>
 												</span>
+                                        </div>
                                     </td>
                                     <td>
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
@@ -506,39 +507,15 @@
 														</ul>
 													</span>
 												</span>
-                                    </td>
-                                    <td><input type="text" placeholder="请填写" name="acreage"></td>
-                                    <td><input type="text" placeholder="请填写" name="floors"></td>
-                                    <td><input type="text" placeholder="请填写" name="now_floor"></td>
-                                    <td>
-												<span class="sui-dropdown dropdown-bordered select">
-													<span class="dropdown-inner">
-														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
-                                                           class="dropdown-toggle">
-															<input type="hidden" value="无" name="has_elevator"><i class="caret"></i>
-															<span>无</span>
-														</a>
-														<ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
-															<li role="presentation" class="active">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="无">
-																	无
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="有">
-																	有
-																</a>
-															</li>
-														</ul>
-													</span>
-												</span>
+                                        </div>
                                     </td>
                                     <td class="fitment">
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
-															<input type="hidden" value="" name="fitment_status"><i class="caret"></i>
+															<input type="hidden" value="精装修" name="fitment_status"><i class="caret"></i>
 															<span>精装修</span>
 														</a>
 														<ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
@@ -565,6 +542,7 @@
 														</ul>
 													</span>
 												</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
