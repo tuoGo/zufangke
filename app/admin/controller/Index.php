@@ -9,6 +9,6 @@ class Index extends Base
     public function index()
     {
         $data = Session::get();
-        return $this->fetch('admin/index',['data'=>$data]);
+        return $this->fetch('contact/index',['data'=>$data]);
     }
 }
