@@ -573,12 +573,8 @@ $(function(){
             house.datas[i] = {
                 //出租方式
                 house_type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
-                //楼栋号
-                build : $(trs[i]).find("input[name=build]").val(),
-                //小区单元
-                unit : $(trs[i]).find("input[name=unit]").val(),
-                //房间号
-                room_name : $(trs[i]).find("input[name=room_name]").val(),
+                //楼栋单元房间号
+                room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
                 //有几个房间
                 room_number : $(trs[i]).find("input[name=room_number]").val(),
                 //有几个大厅
