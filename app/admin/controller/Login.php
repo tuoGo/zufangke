@@ -25,7 +25,7 @@ class Login extends Controller
      */
     public function out(){
         Session::clear();
-        return $this->fetch('Log/index');//跳转登录页
+        $this->redirect('index');//跳转登录页
     }
 
     /*
@@ -47,7 +47,6 @@ class Login extends Controller
         }else{
             return json(['data'=>'','status'=>400,'msg'=>'账户密码错误']);
         }
-
     }
 
     /*
