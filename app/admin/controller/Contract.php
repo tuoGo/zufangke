@@ -20,12 +20,14 @@ class Contract extends Base
     public function index()
     {
             $adid = Session::get('adid');
-            $page = input('get.page');
+            $page = intval(input('get.page'));
             if (empty($page)){
                 $page = 1;
             }
             $count = db('contract')->count();
-            $contract = db('contract')->where('adid',$adid)->page($page,15)->select();
+//            $contract = db('contract')->where('adid',$adid)->page($page,15)->select();
+            $contract = db('contract')->where('adid',$adid)->order('contid asc')->paginate(15,$count);
+            $pagecount = $contract->render();
             foreach ($contract as $key => $val){
                 $uid[$key]     = $val['uid'];
                 $underid[$key] = $val['underid'];
@@ -42,7 +44,7 @@ class Contract extends Base
                     }
                 }
             }
-            return $this->fetch('index',['data' => $data , 'page'=>$page , 'count'=>$count]);
+            return $this->fetch('index',['data' => $data , 'page'=>$page , 'count'=>$count , 'pagecount'=>$pagecount]);
     }
 
     //显示合同添加页
