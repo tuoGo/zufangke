@@ -20,7 +20,12 @@ class Contract extends Base
     public function index()
     {
             $adid = Session::get('adid');
-            $contract = db('contract')->where('adid',$adid)->select();
+            $page = input('get.page');
+            if (empty($page)){
+                $page = 1;
+            }
+            $count = db('contract')->count();
+            $contract = db('contract')->where('adid',$adid)->page($page,15)->select();
             foreach ($contract as $key => $val){
                 $uid[$key]     = $val['uid'];
                 $underid[$key] = $val['underid'];
@@ -37,7 +42,7 @@ class Contract extends Base
                     }
                 }
             }
-            return $this->fetch('index',['data' => $data]);
+            return $this->fetch('index',['data' => $data , 'page'=>$page , 'count'=>$count]);
     }
 
     //显示合同添加页
@@ -54,6 +59,7 @@ class Contract extends Base
         if ($request->isPost())
         {
             $data = input('post.');
+            $adid = Session::get('adid');
             $time = time();
             $userData = [
                 'adid'          => $data['adid'],
@@ -68,7 +74,7 @@ class Contract extends Base
             if ($uid)
             {
                 $contData = [
-                    'adid'              => $data['adid'],
+                    'adid'              => $adid,
                     'hid'               => $data['hid'],
                     'uid'               => $uid,
                     'bet'               => $data['bet'],
@@ -81,7 +87,7 @@ class Contract extends Base
                     'idcard_img_front'  => $data['idcard_img_front'],
                     'idcard_img_behind' => $data['idcard_img_behind'],
                     'contract_img'      => $data['contract_img'],
-                    'sms_time'  => $time,
+                    'sms_time'          => $time,
                 ];
                 $rel = model('contract')->allowField(true)->save($contData);
                 if ($rel)

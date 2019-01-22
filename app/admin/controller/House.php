@@ -58,25 +58,22 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
-            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
-            if (!empty($result['address'])){
+            if (!empty($result['datas']['plot_name'])){
                 $house = array(
                     'adid'          => $adid, //房东id
-                    'address'       => $result['address'],//地址
+                    'address'       => $result['datas']['plot_name'],//地址
                     'create_time'   => $time,
                     'update_time'   => $time,
                 );
                 $hid = model('house')->insertGetId($house);
                 if ($hid){
-                    $room = array(
-                        'adid'  => $adid,
-                        'hid'   => $hid,
-                        'room'  => $result['room'],
-                        'type'  => $result['type'],
-                    );
-                    model('room')->allowField(true)->save($room);
+                    foreach ($result['datas']['datas'] as $key => $val){
+                        $val['hid']  = $hid;
+                        $val['adid'] = $adid;
+                        model('room')->data($val,true)->isUpdate(false)->save();
+                    }
                     return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
                 }
             }else if (!empty($result['hid'])){
@@ -86,30 +83,12 @@ class House extends Base
                     'room'      => $result['room'],
                     'type'      => $result['type'],
                 );
-                model('room')->allowField(true)->save($data);
+                model('room')->data($data,true)->isUpdate(false)->save();
                 return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
+            }else if (!empty($result['roomid'])){
+                //房间字段
             }
             return json(['data'=>'','status'=>400,'msg'=>'未知错误,联系我们!']);
-        }
-    }
-    /**
-     * 添加房间
-     */
-    public function addRoom(Request $request){
-        if ($request->isPost()){
-            $result = input('post.');
-            $data = array(
-                'adid'      => $result['adid'], //房东id
-                'address'   => $result['address'],//地址
-                'status'    => $result['status'],//房源状态
-            );
-            try{
-                //数据库存储操作
-                model('house')->save($data);
-                return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
-            }catch (Exception $e){
-                return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
-            }
         }
     }
 
