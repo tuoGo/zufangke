@@ -1,0 +1,108 @@
+.radius{
+    border-radius:5px !important;
+}
+input{
+    height:22px !important;
+    font-size:16px !important;
+}
+.sui-form{
+    padding-bottom:20px;
+}
+.sign{
+    padding:10px 25px;
+    margin:auto;
+    box-shadow:0 0 10px #bbb;
+}
+@media (min-width:360px){
+    .sign{
+        padding:20px 50px;
+        box-shadow:0 0 10px #bbb;
+    }
+}
+@media (min-width:1280px){
+    .sign{
+        width:1230px;
+        margin:20px auto;
+        padding:20px 50px;
+        box-shadow:0 0 10px #bbb;
+    }
+}
+.sign > div > div{
+    margin-bottom:1em;
+}
+.sign .title{
+    position:relative;
+}
+.sign .title h2{
+    text-indent:10px;
+}
+.sign .title:before{
+    content:'';
+    position:absolute;
+    top:5px;
+    left:0;
+    width:5px;
+    height:22px;
+    background:#00ccff;
+}
+.sign a.dropdown-toggle{
+    width:100px;
+}
+.sign .pics h3{
+    width:120px;
+    text-align:center;
+}
+.sign .pics .dashed-box{
+    position:relative;
+    width:120px;
+    height:120px;
+    border:1px dashed #ddd;
+}
+.sign .pics .dashed-box:hover{
+    border-color:#00ccff;
+    cursor:pointer;
+}
+.sign .pics .dashed-box:hover .upload{
+    color:#00ccff;
+}
+.sign .pics .dashed-box .upload{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    transform:translateY(-50%);
+    text-align:center;
+    color:#ddd;
+}
+.sign .pics .dashed-box .upload i{
+    font-size:40px;
+}
+.sign .pics .dashed-box .upload .text{
+    font-size:14px;
+}
+.sign .less-time > div{
+    /*float:left;*/
+}
+.sign .time .add-on{
+    height:26px !important;
+}
+.sign .time .add-on i{
+    font-size:16px;
+    line-height:26px;
+}
+.sign a{
+    margin-right:16px;
+}
+.sign span.uneditable-input{
+    height:25px;
+    line-height:25px;
+    font-size:14px;
+}
+.btn-area .sui-btn{
+    width:90px;
+}
+.sui-form .sign .input-prepend{
+    margin-bottom:0;
+}
+
+

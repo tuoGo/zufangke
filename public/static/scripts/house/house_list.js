@@ -248,6 +248,7 @@ $(function(){
         inner += '<td class="room-t"><input type="text" readonly="readonly" value="'+text+'" name="build_name"></td>';
         inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
         inner += '<td class="room-type">';
+        inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -269,50 +270,10 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
-        inner += '</td>';
-        inner += '<td class="room-size"><input type="text" placeholder="请填写"></td>';
-        inner += '<td>';
-        inner += '<span class="sui-dropdown dropdown-bordered select">';
-        inner += '<span class="dropdown-inner">';
-        inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
-        inner += '<input type="hidden" value="东" name="direction"><i class="caret"></i><span>东</span>';
-        inner += '</a>';
-        inner += '<ul role="menu" aria-labelledby="drop10" class="sui-dropdown-menu">';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东">东</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南">南</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西">西</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="北">北</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东南">东南</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东西">东西</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东北">东北</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西南">西南</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西北">西北</a>';
-        inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南北">南北</a>';
-        inner += '</li>';
-        inner += '</ul>';
-        inner += '</span>';
-        inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
         inner += '<td>';
+        inner += '<div style="width:65px;">';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -328,8 +289,9 @@ $(function(){
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
+        inner += '</div>';
         inner += '</td>';
-        inner += '<td>';
+        inner += '<td style="width:140px;">';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -436,10 +398,6 @@ $(function(){
         inner += '</td>';
         inner += '<td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>';
         inner += '<td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>';
-        inner += '<td class="room-comment">';
-        inner += '<input type="hidden" class="r-comment" name="comment">';
-        inner += '<a href="javascript:void(0);"><i class="sui-icon icon-pc-plus-circle"></i></a>';
-        inner += '</td>';
         inner += '</tr>';
         for(var i = 0; i < num; i++){
             $("#rooming .add").append(inner);
@@ -493,29 +451,29 @@ $(function(){
         input.css("width",wid + "px");
     }
     //添加房间页面的层上层房间描述显示
-    $("#rooming").on("click",".room-comment",houseComment);
-    function houseComment(){
-        var a = $(this).find("a");
-        var input = $(this).find(".r-comment");
-        var text = input.val();
-        $("#rooming").modal("shadeIn");
-        return $.confirm({
-            title : "房间描述",
-            body : "<form action='' class='sui-form'>" +
-                "<textarea class='h-comment' style='width:400px;height:200px;font-size:18px;'>" + text +
-                "</textarea>" +
-                "</form>",
-            backdrop : false,
-            okHide : function(){
-                text = $(".h-comment").val();
-                a.html("已配置");
-                input.val(text);
-            },
-            hide : function(){
-                return $("#rooming").modal("shadeOut");
-            }
-        });
-    }
+    // $("#rooming").on("click",".room-comment",houseComment);
+    // function houseComment(){
+    //     var a = $(this).find("a");
+    //     var input = $(this).find(".r-comment");
+    //     var text = input.val();
+    //     $("#rooming").modal("shadeIn");
+    //     return $.confirm({
+    //         title : "房间描述",
+    //         body : "<form action='' class='sui-form'>" +
+    //             "<textarea class='h-comment' style='width:400px;height:200px;font-size:18px;'>" + text +
+    //             "</textarea>" +
+    //             "</form>",
+    //         backdrop : false,
+    //         okHide : function(){
+    //             text = $(".h-comment").val();
+    //             a.html("已配置");
+    //             input.val(text);
+    //         },
+    //         hide : function(){
+    //             return $("#rooming").modal("shadeOut");
+    //         }
+    //     });
+    // }
     //删除操作
     $(".del-plot").click(popup.bind(null,1));
     $(".del-unit").click(popup.bind(null,2));

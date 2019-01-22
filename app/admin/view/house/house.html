@@ -657,13 +657,10 @@
                                     <th>门牌号</th>
                                     <th>房间名称</th>
                                     <th>房间类型</th>
-                                    <th>房间面积㎡</th>
-                                    <th>朝向</th>
                                     <th>出租状态</th>
                                     <th>付款方式</th>
                                     <th>租金</th>
                                     <th>押金</th>
-                                    <th>房间描述</th>
                                 </tr>
                                 </thead>
                                 <tbody class="add">
@@ -671,7 +668,8 @@
                                     <td class="room-t"><input type="text" readonly="readonly" value="" name="build_name"></td>
                                     <td><input type="text" placeholder="请填写" name="room_name"></td>
                                     <td class="room-type">
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div>
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
@@ -702,73 +700,11 @@
 														</ul>
 													</span>
 												</span>
-                                    </td>
-                                    <td class="room-size"><input type="text" placeholder="请填写"></td>
-                                    <td>
-												<span class="sui-dropdown dropdown-bordered select">
-													<span class="dropdown-inner">
-														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
-                                                           class="dropdown-toggle">
-															<input type="hidden" value="东" name="direction"><i class="caret"></i>
-															<span>东</span>
-														</a>
-														<ul role="menu" aria-labelledby="drop10" class="sui-dropdown-menu">
-															<li role="presentation" class="active">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东">
-																	东
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南">
-																	南
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西">
-																	西
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="北">
-																	北
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东南">
-																	东南
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东西">
-																	东西
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="东北">
-																	东北
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西南">
-																	西南
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="西北">
-																	西北
-																</a>
-															</li>
-															<li role="presentation">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="南北">
-																	南北
-																</a>
-															</li>
-														</ul>
-													</span>
-												</span>
+                                        </div>
                                     </td>
                                     <td>
-												<span class="sui-dropdown dropdown-bordered select">
+                                        <div style="width:65px;">
+                                            <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
@@ -789,10 +725,11 @@
 														</ul>
 													</span>
 												</span>
+                                        </div>
                                     </td>
-                                    <td>
-												<span class="sui-dropdown dropdown-bordered select">
-													<span class="dropdown-inner">
+                                    <td style="width:140px;">
+                                        <span class="sui-dropdown dropdown-bordered select">
+                                            <span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
 															<input type="hidden" value="押0" name="cash"><i class="caret"></i>
@@ -821,9 +758,9 @@
 															</li>
 														</ul>
 													</span>
-												</span>
+                                        </span>
                                         <span class="sui-dropdown dropdown-bordered select">
-													<span class="dropdown-inner">
+                                            <span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
                                                            class="dropdown-toggle">
 															<input type="hidden" value="付1" name="pay"><i class="caret"></i>
@@ -952,14 +889,10 @@
 															</li>
 														</ul>
 													</span>
-												</span>
+                                        </span>
                                     </td>
                                     <td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>
                                     <td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>
-                                    <td class="room-comment">
-                                        <input type="hidden" class="r-comment" name="comment">
-                                        <a href="javascript:void(0);"><i class="sui-icon icon-pc-plus-circle"></i></a>
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

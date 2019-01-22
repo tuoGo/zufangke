@@ -72,7 +72,7 @@
 }
 .computer .show-content .house-box .top-title .area-menu{
     position:relative;
-    width:20px;
+    width:23px;
     border:2px solid #0099ff;
     border-radius:50%;
     font-size:18px;
@@ -353,6 +353,12 @@
     width:80%;
     margin:0 auto;
     text-align:center;
+}
+#rooming .modal-body .add td > div{
+    margin:0 auto;
+}
+#rooming .modal-body .add .room-type > div{
+    width:105px;
 }
 #rooming .modal-body .table-area tbody td.room-size,#rooming .modal-body .table-area tbody td.room-price{
     width:100px;

@@ -43,7 +43,7 @@ class Contract extends Base
     //显示合同添加页
     public function addpage()
     {
-        return $this->fetch();
+        return $this->fetch('add');
     }
 
     /*
