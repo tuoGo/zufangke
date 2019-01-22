@@ -44,7 +44,7 @@ class Contract extends Base
                     }
                 }
             }
-            return $this->fetch('index',['data' => $data , 'page'=>$page , 'count'=>$count]);
+            return $this->fetch('index',['data' => $data , 'page'=>$page , 'count'=>$count , 'pagecount'=>$pagecount]);
     }
 
     //显示合同添加页
