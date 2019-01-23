@@ -44,7 +44,14 @@ class House extends Base
                     if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
                         $data[$key]['father'][$ky]['child'][$k] = $v;
                         $time = $nowTime - $v['update_time'];//时间差
-                        $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                        if ($v['status'] == 2){
+                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = ($time / 60 / 60 / 24) > 0 && ($time / 60 / 60 / 24) < 1 ? 1 : floor($time / 60 / 60 / 24);
+                        }else if ($time > (60 * 60 * 24 * 30) && $v['status'] == 0){
+                            $data[$key]['father'][$ky]['child'][$k]['status'] = 4;
+                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //空置时间
+                        }else{
+                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24) < 0 ? 1 : floor($time / 60 / 60 / 24);
+                        }
                     }
                 }
             }
@@ -198,7 +205,14 @@ class House extends Base
                         if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
                             $data[$key]['father'][$ky]['child'][$k] = $v;
                             $time = $nowTime - $v['update_time'];//时间差
-                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                            if ($v['status'] == 2){
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = ($time / 60 / 60 / 24) > 0 && ($time / 60 / 60 / 24) < 1 ? 1 : floor($time / 60 / 60 / 24);
+                            }else if ($time > (60 * 60 * 24 * 30) && $v['status'] == 0){
+                                $data[$key]['father'][$ky]['child'][$k]['status'] = 4;
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //空置时间
+                            }else{
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24) < 0 ? 1 : floor($time / 60 / 60 / 24);
+                            }
                         }
                     }
                 }
@@ -245,7 +259,14 @@ class House extends Base
                         if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
                             $data[$key]['father'][$ky]['child'][$k] = $v;
                             $time = $nowTime - $v['update_time'];//时间差
-                            $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //逾期时间值
+                            if ($v['status'] == 2){
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = ($time / 60 / 60 / 24) > 0 && ($time / 60 / 60 / 24) < 1 ? 1 : floor($time / 60 / 60 / 24);
+                            }else if ($time > (60 * 60 * 24 * 30) && $v['status'] == 0){
+                                $data[$key]['father'][$ky]['child'][$k]['status'] = 4;
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //空置时间
+                            }else{
+                                $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24) < 0 ? 1 : floor($time / 60 / 60 / 24);
+                            }
                         }
                     }
                 }

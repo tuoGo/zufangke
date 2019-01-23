@@ -10,7 +10,6 @@ namespace app\admin\controller;
 
 
 use think\Controller;
-use think\Exception;
 use think\Session;
 
 class Login extends Controller
@@ -71,7 +70,4 @@ class Login extends Controller
             return json(['data'=>'','status'=>400,'msg'=>'用户不存在!']);
         }
     }
-
-
-
 }

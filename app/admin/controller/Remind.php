@@ -69,6 +69,28 @@ class Remind extends Controller
             }
         }
     }
+    //逾期房间自动计算
+    public function  autoChange(){
+        $nowDate = time();
+        $contract   = db('contract')->select();
+        $underlying = db('underlying')->select();
+        foreach ($contract as $key=>$val){
+            $data[$key] = $val;
+            foreach ($underlying as $ky => $vl){
+                if ($contract[$key]['underid'] == $underlying[$ky]['underid']){
+                    $data[$key]['child'] = $vl;
+                    continue;
+                }
+            }
+        }
+        foreach ($data as $dk => $dv){
+            $newDate = date('Y-m-d',strtotime("+".$dv['pay']."month",$dv['child']['update_time']));
+            $date = strtotime($newDate);
+            if ($nowDate > $date){
+                db('underlying')->where('underid',$dv['underid'])->update(['status'=>'2','update_time'=>$nowDate]);
+            }
+        }
+    }
     //验证码短信获取接口
     public function vercode(Request $request)
     {
