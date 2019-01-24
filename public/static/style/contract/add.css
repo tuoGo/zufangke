@@ -46,7 +46,7 @@ input{
     background:#00ccff;
 }
 .sign a.dropdown-toggle{
-    width:100px;
+    /*width:100px;*/
 }
 .sign .pics h3{
     width:120px;
@@ -103,6 +103,9 @@ input{
 }
 .sui-form .sign .input-prepend{
     margin-bottom:0;
+}
+.less-time .time-less{
+    margin-top:18px;
 }
 
 
