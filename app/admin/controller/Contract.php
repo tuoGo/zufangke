@@ -45,6 +45,30 @@ class Contract extends Base
     //显示合同添加页
     public function addpage()
     {
+        $adid  = Session::get('adid');
+        $house = db('house')->where('adid',$adid)->select();
+        foreach ($house as $hk => $hv){
+            $hid[$hk] = $hv['hid'];
+        }
+        $room = db('room')->where('hid','in',$hid)->select();
+        foreach ($room as $rk => $rv){
+            $roomid[$rk] = $rv['roomid'];
+        }
+        $underlying = db('underlying')->where('roomid','in',$roomid)->select();
+        foreach ($house as $key => $val) {
+            $data[$key] = $val;
+            foreach ($room as $ky => $vl) {
+                if ($house[$key]['hid'] == $room[$ky]['hid']) {
+                    $data[$key]['father'][$ky] = $vl;
+                }
+                foreach ($underlying as $k => $v) {
+                    if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
+                        $data[$key]['father'][$ky]['child'][$k] = $v;
+                    }
+                }
+            }
+        }
+        print_r($data);exit;
         return $this->fetch('add');
     }
 
