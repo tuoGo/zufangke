@@ -48,12 +48,12 @@ class Contract extends Base
         $adid  = Session::get('adid');
         if(input('post.hid')){
             $hid = input('post.hid');
-            if(!empty($hid)){
-                $data = db('room')->where('hid',$hid)->select();
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-            }
-            $house = db('house')->where('adid',$adid)->select();
-            return $this->fetch('add',['data'=>$house]);
+            $room = db('room')->where('hid',$hid)->select();
+            return json(['data'=>$room,'status'=>200,'msg'=>'']);
+        }else if (input('roomid')){
+            $roomid = input('roomid');
+            $underlying = db('underlying')->where('roomid',$roomid)->select();
+            return json(['data'=>$underlying,'status'=>200,'msg'=>'']);
         }
         $house = db('house')->where('adid',$adid)->select();
         return $this->fetch('add',['data'=>$house]);
