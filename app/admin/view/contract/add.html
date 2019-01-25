@@ -14,7 +14,7 @@
     <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
     <script src="__STATIC__/scripts/sui/sui.min.js"></script>
     <script src="__STATIC__/scripts/banner/banner.js"></script>
-    <script scr="__STATIC__/scripts/contract/add.js"></script>
+    <script src="__STATIC__/scripts/contract/add.js"></script>
 </head>
 <body>
     <div class="computer">
@@ -33,32 +33,33 @@
                         <div class="pure-g">
                             <div class="pure-u-1-1">
                                 <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
-                                    <span class="dropdown-inner">
+                                    <span class="dropdown-inner house-id">
                                         <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
-                                        <input type="hidden" value="" name="house_msg"><i class="caret"></i><span>请选择小区</span>
+                                            <input type="hidden" value="" name="house_h"><i class="caret"></i><span>请选择小区</span>
                                         </a>
                                         <ul role="menu" aria-labelledby="drop3" class="sui-dropdown-menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="翻斗大街">翻斗大街翻斗花园</a></li>
+                                            {foreach name="data" item="value" key="key"}
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" data-hid="{$value.hid}" value="{$value.address}">{$value.address}</a></li>
+                                            {/foreach}
                                         </ul>
                                     </span>
                                 </span>
                                 <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
-                                    <span class="dropdown-inner">
+                                    <span class="dropdown-inner unit-id">
                                         <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
-                                        <input type="hidden" value="" name="house_msg"><i class="caret"></i><span>请选择楼栋</span>
+                                        <input type="hidden" value="" name="house-u"><i class="caret"></i><span>请选择楼栋</span>
                                         </a>
                                         <ul role="menu" aria-labelledby="drop3" class="sui-dropdown-menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="A栋2单元">A栋2单元</a></li>
+
                                         </ul>
                                     </span>
                                 </span>
                                 <span class="sui-dropdown dropdown-bordered select dropdown-xlarge">
-                                    <span class="dropdown-inner">
+                                    <span class="dropdown-inner room-id">
                                         <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
-                                        <input type="hidden" value="" name="house_msg"><i class="caret"></i><span>请选择房间</span>
+                                        <input type="hidden" value="" name="house-r"><i class="caret"></i><span>请选择房间</span>
                                         </a>
                                         <ul role="menu" aria-labelledby="drop3" class="sui-dropdown-menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="401">401</a></li>
                                         </ul>
                                     </span>
                                 </span>

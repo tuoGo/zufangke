@@ -46,30 +46,17 @@ class Contract extends Base
     public function addpage()
     {
         $adid  = Session::get('adid');
-        $house = db('house')->where('adid',$adid)->select();
-        foreach ($house as $hk => $hv){
-            $hid[$hk] = $hv['hid'];
-        }
-        $room = db('room')->where('hid','in',$hid)->select();
-        foreach ($room as $rk => $rv){
-            $roomid[$rk] = $rv['roomid'];
-        }
-        $underlying = db('underlying')->where('roomid','in',$roomid)->select();
-        foreach ($house as $key => $val) {
-            $data[$key] = $val;
-            foreach ($room as $ky => $vl) {
-                if ($house[$key]['hid'] == $room[$ky]['hid']) {
-                    $data[$key]['father'][$ky] = $vl;
-                }
-                foreach ($underlying as $k => $v) {
-                    if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
-                        $data[$key]['father'][$ky]['child'][$k] = $v;
-                    }
-                }
+        if(input('post.hid')){
+            $hid = input('post.hid');
+            if(!empty($hid)){
+                $data = db('room')->where('hid',$hid)->select();
+                return json(['data'=>$data,'status'=>200,'msg'=>'']);
             }
+            $house = db('house')->where('adid',$adid)->select();
+            return $this->fetch('add',['data'=>$house]);
         }
-        print_r($data);exit;
-        return $this->fetch('add');
+        $house = db('house')->where('adid',$adid)->select();
+        return $this->fetch('add',['data'=>$house]);
     }
 
     /*
