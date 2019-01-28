@@ -58,6 +58,13 @@ input{
     height:120px;
     border:1px dashed #ddd;
 }
+.sign .pics .dashed-box img{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    transform:translateY(-50%);
+}
 .sign .pics .dashed-box:hover{
     border-color:#00ccff;
     cursor:pointer;

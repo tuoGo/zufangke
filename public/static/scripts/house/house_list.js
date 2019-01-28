@@ -523,9 +523,15 @@ $(function(){
     $("#housing").on("okHide",function(){
         var trs = $("#housing .add tr");
         var length = trs.length;
-        var house = {
-            plot_name : $("#housing .add-plot input[name=plot_name]").val()
-        };
+        var param = {};
+        var house = {};
+        if($("#housing .add-plot").is(":hidden")){
+            param.hid = $("#housing .plot input[name=plot]").attr("data-id");
+        }else{
+            house = {
+                plot_name : $("#housing .plot input[name=plot]").val()
+            };
+        }
         house.datas = [];
         for(var i = 0; i < length; i++){
             house.datas[i] = {
@@ -543,14 +549,18 @@ $(function(){
                 decorate : $(trs[i]).find("input[name=fitment_status]").val()
             };
         }
+        param.datas = house;
         $.ajax({
             url:"/house/add",
-            data:{'datas':house},
+            data:param,
             type:"post",
             success:function (data){
 
             }
         });
+    });
+    $(".show-content").on("click",".plot-add",function(){
+        $("#housing .plot input[name=plot]").attr("data-id",$(this).attr("data-id"));
     });
     //合租-整租更换
     // $(".house-title .banner-box .bor-b").click(function(){

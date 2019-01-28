@@ -21,8 +21,8 @@ class User extends Base
      */
     public function index()
     {
-        $data = Db::table('zfk_user')->select();
-        return $this->fetch('index',['data' => $data]);
+//        $data = Db::table('zfk_user')->select();
+        return $this->fetch('index');
     }
     /*
      * 添加用户

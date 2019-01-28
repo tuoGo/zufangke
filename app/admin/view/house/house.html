@@ -61,15 +61,15 @@
                         </p>
                     </div>
                     <div class="banner-box fl">
-                        <p>
-                            <span class="title_s list all" data-status="3">全部</span>
-                            <span class="title_s list null" data-status="0">空置</span>
-                            <span class="title_s list overdue" data-status="2">逾期</span>
-                            <span class="title_s list rentout" data-status="1">已租</span>
+                        <div class="clearfix">
+                            <span class="title_s list all fl" data-status="3">全部</span>
+                            <span class="title_s list null fl" data-status="0">空置</span>
+                            <span class="title_s list overdue fl" data-status="2">逾期</span>
+                            <span class="title_s list rentout fl" data-status="1">已租</span>
                             <!--<span class="title_s list fire">着火房</span>-->
                             <!--<span class="title_s list expiring">将到期</span>-->
                             <input type="hidden" value="3" name="status">
-                        </p>
+                        </div>
                     </div>
                 </form>
                 <div class="banner-box fr">
@@ -93,12 +93,12 @@
             <div class="house-box">
                 <div class="top-title clearfix">
                     <!--区域-->
-                    <div class="area-title fl" data-id="{$item.hid}">{$item.address}</div>
+                    <div class="area-title fl">{$item.address}</div>
                     <div class="area-menu fl">
                         <i class="sui-icon icon-tb-more"></i>
                         <div class="c-list">
                             <ul>
-                                <li><a class="plot-add" href="javascript:void(0);" data-toggle="modal" data-target="#housing">添加房源</a></li>
+                                <li><a class="plot-add" data-id="{$item.hid}" href="" data-toggle="modal" data-target="#housing">添加房源</a></li>
                                 <li><hr style="width:70px;margin:10px auto;"></li>
                                 <li><a href="javascript:void(0);" class="del-plot">删除小区</a></li>
                             </ul>
@@ -255,7 +255,6 @@
                                         <div class="house-contract-handle">
                                             <div class="enter">录入预定信息</div>
                                             <div class="launch">发起电子合同</div>
-                                            <div class="check">查看合同</div>
                                         </div>
                                         {/if}
                                     </div>
@@ -660,7 +659,7 @@
                                     <th>出租状态</th>
                                     <th>付款方式</th>
                                     <th>租金</th>
-                                    <th>押金</th>
+                                    <!--<th>押金</th>-->
                                 </tr>
                                 </thead>
                                 <tbody class="add">
@@ -892,7 +891,7 @@
                                         </span>
                                     </td>
                                     <td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>
-                                    <td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>
+                                    <!--<td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>-->
                                 </tr>
                                 </tbody>
                             </table>
