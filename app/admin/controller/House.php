@@ -156,17 +156,18 @@ class House extends Base
     {
         if ($request->isPost()) {
             $adid    = Session::get('adid');
-            $post_status  = input('post.status'); //房间的状态 0空置 1已租 2逾期 3全部
+            $status  = input('post.status'); //房间的状态 0空置 1已租 2逾期 3全部
             $type    = input('post.type'); //单元/室 1整租 2合租 3全部
-            $typestr = $type;
+            $statusNow = $status;
+            $typeNow = $type;
             if($type == '3'){
                 $type = array('0'=>'1','1'=>'2');
             }
             $nowTime = time();
             //筛选
-            if ($post_status == '0' || $post_status == '2'){
-                $underlyingStr = db('underlying')->where('adid',$adid)->where('status',$post_status)->select();
-            }elseif($post_status == '1'){
+            if ($status == '0' || $status == '2'){
+                $underlyingStr = db('underlying')->where('adid',$adid)->where('status',$status)->select();
+            }elseif($status == '1'){
                 $status = array('0'=>'1','1'=>'2');
                 $underlyingStr = db('underlying')->where('adid',$adid)->where('status','in',$status)->select();
             }else{
@@ -218,7 +219,8 @@ class House extends Base
                     }
                 }
             }
-            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract,'type'=>$typestr ,'status'=>$post_status]);
+            print_r($data);exit;
+            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract , 'type' => $typeNow , 'status' => $statusNow]);
         }
     }
     /**
