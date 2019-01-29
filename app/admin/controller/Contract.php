@@ -115,7 +115,7 @@ class Contract extends Base
                 $rel = model('contract')->allowField(true)->save($contData);
                 if ($rel)
                 {
-                    return json(['data'=>'','status'=>200,'msg'=>'合同添加成功!']);
+                    $this->success('合同添加成功！', '/contract');
                 }
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同添加失败!']);
