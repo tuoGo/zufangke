@@ -69,9 +69,19 @@ class Contract extends Base
             $data = input('post.');
             $adid = Session::get('adid');
             $time = time();
+            // 获取表单上传文件
+            $files = request()->file('image');
+            foreach($files as $file){
+                // 移动到框架应用根目录/public/uploads/ 目录下
+                $info = $file->move('uploads' . DS . 'infoimg');
+                $path = DS . 'uploads' . DS . 'infoimg'. DS .$info->getSaveName();
+                $pathNow = str_replace('\\','/',$path);
+                $imgData[] = $pathNow;
+            }
             $userData = [
-                'adid'          => $data['adid'],
-                'hid'           => $data['hid'],
+                'adid'          => $adid,
+                'rid'           => '2',
+                'underid'       => $data['underid'],
                 'name'          => $data['name'],
                 'phone'         => $data['phone'],
                 'idcard'        => $data['idcard'],
@@ -83,19 +93,24 @@ class Contract extends Base
             {
                 $contData = [
                     'adid'              => $adid,
+                    'underid'           => $data['underid'],
                     'hid'               => $data['hid'],
                     'uid'               => $uid,
                     'bet'               => $data['bet'],
                     'pay'               => $data['pay'],
                     'deposit'           => $data['deposit'],
                     'payment'           => $data['payment'],
-                    'chargeday'         => $data['chargeday'],
+                    'chargeday'         => '18',
                     'water'             => $data['water'],
                     'elec'              => $data['elec'],
-                    'idcard_img_front'  => $data['idcard_img_front'],
-                    'idcard_img_behind' => $data['idcard_img_behind'],
-                    'contract_img'      => $data['contract_img'],
+                    'idcard_img_front'  => $imgData[0],
+                    'idcard_img_behind' => $imgData[1],
+                    'contract_img'      => $imgData[2],
                     'sms_time'          => $time,
+                    'start_time'        => $data['start_time'],
+                    'end_time'          => $data['end_time'],
+                    'address'           => $data['address'],
+                    'note'              => $data['note'],
                 ];
                 $rel = model('contract')->allowField(true)->save($contData);
                 if ($rel)
