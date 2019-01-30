@@ -246,7 +246,7 @@ $(function(){
         var inner = '';
         inner += '<tr>';
         inner += '<td class="room-t"><input type="text" readonly="readonly" value="'+text+'" name="build_name"></td>';
-        inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
+        inner += '<td><input type="text" placeholder="请填写" name="room_name" class="needCheck"></td>';
         inner += '<td class="room-type">';
         inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
@@ -272,7 +272,7 @@ $(function(){
         inner += '</span>';
         inner += '</div>';
         inner += '</td>';
-        inner += '<td>';
+        inner += '<td class="room-status">';
         inner += '<div style="width:65px;">';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
@@ -291,7 +291,7 @@ $(function(){
         inner += '</span>';
         inner += '</div>';
         inner += '</td>';
-        inner += '<td style="width:140px;">';
+        inner += '<td style="width:140px;" class="room-bp">';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
         inner += '<span class="dropdown-inner">';
         inner += '<a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">';
@@ -396,8 +396,7 @@ $(function(){
         inner += '</span>';
         inner += '</span>';
         inner += '</td>';
-        inner += '<td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>';
-        inner += '<td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>';
+        inner += '<td class="room-price"><input type="text" placeholder="请填写" name="lease_price" class="needCheck"></td>';
         inner += '</tr>';
         for(var i = 0; i < num; i++){
             $("#rooming .add").append(inner);
@@ -436,6 +435,8 @@ $(function(){
     });
     //房间添加事件
     $(".room-plus").click(function(){
+        var roomid = $(this).siblings(".room-title").attr("data-id");
+        $("#rooming .add").attr("data-id",roomid);
         var input = $("#rooming .plot input");
         $("#rooming .house-number").show();
         $("#rooming .plot").show();
@@ -562,14 +563,14 @@ $(function(){
                     decorate : $(trs[i]).find("input[name=fitment_status]").val()
                 };
             }
-            // $.ajax({
-            //     url:"/house/add",
-            //     data:param,
-            //     type:"post",
-            //     success:function (data){
-            //
-            //     }
-            // });
+            $.ajax({
+                url:"/house/add",
+                data:param,
+                type:"post",
+                success:function (data){
+
+                }
+            });
         }else{
             $.alert("请填补好标红部分的内容!");
             return false;
@@ -578,9 +579,52 @@ $(function(){
     $(".show-content").on("click",".plot-add",function(){
         $("#housing .plot input[name=plot]").attr("data-id",$(this).attr("data-id"));
     });
-    //合租-整租更换
-    // $(".house-title .banner-box .bor-b").click(function(){
-    //     $(this).siblings(".bor-b").toggleClass("chose");
-    //     $(this).toggleClass("chose");
-    // });
+    //添加房间的提交事件
+    $("#rooming").on("okHide",function(){
+        //先进行表单检验
+        var swit = true;
+        var validates = $("#rooming .needCheck");
+        for(var j = 0; j < validates.length; j++){
+            $(validates[j]).removeClass("input-error");
+            if(!$(validates[j]).val()){
+                $(validates[j]).addClass("input-error");
+                swit = false;
+            }
+        }
+        if(swit){
+            var trs = $("#rooming .add tr");
+            var length = trs.length;
+            var param = {};
+            param.roomid = $("#rooming .add").attr("data-id");
+            param.datas = [];
+            for(var i = 0; i < length; i++){
+                param.datas[i] = {
+                    //tag 房间名称
+                    tag : $("#rooming .add input[name=room_name]").val(),
+                    //bedroom 主卧 次卧 独卫
+                    bedroom : $("#rooming .add .room-type .dropdown-inner input[name=room_type]").val(),
+                    //status 房间出租状态
+                    status : $("#rooming .add .room-status .dropdown-inner input[name=lease_status]").val() === "未租" ? 0 : 1,
+                    //bet 押金方式
+                    bet : $("#rooming .add .room-bp .dropdown-inner input[name=cash]").val().replace("押",""),
+                    //pay 付款方式
+                    pay : $("#rooming .add .room-bp .dropdown-inner input[name=pay]").val().replace("付",""),
+                    //amount 租金
+                    amount : $("#rooming .add .room-price input[name=lease_price]").val()
+                }
+            }
+            console.log(param.datas);
+            // $.ajax({
+            //     url:"/house/add",
+            //     data : param,
+            //     type : "post",
+            //     success : function(data){
+            //
+            //     }
+            // });
+        }else{
+            $.alert("请填补好标红部分的内容!");
+            return false;
+        }
+    });
 });

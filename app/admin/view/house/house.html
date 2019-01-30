@@ -155,9 +155,7 @@
                             </p>
                         </div>
                     </div>
-
                     <div class="m-mid-content clearfix">
-
                         <!--第三层-->
                         {foreach name="data[$key]['father'][$ky]['child']" item="vv" key="kk"}
                         <div class="house-room fl" title="点击查看更多信息">
@@ -591,7 +589,7 @@
                     <h4 class="modal-title">请填写房间的详细信息</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="sui-form">
+                    <form action="" class="sui-form sui-validate">
                         <div class="house-type">
                             出租方式 :
                             <label data-toggle="radio" class="radio-pretty inline checked">
@@ -665,7 +663,7 @@
                                 <tbody class="add">
                                 <tr>
                                     <td class="room-t"><input type="text" readonly="readonly" value="" name="build_name"></td>
-                                    <td><input type="text" placeholder="请填写" name="room_name"></td>
+                                    <td><input type="text" placeholder="请填写" name="room_name" class="needCheck"></td>
                                     <td class="room-type">
                                         <div>
                                             <span class="sui-dropdown dropdown-bordered select">
@@ -701,7 +699,7 @@
 												</span>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="room-status">
                                         <div style="width:65px;">
                                             <span class="sui-dropdown dropdown-bordered select">
 													<span class="dropdown-inner">
@@ -726,7 +724,7 @@
 												</span>
                                         </div>
                                     </td>
-                                    <td style="width:140px;">
+                                    <td class="room-bp" style="width:140px;">
                                         <span class="sui-dropdown dropdown-bordered select">
                                             <span class="dropdown-inner">
 														<a role="button" href="javascript:void(0);" data-toggle="dropdown"
@@ -890,7 +888,7 @@
 													</span>
                                         </span>
                                     </td>
-                                    <td class="room-price"><input type="text" placeholder="请填写" name="lease_price"></td>
+                                    <td class="room-price"><input type="text" placeholder="请填写" name="lease_price" class="needCheck"></td>
                                     <!--<td class="room-price"><input type="text" placeholder="请填写" name="pay_price"></td>-->
                                 </tr>
                                 </tbody>
