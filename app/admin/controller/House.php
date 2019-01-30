@@ -84,16 +84,18 @@ class House extends Base
                     return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
                 }
             }else if (!empty($result['hid'])){
-                $data = array(
-                    'adid'      => $adid,
-                    'hid'       => $result['hid'],
-                    'room'      => $result['room'],
-                    'type'      => $result['type'],
-                );
-                model('room')->data($data,true)->isUpdate(false)->save();
+                foreach ($result['datas'] as $ky => $vl){
+                    $vl['hid']  = $result['hid'];
+                    $vl['adid'] = $adid;
+                }
+                model('room')->data($vl,true)->isUpdate(false)->save();
                 return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
             }else if (!empty($result['roomid'])){
                 //房间字段
+                foreach ($result['datas'] as $k => $v){
+                    $v['roomid'] = $result['roomid'];
+                    $v['adid']   = $adid;
+                }
             }
             return json(['data'=>'','status'=>400,'msg'=>'未知错误,联系我们!']);
         }
