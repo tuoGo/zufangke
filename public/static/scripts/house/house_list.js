@@ -523,23 +523,27 @@ $(function(){
     $("#housing").on("okHide",function(){
         //先进行表单检验
         var swit = true;
-        // var validates = $("#housing .needCheck");
-        // for(var j = 0; j < validates.length; j++){
-        //     $(validates[j]).removeClass("input-error");
-        //     if(!$(validates[j]).val()){
-        //         $(validates[j]).addClass("input-error");
-        //         swit = false;
-        //     }
-        // }
+        var validates = $("#housing .needCheck");
+        for(var j = 0; j < validates.length; j++){
+            $(validates[j]).removeClass("input-error");
+            if(!$(validates[j]).val()){
+                $(validates[j]).addClass("input-error");
+                swit = false;
+            }
+        }
         if(swit){
             var trs = $("#housing .add tr");
             var length = trs.length;
             var param = {};
-            var house = {};
             if($("#housing .add-plot").is(":hidden")){
                 param.hid = $("#housing .plot input[name=plot]").attr("data-id");
             }else{
-                param.plot_name =  $("#housing .plot input[name=plot]").val();
+                console.log(111);
+                param.plot_name =  $("#housing .plot input[name=plot_name]").val();
+                if(!param.plot_name){
+                    $.alert("请填写小区名");
+                    return false;
+                }
             }
             param.datas = [];
             for(var i = 0; i < length; i++){
@@ -558,15 +562,16 @@ $(function(){
                     decorate : $(trs[i]).find("input[name=fitment_status]").val()
                 };
             }
-            $.ajax({
-                url:"/house/add",
-                data:param,
-                type:"post",
-                success:function (data){
-
-                }
-            });
+            // $.ajax({
+            //     url:"/house/add",
+            //     data:param,
+            //     type:"post",
+            //     success:function (data){
+            //
+            //     }
+            // });
         }else{
+            $.alert("请填补好标红部分的内容!");
             return false;
         }
     });
