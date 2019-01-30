@@ -65,19 +65,18 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
-            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
-            if (!empty($result['datas']['plot_name'])){
+            if (!empty($result['plot_name'])){
                 $house = array(
                     'adid'          => $adid, //房东id
-                    'address'       => $result['datas']['plot_name'],//地址
+                    'address'       => $result['plot_name'],//地址
                     'create_time'   => $time,
                     'update_time'   => $time,
                 );
                 $hid = model('house')->insertGetId($house);
                 if ($hid){
-                    foreach ($result['datas']['datas'] as $key => $val){
+                    foreach ($result['datas'] as $key => $val){
                         $val['hid']  = $hid;
                         $val['adid'] = $adid;
                         model('room')->data($val,true)->isUpdate(false)->save();
