@@ -282,7 +282,7 @@
                     <h4 class="modal-title">请填写房源的详细信息</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="sui-form" method="post">
+                    <form action="" class="sui-form sui-validate" method="post">
                         <!--<div class="house-type">-->
                             <!--出租方式 :-->
                             <!--<label data-toggle="radio" class="radio-pretty inline checked">-->
@@ -294,11 +294,11 @@
                         <!--</div>-->
                         <div class="plot add-plot">
                             添加小区 :
-                            <input type="text" placeholder="输入您要添加的小区名" class="input-xlarge" name="plot_name">
+                            <input type="text" placeholder="输入您要添加的小区名" class="input-xlarge" name="plot_name" data-rules="required">
                         </div>
                         <div class="plot">
                             选择小区 :
-                            <input type="text" placeholder="输入您要添加的小区名" readonly="readonly" class="input-large" name="plot">
+                            <input type="text" readonly="readonly" class="input-large" name="plot">
                         </div>
                         <div class="house-number">
                             选择房源数 :
@@ -381,9 +381,9 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td><input type="text" placeholder="请填写" name="build"></td>
-                                    <td><input type="text" placeholder="请填写" name="unit"></td>
-                                    <td><input type="text" placeholder="请填写" name="room_name"></td>
+                                    <td><input type="text" placeholder="请填写数字" name="build" class="needCheck"></td>
+                                    <td><input type="text" placeholder="请填写数字" name="unit" class="needCheck"></td>
+                                    <td><input type="text" placeholder="请填写数字" name="room_name" class="needCheck"></td>
                                     <td>
                                         <div>
                                             <span class="sui-dropdown dropdown-bordered select">

@@ -27,24 +27,27 @@
                                 个人中心
                             </div>
                         </div>
-                        <form action="" method="post" class="sui-form form-horizontal">
+                        <form action="" method="post" class="sui-form form-horizontal sui-validate">
                             <div class="input-area">
                                 <div class="milky">
                                     原密码:
                                 </div>
-                                <input type="password" placeholder="请输入原始密码" class="input-large input-xfat">
+                                <input type="password" placeholder="请输入原始密码" class="input-large input-xfat" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     新密码:
                                 </div>
-                                <input type="password" placeholder="请输入新密码" class="input-large input-xfat">
+                                <input type="password" name="password" placeholder="请输入新密码" class="input-large input-xfat" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     确认密码:
                                 </div>
-                                <input type="password" placeholder="请再一次输入新密码" class="input-large input-xfat">
+                                <input type="password" placeholder="请再一次输入新密码" class="input-large input-xfat" data-rules="required|match=password">
+                            </div>
+                            <div class="input-area">
+                                <a href="javascript:void(0);" class="sui-btn btn-xlarge btn-success">确认修改</a>
                             </div>
                         </form>
                     </div>

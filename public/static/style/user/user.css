@@ -6,7 +6,6 @@
 .computer .box .main-box{
     width:70%;
     height:500px;
-    border:1px solid #ddd;
     margin:0 auto;
 }
 .computer .main-box .title{
@@ -22,13 +21,14 @@
 }
 .computer .main-box .input-area{
     position:relative;
-    width:200px;
-    margin:20px auto;
+    width:360px;
+    padding-left:160px;
+    margin:35px auto;
 }
 .computer .main-box .input-area .milky{
     position:absolute;
     top:50%;
-    left:-55%;
+    left:-21%;
     width:100%;
     font-size:24px;
     letter-spacing:2px;
