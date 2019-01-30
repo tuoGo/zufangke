@@ -106,9 +106,9 @@ $(function(){
         inner += '</span>';
         inner += '</div>';
         inner += '</td>';
-        inner += '<td><input type="text" placeholder="请填写" name="build"></td>';
-        inner += '<td><input type="text" placeholder="请填写" name="unit"></td>';
-        inner += '<td><input type="text" placeholder="请填写" name="room_name"></td>';
+        inner += '<td><input type="text" placeholder="请填写数字" name="build" class="needCheck"></td>';
+        inner += '<td><input type="text" placeholder="请填写数字" name="unit" class="needCheck"></td>';
+        inner += '<td><input type="text" placeholder="请填写数字" name="room_name" class="needCheck"></td>';
         inner += '<td>';
         inner += '<div>';
         inner += '<span class="sui-dropdown dropdown-bordered select">';
@@ -531,6 +531,11 @@ $(function(){
                 $(validates[j]).addClass("input-error");
                 swit = false;
             }
+            if(isNaN($(validates[j]).val())){
+                $(validates[j]).addClass("input-error");
+                $(validates[j]).val("请填写纯数字");
+                swit = false;
+            }
         }
         if(swit){
             var trs = $("#housing .add tr");
@@ -590,6 +595,11 @@ $(function(){
                 $(validates[j]).addClass("input-error");
                 swit = false;
             }
+            if(isNaN($(validates[j]).val())){
+                $(validates[j]).addClass("input-error");
+                $(validates[j]).val("请填写纯数字");
+                swit = false;
+            }
         }
         if(swit){
             var trs = $("#rooming .add tr");
@@ -613,15 +623,14 @@ $(function(){
                     amount : $("#rooming .add .room-price input[name=lease_price]").val()
                 }
             }
-            console.log(param.datas);
-            // $.ajax({
-            //     url:"/house/add",
-            //     data : param,
-            //     type : "post",
-            //     success : function(data){
-            //
-            //     }
-            // });
+            $.ajax({
+                url:"/house/add",
+                data : param,
+                type : "post",
+                success : function(data){
+
+                }
+            });
         }else{
             $.alert("请填补好标红部分的内容!");
             return false;
