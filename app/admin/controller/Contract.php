@@ -121,6 +121,17 @@ class Contract extends Base
             return json(['data'=>'','status'=>400,'msg'=>'合同添加失败!']);
         }
     }
+    //检测是否存在合同
+    public function checkContract(Request $request){
+        if ($request->post()){
+            $underid = input('post.underid');
+            $rel  = db('contract')->where('underid',$underid)->where('status','1')->select();
+            if ($rel){
+                return json(['data' => '' , 'status' => 400 ,'msg' => '已存在生效中合同,请先删除合同!']);
+            }
+            return true;
+        }
+    }
 
     //显示合同删除页
     public function delpage()
