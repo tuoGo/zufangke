@@ -219,7 +219,7 @@ class House extends Base
                     }
                 }
             }
-            print_r($data);exit;
+//            print_r($data);exit;
             return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract , 'type' => $typeNow , 'status' => $statusNow]);
         }
     }

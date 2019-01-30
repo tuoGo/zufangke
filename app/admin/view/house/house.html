@@ -188,79 +188,78 @@
                                 {/if}
                             </div>
                             {foreach name="user" item="value" key="u"}
-                                {if $value['underid'] == $vv['underid']}
+                            {if $value['underid'] == $vv['underid']}
+                            {if $vv.status==0||$vv.status==4}
+                            <div class="house-info">
+                                <div class="show-msg other">已空置{$vv.vacancy}天</div>
+                                {if $vv.status==4}<div class="fire-icon"></div>{/if}
+                                <div class="show-msg price">{$vv.amount}元/月</div>
+                            </div>
+                            {else /}
+                            <div class="house-info">
+                                <div class="show-msg phone">{$value['phone']}</div>
+                                {if $vv.status==2}<div class="show-msg warning-msg">逾期{$vv.vacancy}天</div>{/if}
+                                <div class="show-msg room-user">{$value['name']}</div>
+                                <div class="show-msg price">{$vv.amount}元/月</div>
+                            </div>
+                            {/if}
+                            {foreach name="contract" item="cont" key="c"}
+                            {if $cont['underid'] == $vv['underid']}
+                            <div class="house-handle clearfix">
+                                <div class="all-msg fl">
+                                    <div class="all-msg-top">
+                                        <div class="all-msg-title">{$val.room}{$vv.tag}</div>
+                                    </div>
+                                    <div class="all-msg-house">
+                                        <div class="all-msg-title">房间详情</div>
+                                        <div class="house-price">房间租金 : {$vv.amount}元/月</div>
+                                        <div class="pay-type">付款方式 : 押{$cont['bet']}付{$cont['pay']}</div>
+                                        <div class="house-cash">房间押金 : {$cont['deposit']}元</div>
+                                        <div class="fitment">装修状态 : {$val.decorate}</div>
+                                        <div class="contact">联系电话 : {$Think.session.phone}</div>
+                                    </div>
                                     {if $vv.status==0||$vv.status==4}
-                                    <div class="house-info">
-                                        <div class="show-msg other">已空置{$vv.vacancy}天</div>
-                                        {if $vv.status==4}<div class="fire-icon"></div>{/if}
-                                        <div class="show-msg price">{$vv.amount}元/月</div>
+                                    <div class="all-msg-contract">
+                                        <div class="house-status">空置情况 : 已空置{$vv.vacancy}天</div>
                                     </div>
                                     {else /}
-                                    <div class="house-info">
-                                        <div class="show-msg phone">{$value['phone']}</div>
-                                        {if $vv.status==2}<div class="show-msg warning-msg">逾期{$vv.vacancy}天</div>{/if}
-                                        <div class="show-msg room-user">{$value['name']}</div>
-                                        <div class="show-msg price">{$vv.amount}元/月</div>
+                                    <div class="all-msg-contract">
+                                        <div class="all-msg-title">租约详情</div>
+                                        <div class="house-status">合同状态 : 租住中</div>
+                                        <div class="user-name">租客姓名 : {$value['name']}</div>
+                                        <div class="user-phone">租客手机 : {$value['phone']}</div>
+                                        <div class="contract-time">租约起始 : {$cont['start_time']}-{$cont['end_time']}</div>
                                     </div>
                                     {/if}
-                                {foreach name="contract" item="cont" key="c"}
-                                    {if $cont['underid'] == $vv['underid']}
-                                        <div class="house-handle clearfix">
-                                            <div class="all-msg fl">
-                                                <div class="all-msg-top">
-                                                    <div class="all-msg-title">{$val.room}{$vv.tag}</div>
-                                                </div>
-                                                <div class="all-msg-house">
-                                                    <div class="all-msg-title">房间详情</div>
-                                                    <div class="house-price">房间租金 : {$vv.amount}元/月</div>
-                                                    <div class="pay-type">付款方式 : 押{$cont['bet']}付{$cont['pay']}</div>
-                                                    <div class="house-cash">房间押金 : {$cont['deposit']}元</div>
-                                                    <div class="fitment">装修状态 : {$val.decorate}</div>
-                                                    <div class="contact">联系电话 : {$Think.session.phone}</div>
-                                                </div>
-                                                {if $vv.status==0||$vv.status==4}
-                                                <div class="all-msg-contract">
-                                                    <div class="house-status">空置情况 : 已空置{$vv.vacancy}天</div>
-                                                </div>
-                                                {else /}
-                                                <div class="all-msg-contract">
-                                                    <div class="all-msg-title">租约详情</div>
-                                                    <div class="house-status">合同状态 : 租住中</div>
-                                                    <div class="user-name">租客姓名 : {$value['name']}</div>
-                                                    <div class="user-phone">租客手机 : {$value['phone']}</div>
-                                                    <div class="contract-time">租约起始 : {$cont['start_time']}-{$cont['end_time']}</div>
-                                                </div>
-                                                {/if}
-                                            </div>
-
-                                    {/if}
+                                </div>
+                                {/if}
                                 {/foreach}
                                 {/if}
-                            {/foreach}
-                                            <div class="handle-area fr">
-                                                <div class="all-msg-top">
-                                                    <div class="all-msg-title">编辑操作</div>
-                                                </div>
-                                                <div class="house-handle-list">
-                                                    <div class="house-controll">
-                                                        <div class="edit">编辑房源</div>
-                                                        <div class="del-room">删除房源</div>
-                                                    </div>
-                                                    {if $vv.status==1||$vv.status==2}
-                                                    <div class="house-contract-handle">
-                                                        <div class="exit">退房</div>
-                                                        <div class="relet">续租</div>
-                                                        <div class="check">查看合同</div>
-                                                    </div>
-                                                    {else /}
-                                                    <div class="house-contract-handle">
-                                                        <div class="enter">录入预定信息</div>
-                                                        <div class="launch">发起电子合同</div>
-                                                    </div>
-                                                    {/if}
-                                                </div>
-                                            </div>
+                                {/foreach}
+                                <div class="handle-area fr">
+                                    <div class="all-msg-top">
+                                        <div class="all-msg-title">编辑操作</div>
+                                    </div>
+                                    <div class="house-handle-list">
+                                        <div class="house-controll">
+                                            <div class="edit">编辑房源</div>
+                                            <div class="del-room">删除房源</div>
                                         </div>
+                                        {if $vv.status==1||$vv.status==2}
+                                        <div class="house-contract-handle">
+                                            <div class="exit">退房</div>
+                                            <div class="relet">续租</div>
+                                            <div class="check">查看合同</div>
+                                        </div>
+                                        {else /}
+                                        <div class="house-contract-handle">
+                                            <div class="enter">录入预定信息</div>
+                                            <div class="launch">发起电子合同</div>
+                                        </div>
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         {/foreach}
                         <!--第三层结束-->
