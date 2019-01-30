@@ -1,9 +1,36 @@
 .computer .box{
     width:100%;
     height:100%;
+    padding-top:80px;
 }
 .computer .box .main-box{
-    width:500px;
+    width:70%;
     height:500px;
-    border:1px solid #ddd;
+    margin:0 auto;
+}
+.computer .main-box .title{
+    position:relative;
+    width:100%;
+    height:125px;
+}
+.computer .main-box .title .milky{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:100%;
+}
+.computer .main-box .input-area{
+    position:relative;
+    width:360px;
+    padding-left:160px;
+    margin:35px auto;
+}
+.computer .main-box .input-area .milky{
+    position:absolute;
+    top:50%;
+    left:-21%;
+    width:100%;
+    font-size:24px;
+    letter-spacing:2px;
+    text-align:right;
 }

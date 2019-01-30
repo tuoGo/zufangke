@@ -86,6 +86,22 @@ $(function(){
             }
         }
     }
+    //选择房间后认证是否已有合同存在
+    $(".room-id ul").on("click","li",function(){
+        var underid = $(this).find("a").attr("data-roomid");
+        $.ajax({
+            url : "/contract/checkContract",
+            data : {"underid" : underid},
+            type : "post",
+            dataType: "json",
+            success : function(data){
+                //针对已有合同发出提醒,无则不做操作
+                if(data.status === 400){
+                    $.alert(data.msg);
+                }
+            }
+        });
+    });
     //签约时间按钮的点击
     $(".sui-btn-group").on("click",".sui-btn",function(){
         var text = $(this).html();

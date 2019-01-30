@@ -521,43 +521,54 @@ $(function(){
     });
     //添加房源的提交事件
     $("#housing").on("okHide",function(){
-        var trs = $("#housing .add tr");
-        var length = trs.length;
-        var param = {};
-        var house = {};
-        if($("#housing .add-plot").is(":hidden")){
-            param.hid = $("#housing .plot input[name=plot]").attr("data-id");
-        }else{
-            house = {
-                plot_name : $("#housing .plot input[name=plot]").val()
-            };
-        }
-        house.datas = [];
-        for(var i = 0; i < length; i++){
-            house.datas[i] = {
-                //出租方式
-                type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
-                //楼栋单元房间号
-                room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
-                //有几个房间
-                num_room : $(trs[i]).find("input[name=room_number]").val(),
-                //有几个大厅
-                num_hall : $(trs[i]).find("input[name=lobby_number]").val(),
-                //有几个厕所
-                num_toilet : $(trs[i]).find("input[name=toilet_number]").val(),
-                //装修状态
-                decorate : $(trs[i]).find("input[name=fitment_status]").val()
-            };
-        }
-        param.datas = house;
-        $.ajax({
-            url:"/house/add",
-            data:param,
-            type:"post",
-            success:function (data){
-
+        //先进行表单检验
+        var swit = true;
+        // var validates = $("#housing .needCheck");
+        // for(var j = 0; j < validates.length; j++){
+        //     $(validates[j]).removeClass("input-error");
+        //     if(!$(validates[j]).val()){
+        //         $(validates[j]).addClass("input-error");
+        //         swit = false;
+        //     }
+        // }
+        if(swit){
+            var trs = $("#housing .add tr");
+            var length = trs.length;
+            var param = {};
+            var house = {};
+            if($("#housing .add-plot").is(":hidden")){
+                param.hid = $("#housing .plot input[name=plot]").attr("data-id");
+            }else{
+                param.plot_name =  $("#housing .plot input[name=plot]").val();
             }
-        });
+            param.datas = [];
+            for(var i = 0; i < length; i++){
+                param.datas[i] = {
+                    //出租方式
+                    type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
+                    //楼栋单元房间号
+                    room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
+                    //有几个房间
+                    num_room : $(trs[i]).find("input[name=room_number]").val(),
+                    //有几个大厅
+                    num_hall : $(trs[i]).find("input[name=lobby_number]").val(),
+                    //有几个厕所
+                    num_toilet : $(trs[i]).find("input[name=toilet_number]").val(),
+                    //装修状态
+                    decorate : $(trs[i]).find("input[name=fitment_status]").val()
+                };
+            }
+            $.ajax({
+                url:"/house/add",
+                data:param,
+                type:"post",
+                success:function (data){
+
+                }
+            });
+        }else{
+            return false;
+        }
     });
     $(".show-content").on("click",".plot-add",function(){
         $("#housing .plot input[name=plot]").attr("data-id",$(this).attr("data-id"));
