@@ -627,4 +627,12 @@ $(function(){
             return false;
         }
     });
+    //检测单元下是否有房间
+    var house = $(".house-box");
+    for(var h = 0; h < house.length; h++){
+        var rooms = $(house[h]).find(".m-mid-content .house-room");
+        if(!rooms.length){
+            $(house[h]).find(".mid-content .m-top-title .room-pack").click();
+        }
+    }
 });

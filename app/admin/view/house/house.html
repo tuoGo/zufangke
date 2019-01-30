@@ -191,6 +191,22 @@
                                 {if $vv.status==4}<div class="fire-icon"></div>{/if}
                                 <div class="show-msg price">{$vv.amount}元/月</div>
                             </div>
+                            <div class="house-handle clearfix">
+                                <div class="all-msg fl">
+                                    <div class="all-msg-top">
+                                        <div class="all-msg-title">{$val.room}{$vv.tag}</div>
+                                    </div>
+                                    <div class="all-msg-house">
+                                        <div class="all-msg-title">房间详情</div>
+                                        <div class="house-price">房间租金 : {$vv.amount}元/月</div>
+                                        <div class="pay-type">付款方式 : 押{$vv.bet}付{$vv.pay}</div>
+                                        <div class="fitment">装修状态 : {$val.decorate}</div>
+                                        <div class="contact">联系电话 : {$Think.session.phone}</div>
+                                    </div>
+                                    <div class="all-msg-contract">
+                                        <div class="house-status">空置情况 : 已空置{$vv.vacancy}天</div>
+                                    </div>
+                                </div>
                             {else /}
                             <div class="house-info">
                                 <div class="show-msg phone">{$vv['user']['phone']}</div>
@@ -198,7 +214,6 @@
                                 <div class="show-msg room-user">{$vv['user']['name']}</div>
                                 <div class="show-msg price">{$vv.amount}元/月</div>
                             </div>
-                            {/if}
                             <div class="house-handle clearfix">
                                 <div class="all-msg fl">
                                     <div class="all-msg-top">
@@ -226,7 +241,7 @@
                                     </div>
                                     {/if}
                                 </div>
-
+                                {/if}
                                 <div class="handle-area fr">
                                     <div class="all-msg-top">
                                         <div class="all-msg-title">编辑操作</div>
