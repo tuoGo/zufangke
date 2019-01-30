@@ -34,6 +34,30 @@ class House extends Base
             $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
             $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
         }
+        foreach ($underlying as $unk => $unv){
+            $underlying[$unk] = $unv;
+            foreach ($userinfo as $userk => $userv){
+                if ($underlying[$unk]['underid'] == $userv['underid']){
+                    $underlying[$unk]['user'] = $userv;
+                    continue;
+                }
+                if (!array_key_exists('user',$underlying[$unk])){
+                    $underlying[$unk]['user'] = '';
+                }
+            }
+            foreach ($underlying as $underk => $underv){
+                $underlying[$underk] = $underv;
+                foreach ($contract as $conk => $conv){
+                    if($underlying[$underk]['underid'] == $conv['underid']){
+                        $underlying[$underk]['contract'] = $conv;
+                        continue;
+                    }
+                    if(!array_key_exists('contract',$underlying[$underk])){
+                        $underlying[$underk]['contract'] = '';
+                    }
+                }
+            }
+        }
         foreach ($house as $key => $val) {
             $data[$key] = $val;
             foreach ($room as $ky => $vl) {
@@ -56,7 +80,8 @@ class House extends Base
                 }
             }
         }
-        return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
+//        print_r($data);exit;
+        return $this->fetch('house', ['data' => $data]);
     }
 
     /**
@@ -198,6 +223,31 @@ class House extends Base
                 $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
                 $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
             }
+            //数据拼接
+            foreach ($underlying as $unk => $unv){
+                $underlying[$unk] = $unv;
+                foreach ($userinfo as $userk => $userv){
+                    if ($underlying[$unk]['underid'] == $userv['underid']){
+                        $underlying[$unk]['user'] = $userv;
+                        continue;
+                    }
+                    if (!array_key_exists('user',$underlying[$unk])){
+                        $underlying[$unk]['user'] = '';
+                    }
+                }
+                foreach ($underlying as $underk => $underv){
+                    $underlying[$underk] = $underv;
+                    foreach ($contract as $conk => $conv){
+                        if($underlying[$underk]['underid'] == $conv['underid']){
+                            $underlying[$underk]['contract'] = $conv;
+                            continue;
+                        }
+                        if(!array_key_exists('contract',$underlying[$underk])){
+                            $underlying[$underk]['contract'] = '';
+                        }
+                    }
+                }
+            }
             foreach ($house as $key => $val) {
                 $data[$key] = $val;
                 foreach ($room as $ky => $vl) {
@@ -221,7 +271,7 @@ class House extends Base
                 }
             }
 //            print_r($data);exit;
-            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract , 'type' => $typeNow , 'status' => $statusNow]);
+            return $this->fetch('house', ['data' => $data, 'type' => $typeNow , 'status' => $statusNow]);
         }
     }
     /**
@@ -253,6 +303,31 @@ class House extends Base
                 $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
                 $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
             }
+            //数据拼接
+            foreach ($underlying as $unk => $unv){
+                $underlying[$unk] = $unv;
+                foreach ($userinfo as $userk => $userv){
+                    if ($underlying[$unk]['underid'] == $userv['underid']){
+                        $underlying[$unk]['user'] = $userv;
+                        continue;
+                    }
+                    if (!array_key_exists('user',$underlying[$unk])){
+                        $underlying[$unk]['user'] = '';
+                    }
+                }
+                foreach ($underlying as $underk => $underv){
+                    $underlying[$underk] = $underv;
+                    foreach ($contract as $conk => $conv){
+                        if($underlying[$underk]['underid'] == $conv['underid']){
+                            $underlying[$underk]['contract'] = $conv;
+                            continue;
+                        }
+                        if(!array_key_exists('contract',$underlying[$underk])){
+                            $underlying[$underk]['contract'] = '';
+                        }
+                    }
+                }
+            }
             foreach ($house as $key => $val) {
                 $data[$key] = $val;
                 foreach ($room as $ky => $vl) {
@@ -278,7 +353,7 @@ class House extends Base
             if ($data == ''){
                 $data = '0';
             }
-            return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract]);
+            return $this->fetch('house', ['data' => $data]);
         }
     }
 }
