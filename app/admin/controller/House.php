@@ -65,19 +65,18 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
-            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
-            if (!empty($result['datas']['plot_name'])){
+            if (!empty($result['plot_name'])){
                 $house = array(
                     'adid'          => $adid, //房东id
-                    'address'       => $result['datas']['plot_name'],//地址
+                    'address'       => $result['plot_name'],//地址
                     'create_time'   => $time,
                     'update_time'   => $time,
                 );
                 $hid = model('house')->insertGetId($house);
                 if ($hid){
-                    foreach ($result['datas']['datas'] as $key => $val){
+                    foreach ($result['datas'] as $key => $val){
                         $val['hid']  = $hid;
                         $val['adid'] = $adid;
                         model('room')->data($val,true)->isUpdate(false)->save();
@@ -85,16 +84,17 @@ class House extends Base
                     return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
                 }
             }else if (!empty($result['hid'])){
-                $data = array(
-                    'adid'      => $adid,
-                    'hid'       => $result['hid'],
-                    'room'      => $result['room'],
-                    'type'      => $result['type'],
-                );
-                model('room')->data($data,true)->isUpdate(false)->save();
+                foreach ($result['datas'] as $ky => $vl){
+                    $vl['hid']  = $result['hid'];
+                    $vl['adid'] = $adid;
+                }
+                model('room')->data($vl,true)->isUpdate(false)->save();
                 return json(['data'=>'','status'=>200,'msg'=>'添加成功!']);
             }else if (!empty($result['roomid'])){
-                //房间字段
+                foreach ($result['datas'] as $k => $v){
+                    $v['roomid'] = $result['roomid'];
+                    $v['adid']   = $adid;
+                }
             }
             return json(['data'=>'','status'=>400,'msg'=>'未知错误,联系我们!']);
         }
@@ -219,7 +219,6 @@ class House extends Base
                     }
                 }
             }
-            print_r($data);exit;
             return $this->fetch('house', ['data' => $data, 'user' => $userinfo, 'contract' => $contract , 'type' => $typeNow , 'status' => $statusNow]);
         }
     }
