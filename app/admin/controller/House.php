@@ -120,6 +120,8 @@ class House extends Base
                 foreach ($result['datas'] as $k => $v){
                     $v['roomid'] = $result['roomid'];
                     $v['adid']   = $adid;
+                    $rel = model('underlying')->data($v,true)->isUpdate(false)->save();
+                    return json(['data'=>$rel,'status'=>200,'msg'=>'添加成功!']);
                 }
             }
             return json(['data'=>'','status'=>400,'msg'=>'未知错误,联系我们!']);
@@ -190,6 +192,71 @@ class House extends Base
                 $type = array('0'=>'1','1'=>'2');
             }
             $nowTime = time();
+            if (empty($status)){
+                $room = db('room')->where('adid',$adid)->where('type','in',$type)->select();
+                foreach ($room as $ky => $vl) {
+                    $hid[$ky]    = $vl['hid'];
+                    $roomid[$ky] = $vl['roomid'];
+                }unset($ky, $vl);//解除room循环变量
+                $house = db('house')->where('hid','in',$hid)->select();
+                $underlying = db('underlying')->where('roomid', 'in', $roomid)->select();
+                foreach ($underlying as $kk => $vv) {
+                    $underid[$kk] = $vv['underid'];
+                }unset($kk, $vv);//解除underlying循环变量
+                $userinfo = db('user')->where('underid', 'in', $underid)->where('status', '1')->select(); //合同签署者
+                $contract = db('contract')->where('underid', 'in', $underid)->select(); //合同信息
+                foreach ($contract as $c => $cc) {
+                    $contract[$c]['start_time'] = date('Y.m.d', $cc['start_time']);
+                    $contract[$c]['end_time'] = date('Y.m.d', $cc['end_time']);
+                }
+                foreach ($underlying as $unk => $unv){
+                    $underlying[$unk] = $unv;
+                    foreach ($userinfo as $userk => $userv){
+                        if ($underlying[$unk]['underid'] == $userv['underid']){
+                            $underlying[$unk]['user'] = $userv;
+                            continue;
+                        }
+                        if (!array_key_exists('user',$underlying[$unk])){
+                            $underlying[$unk]['user'] = '';
+                        }
+                    }
+                    foreach ($underlying as $underk => $underv){
+                        $underlying[$underk] = $underv;
+                        foreach ($contract as $conk => $conv){
+                            if($underlying[$underk]['underid'] == $conv['underid']){
+                                $underlying[$underk]['contract'] = $conv;
+                                continue;
+                            }
+                            if(!array_key_exists('contract',$underlying[$underk])){
+                                $underlying[$underk]['contract'] = '';
+                            }
+                        }
+                    }
+                }
+                foreach ($house as $key => $val) {
+                    $data[$key] = $val;
+                    foreach ($room as $ky => $vl) {
+                        if ($house[$key]['hid'] == $room[$ky]['hid']) {
+                            $data[$key]['father'][$ky] = $vl;
+                        }
+                        foreach ($underlying as $k => $v) {
+                            if ($data[$key]['father'][$ky]['roomid'] == $v['roomid']) {
+                                $data[$key]['father'][$ky]['child'][$k] = $v;
+                                $time = $nowTime - $v['update_time'];//时间差
+                                if ($v['status'] == 2){
+                                    $data[$key]['father'][$ky]['child'][$k]['vacancy'] = ($time / 60 / 60 / 24) > 0 && ($time / 60 / 60 / 24) < 1 ? 1 : floor($time / 60 / 60 / 24);
+                                }else if ($time > (60 * 60 * 24 * 30) && $v['status'] == 0){
+                                    $data[$key]['father'][$ky]['child'][$k]['status'] = 4;
+                                    $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24); //空置时间
+                                }else{
+                                    $data[$key]['father'][$ky]['child'][$k]['vacancy'] = floor($time / 60 / 60 / 24) < 0 ? 1 : floor($time / 60 / 60 / 24);
+                                }
+                            }
+                        }
+                    }
+                }
+                return $this->fetch('house', ['data' => $data, 'type' => $typeNow , 'status' => $statusNow]);
+            }
             //筛选
             if ($status == '0' || $status == '2'){
                 $underlyingStr = db('underlying')->where('adid',$adid)->where('status',$status)->select();
@@ -270,7 +337,6 @@ class House extends Base
                     }
                 }
             }
-//            print_r($data);exit;
             return $this->fetch('house', ['data' => $data, 'type' => $typeNow , 'status' => $statusNow]);
         }
     }
