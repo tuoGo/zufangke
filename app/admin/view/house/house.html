@@ -62,13 +62,13 @@
                     </div>
                     <div class="banner-box fl">
                         <div class="clearfix">
-                            <span class="title_s list all fl" data-status="3">全部</span>
-                            <span class="title_s list null fl" data-status="0">空置</span>
-                            <span class="title_s list overdue fl" data-status="2">逾期</span>
-                            <span class="title_s list rentout fl" data-status="1">已租</span>
+                            <span class="title_s list all fl {if $status == 3}all-on{/if}" data-status="3">全部</span>
+                            <span class="title_s list null fl {if $status == '0'}null-on{/if}" data-status="0">空置</span>
+                            <span class="title_s list overdue fl {if $status == 2}overdue-on{/if}" data-status="2">逾期</span>
+                            <span class="title_s list rentout fl {if $status == 1}rentout-on{/if}" data-status="1">已租</span>
                             <!--<span class="title_s list fire">着火房</span>-->
                             <!--<span class="title_s list expiring">将到期</span>-->
-                            <input type="hidden" value="" name="status">
+                            <input type="hidden" value="{$status}" name="status">
                         </div>
                     </div>
                 </form>

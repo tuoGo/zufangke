@@ -652,11 +652,11 @@ $(function(){
         }
     });
     //检测单元下是否有房间
-    var house = $(".house-box");
-    for(var h = 0; h < house.length; h++){
-        var rooms = $(house[h]).find(".m-mid-content .house-room");
+    var mid = $(".mid-content");
+    for(var h = 0; h < mid.length; h++){
+        var rooms = $(mid[h]).find(".m-mid-content .house-room");
         if(!rooms.length){
-            $(house[h]).find(".mid-content .m-top-title .room-pack").click();
+            $(mid[h]).find(".m-top-title .room-pack").click();
         }
     }
 });

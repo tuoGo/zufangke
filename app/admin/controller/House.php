@@ -192,7 +192,7 @@ class House extends Base
                 $type = array('0'=>'1','1'=>'2');
             }
             $nowTime = time();
-            if (empty($status)){
+            if (!isset($status)){
                 $room = db('room')->where('adid',$adid)->where('type','in',$type)->select();
                 foreach ($room as $ky => $vl) {
                     $hid[$ky]    = $vl['hid'];
@@ -255,7 +255,7 @@ class House extends Base
                         }
                     }
                 }
-                return $this->fetch('house', ['data' => $data, 'type' => $typeNow , 'status' => $statusNow]);
+                return $this->fetch('house', ['data' => $data, 'type' => $typeNow]);
             }
             //筛选
             if ($status == '0' || $status == '2'){

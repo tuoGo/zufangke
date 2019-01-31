@@ -32,19 +32,23 @@
     font-size:15px;
     line-height:25px;
 }
-.computer .show-content .house-title .banner-box .all:hover{
+.computer .show-content .house-title .banner-box .all:hover,
+.computer .show-content .house-title .banner-box .all-on{
     background:#0099ff;
     color:white;
 }
-.computer .show-content .house-title .banner-box .null:hover{
+.computer .show-content .house-title .banner-box .null:hover,
+.computer .show-content .house-title .banner-box .null-on{
     background:rgb(170,170,170);
     color:white;
 }
-.computer .show-content .house-title .banner-box .overdue:hover{
+.computer .show-content .house-title .banner-box .overdue:hover,
+.computer .show-content .house-title .banner-box .overdue-on{
     background:rgb(250,130,130);
     color:white;
 }
-.computer .show-content .house-title .banner-box .rentout:hover{
+.computer .show-content .house-title .banner-box .rentout:hover,
+.computer .show-content .house-title .banner-box .rentout-on{
     background:rgb(128,194,105);
     color:white;
 }
