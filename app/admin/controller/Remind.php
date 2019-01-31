@@ -84,10 +84,10 @@ class Remind extends Controller
             }
         }
         foreach ($data as $dk => $dv){
-            $newDate = date('Y-m-d',strtotime("+".$dv['pay']."month",$dv['child']['update_time']));
+            $newDate = date('Y-m-d',strtotime("+".$dv['pay']."month",$dv['child']['overdue_time']));
             $date = strtotime($newDate);
             if ($nowDate > $date){
-                db('underlying')->where('underid',$dv['underid'])->update(['status'=>'2','update_time'=>$nowDate]);
+                db('underlying')->where('underid',$dv['underid'])->update(['status'=>'2','overdue_time'=>$nowDate]);
             }
         }
     }
