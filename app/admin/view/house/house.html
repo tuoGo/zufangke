@@ -100,6 +100,8 @@
                             <ul>
                                 <li><a class="plot-add" data-id="{$item.hid}" href="" data-toggle="modal" data-target="#housing">添加房源</a></li>
                                 <li><hr style="width:70px;margin:10px auto;"></li>
+                                <li><a href="javascript:void(0);" class="edit-plot">编辑小区</a></li>
+                                <li><hr style="width:70px;margin:10px auto;"></li>
                                 <li><a href="javascript:void(0);" class="del-plot" data-rank="3">删除小区</a></li>
                             </ul>
                             <div class="list-arrow"></div>
@@ -280,7 +282,7 @@
         </div>
     </div>
     <!--添加房源-->
-    <div id="housing" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+    <div id="housing" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade" data-edit="">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -589,7 +591,7 @@
         </div>
     </div>
     <!--添加房间-->
-    <div id="rooming" tabindex="-1" role="dialog" data-hasfoot="false" data-backdrop="static" class="sui-modal hide fade">
+    <div id="rooming" tabindex="-1" role="dialog" data-hasfoot="false" data-backdrop="static" class="sui-modal hide fade" data-edit="">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -717,11 +719,11 @@
 															<span>未租</span>
 														</a>
 														<ul role="menu" aria-labelledby="drop2" class="sui-dropdown-menu">
-															<li role="presentation" class="active">
-																<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="未租">
-																	未租
-																</a>
-															</li>
+															<!--<li role="presentation" class="active">-->
+																<!--<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="未租">-->
+																	<!--未租-->
+																<!--</a>-->
+															<!--</li>-->
 															<!--<li role="presentation">-->
 																<!--<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="已租">-->
 																	<!--已租-->

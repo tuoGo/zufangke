@@ -400,6 +400,19 @@ $(function(){
         }
     }
     //房源小区编辑事件
+    $(".edit-plot").click(function(){
+        var house = $("#housing");
+        var hid = $(this).parents(".c-list").find(".plot-add").attr("data-id");
+        var name = $(this).parents(".top-title").find(".area-title").html();
+        house.find(".house-number").hide();
+        house.find(".plot").hide();
+        house.find(".table-area").hide();
+        house.find(".add-plot").show();
+        house.find(".add-plot input[name=plot_name]").attr("data-hid",hid);
+        house.find(".add-plot input[name=plot_name]").val(name);
+        house.modal("show");
+    });
+    //房源小区单元编辑事件
     $(".room-edit").click(function(){
         var house = $("#housing");
         var input = $("#housing .plot input[name=plot]");
@@ -410,11 +423,33 @@ $(function(){
         input.val($(this).parents(".house-box").find(".top-title .area-title").html());
         input.bind("input propertychange change",inputResize(input));
         house.find(".house-number").hide();
+        var roomid = $(this).parents(".m-top-title").find(".room-title").attr("data-id");
         /*
         *  ajax 请求获取小区下该单元各类参数并显示到表格上
         * */
-
-        house.modal("show");
+        $.ajax({
+            url : "/house/editpage",
+            data : {roomid : roomid},
+            type : "post",
+            success : function(data){
+                if(data.status === 200){
+                    var text = data.data.room;
+                    var names = text.split(/[^0-9]/ig);
+                    var type = data.data.type === 1 ? "整租" : "合租";
+                    $("#housing .add .dropdown-inner input[name=house_type]").val(type).siblings("span").html(type);
+                    $("#housing .add input[name=build]").val(names[0]);
+                    $("#housing .add input[name=unit]").val(names[1]);
+                    $("#housing .add input[name=room_name]").val(names[3]);
+                    $("#housing .add input[name=room_number]").val(data.data.num_room).siblings("span").html(data.data.num_room);
+                    $("#housing .add input[name=lobby_number]").val(data.data.num_hall).siblings("span").html(data.data.num_hall);
+                    $("#housing .add input[name=toilet_number]").val(data.data.num_toilet).siblings("span").html(data.data.num_toilet);
+                    $("#housing .add input[name=fitment_status]").val(data.data.decorate).siblings("span").html(data.data.decorate);
+                    house.attr("data-edit","1");
+                    house.find(".table-area").attr("data-id",roomid);
+                    house.modal("show");
+                }
+            }
+        });
     });
     //房源房间编辑事件
     $(".house-room .edit").click(function(){
@@ -424,11 +459,30 @@ $(function(){
         room.find(".plot").hide();
         var text = trim($(this).parents(".mid-content").find(".room-title p").html());
         room.find(".add .room-t input").val(text);
+        var underid = $(this).parents(".house-room").find(".cap").attr("data-id");
         /*
         *  ajax 发起请求获取房间数据渲染页面
         * */
-
-        room.modal("show");
+        $.ajax({
+            url : "/house/editpage",
+            data : {underid : underid},
+            type : "post",
+            success : function(data){
+                console.log(data.data);
+                if(data.status === 200){
+                    var status = data.data.status === 0 ? "未租" : "已租";
+                    $("#rooming .add input[name=room_name]").val(data.data.tag);
+                    $("#rooming .add input[name=room_type]").val(data.data.bedroom).siblings("span").html(data.data.bedroom);
+                    $("#rooming .add input[name=lease_status]").val(status).siblings("span").html(status);
+                    $("#rooming .add input[name=cash]").val(data.data.bet).siblings("span").html(data.data.bet);
+                    $("#rooming .add input[name=pay]").val(data.data.pay).siblings("span").html(data.data.pay);
+                    $("#rooming .add input[name=lease_price]").val(data.data.amount);
+                    room.attr("data-edit","1");
+                    room.find(".table-area").attr("data-id",underid);
+                    room.modal("show");
+                }
+            }
+        });
     });
     //房间添加事件
     $(".room-plus").click(function(){
@@ -540,63 +594,109 @@ $(function(){
     });
     //添加房源的提交事件
     $("#housing").on("okHide",function(){
-        //先进行表单检验
-        var swit = true;
-        var validates = $("#housing .needCheck");
-        for(var j = 0; j < validates.length; j++){
-            $(validates[j]).removeClass("input-error");
-            if(!$(validates[j]).val()){
-                $(validates[j]).addClass("input-error");
-                swit = false;
-            }
-            if(isNaN($(validates[j]).val())){
-                $(validates[j]).addClass("input-error");
-                $(validates[j]).val("请填写纯数字");
-                swit = false;
-            }
-        }
-        if(swit){
-            var trs = $("#housing .add tr");
-            var length = trs.length;
-            var param = {};
-            if($("#housing .add-plot").is(":hidden")){
-                param.hid = $("#housing .plot input[name=plot]").attr("data-id");
-            }else{
-                console.log(111);
-                param.plot_name =  $("#housing .plot input[name=plot_name]").val();
-                if(!param.plot_name){
-                    $.alert("请填写小区名");
-                    return false;
-                }
-            }
-            param.datas = [];
-            for(var i = 0; i < length; i++){
-                param.datas[i] = {
-                    //出租方式
-                    type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
-                    //楼栋单元房间号
-                    room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
-                    //有几个房间
-                    num_room : $(trs[i]).find("input[name=room_number]").val(),
-                    //有几个大厅
-                    num_hall : $(trs[i]).find("input[name=lobby_number]").val(),
-                    //有几个厕所
-                    num_toilet : $(trs[i]).find("input[name=toilet_number]").val(),
-                    //装修状态
-                    decorate : $(trs[i]).find("input[name=fitment_status]").val()
-                };
-            }
+        if($("#housing .table-area").is(":hidden")){
             $.ajax({
-                url:"/house/add",
-                data:param,
-                type:"post",
-                success:function (data){
+                url : "/house/edit",
+                data : {hid : $("#housing .add-plot input[name=plot_name]").attr("data-hid"),name : $("#housing .add-plot input[name=plot_name]").val()},
+                type : "post",
+                success : function(data){
 
                 }
             });
         }else{
-            $.alert("请填补好标红部分的内容!");
-            return false;
+            //先进行表单检验
+            var swit = true;
+            var validates = $("#housing .needCheck");
+            for(var j = 0; j < validates.length; j++){
+                $(validates[j]).removeClass("input-error");
+                if(!$(validates[j]).val()){
+                    $(validates[j]).addClass("input-error");
+                    swit = false;
+                }
+                if(isNaN($(validates[j]).val())){
+                    $(validates[j]).addClass("input-error");
+                    $(validates[j]).val("请填写纯数字");
+                    swit = false;
+                }
+            }
+            //判断是新增还是修改
+            if($("#housing").attr("data-edit")){
+                if(swit){
+                    $("#housing").attr("data-edit","");
+                    var param = {};
+                    var tr = $("#housing .add tr");
+                    param.roomid = $("#housing .table-area").attr("data-id");
+                    param.datas = {
+                        //出租方式
+                        type : $(tr).find("input[name=house_type]").val() === "整租" ? 1:2,
+                        //楼栋单元房间号
+                        room : $(tr).find("input[name=build]").val() + "栋" + $(tr).find("input[name=unit]").val() + "单元" + $(tr).find("input[name=room_name]").val() + "室",
+                        //有几个房间
+                        num_room : $(tr).find("input[name=room_number]").val(),
+                        //有几个大厅
+                        num_hall : $(tr).find("input[name=lobby_number]").val(),
+                        //有几个厕所
+                        num_toilet : $(tr).find("input[name=toilet_number]").val(),
+                        //装修状态
+                        decorate : $(tr).find("input[name=fitment_status]").val()
+                    };
+                    $.ajax({
+                        url:"/house/add",
+                        data:param,
+                        type:"post",
+                        success:function (data){
+
+                        }
+                    });
+                }else{
+                    $.alert("请填补好标红部分的内容!");
+                    return false;
+                }
+            }else{
+                if(swit){
+                    var trs = $("#housing .add tr");
+                    var length = trs.length;
+                    var param = {};
+                    if($("#housing .add-plot").is(":hidden")){
+                        param.hid = $("#housing .plot input[name=plot]").attr("data-id");
+                    }else{
+                        console.log(111);
+                        param.plot_name =  $("#housing .plot input[name=plot_name]").val();
+                        if(!param.plot_name){
+                            $.alert("请填写小区名");
+                            return false;
+                        }
+                    }
+                    param.datas = [];
+                    for(var i = 0; i < length; i++){
+                        param.datas[i] = {
+                            //出租方式
+                            type : $(trs[i]).find("input[name=house_type]").val() === "整租" ? 1:2,
+                            //楼栋单元房间号
+                            room : $(trs[i]).find("input[name=build]").val() + "栋" + $(trs[i]).find("input[name=unit]").val() + "单元" + $(trs[i]).find("input[name=room_name]").val() + "室",
+                            //有几个房间
+                            num_room : $(trs[i]).find("input[name=room_number]").val(),
+                            //有几个大厅
+                            num_hall : $(trs[i]).find("input[name=lobby_number]").val(),
+                            //有几个厕所
+                            num_toilet : $(trs[i]).find("input[name=toilet_number]").val(),
+                            //装修状态
+                            decorate : $(trs[i]).find("input[name=fitment_status]").val()
+                        };
+                    }
+                    $.ajax({
+                        url:"/house/add",
+                        data:param,
+                        type:"post",
+                        success:function (data){
+
+                        }
+                    });
+                }else{
+                    $.alert("请填补好标红部分的内容!");
+                    return false;
+                }
+            }
         }
     });
     $(".show-content").on("click",".plot-add",function(){
@@ -619,39 +719,73 @@ $(function(){
                 swit = false;
             }
         }
-        if(swit){
-            var trs = $("#rooming .add tr");
-            var length = trs.length;
-            var param = {};
-            param.roomid = $("#rooming .add").attr("data-id");
-            param.datas = [];
-            for(var i = 0; i < length; i++){
-                param.datas[i] = {
+        if($("#rooming").attr("data-edit")){
+            if(swit){
+                $("#rooming").attr("data-edit","");
+                var param = {};
+                var tr = $("#rooming .add tr");
+                param.underid = $("#rooming .table-area").attr("data-id");
+                param.datas = {
                     //tag 房间名称
-                    tag : $("#rooming .add input[name=room_name]").val(),
+                    tag : $(tr).find("input[room_name]").val(),
                     //bedroom 主卧 次卧 独卫
-                    bedroom : $("#rooming .add .room-type .dropdown-inner input[name=room_type]").val(),
+                    bedroom : $(tr).find("input[name=room_type]").val(),
                     //status 房间出租状态
-                    status : 0,
+                    status : $(tr).find("input[name=lease_status]").val() === "未租" ? "0" : "1",
                     //bet 押金方式
-                    bet : $("#rooming .add .room-bp .dropdown-inner input[name=cash]").val().replace("押",""),
+                    bet : $(tr).find("input[name=cash]").val().replace("押",""),
                     //pay 付款方式
-                    pay : $("#rooming .add .room-bp .dropdown-inner input[name=pay]").val().replace("付",""),
+                    pay : $(tr).find("input[name=pay]").val().replace("付",""),
                     //amount 租金
-                    amount : $("#rooming .add .room-price input[name=lease_price]").val()
-                }
-            }
-            $.ajax({
-                url:"/house/add",
-                data : param,
-                type : "post",
-                success : function(data){
+                    amount : $(tr).find("input[name=lease_price]").val()
+                };
+                $.ajax({
+                    url:"/house/add",
+                    data:param,
+                    type:"post",
+                    success:function (data){
 
-                }
-            });
+                    }
+                });
+            }else{
+                $.alert("请填补好标红部分的内容!");
+                return false;
+            }
         }else{
-            $.alert("请填补好标红部分的内容!");
-            return false;
+            if(swit){
+                var trs = $("#rooming .add tr");
+                var length = trs.length;
+                var param = {};
+                param.roomid = $("#rooming .add").attr("data-id");
+                param.datas = [];
+                for(var i = 0; i < length; i++){
+                    param.datas[i] = {
+                        //tag 房间名称
+                        tag : $(trs[i]).find("input[room_name]").val(),
+                        //bedroom 主卧 次卧 独卫
+                        bedroom : $(trs[i]).find("input[name=room_type]").val(),
+                        //status 房间出租状态
+                        status : $(trs[i]).find("input[name=lease_status]").val() === "未租" ? "0" : "1",
+                        //bet 押金方式
+                        bet : $(trs[i]).find("input[name=cash]").val().replace("押",""),
+                        //pay 付款方式
+                        pay : $(trs[i]).find("input[name=pay]").val().replace("付",""),
+                        //amount 租金
+                        amount : $(trs[i]).find("input[name=lease_price]").val()
+                    }
+                }
+                $.ajax({
+                    url:"/house/add",
+                    data : param,
+                    type : "post",
+                    success : function(data){
+
+                    }
+                });
+            }else{
+                $.alert("请填补好标红部分的内容!");
+                return false;
+            }
         }
     });
     //检测单元下是否有房间
