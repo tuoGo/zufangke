@@ -156,21 +156,10 @@ class House extends Base
             $hid = input('post.hid');//主键
             $result = input('post.');//数据
             $data = array(
-                'address'   => $result['address'],
-                'area'      => $result['area'],
-                'doormodel' => $result['doormodel'],
-                'status'    => $result['status']
+                'address'   => $result['name'],
             );
-            try{
-                model('house')->allowField(true)->save($data,['hid' => $hid]);
-                return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
-            }catch (Exception $e){
-                return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
-            }
-        }else{
-            $hid = input('get.hid');//主键
-            $data = db('house')->where('hid','=',$hid)->select()[0];
-            return $this->fetch('admin/index',['data'=>$data]);
+            model('house')->allowField(true)->save($data,['hid' => $hid]);
+            return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
         }
     }
 
