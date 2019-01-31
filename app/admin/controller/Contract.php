@@ -21,7 +21,7 @@ class Contract extends Base
     {
             $adid = Session::get('adid');
             $count = db('contract')->count();
-            $contract = db('contract')->where('adid',$adid)->order('contid asc')->paginate(15,$count);
+            $contract = db('contract')->where('adid',$adid)->order('contid asc')->paginate(14,$count);
             $pagecount = $contract->render();
             foreach ($contract as $key => $val){
                 $uid[$key]     = $val['uid'];
