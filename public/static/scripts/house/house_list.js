@@ -476,16 +476,34 @@ $(function(){
     //     });
     // }
     //删除操作
-    $(".del-plot").click(popup.bind(null,1));
-    $(".del-unit").click(popup.bind(null,2));
-    $(".del-room").click(popup.bind(null,3));
+    $(".del-plot").click(popup.bind(null));
+    $(".del-unit").click(popup.bind(null));
+    $(".del-room").click(popup.bind(null));
     //弹窗确认
-    function popup(rank){
-        return $.confirm({
-            title : "请确认您的操作",
-            body : "确定要执行删除的操作吗！？",
-            okHide : del.bind(null,rank)
-        });
+    function popup(ev){
+        var that = $(ev.target);
+        var rank = that.attr("data-rank");
+        var delId = {
+            room : [],
+            unit : [],
+        };
+        switch(rank){
+            case 1:
+                delId.room[0] = that.parents(".house-room").find(".cap").attr("data-id");
+                break;
+            case 2:
+
+                break;
+            case 3:
+                delId.house = that
+                break;
+        }
+        console.log(delId);
+        // return $.confirm({
+        //     title : "请确认您的操作",
+        //     body : "确定要执行删除的操作吗！？",
+        //     okHide : del.bind(null,id)
+        // });
     }
     function del(rank){
         //rank代表要删除的级别
@@ -494,8 +512,8 @@ $(function(){
         * */
         console.log(rank);
     }
+    //显示该小区下房间总数
     $.each($(".house-box"),function(index,el){
-        //显示该小区下房间总数
         $(el).find(".house-msg .house-all").html(($(el).find(".house-room").length));
         $(el).find(".house-msg .empty-all").html($(el).find(".house-room .cap .null").length);
     });

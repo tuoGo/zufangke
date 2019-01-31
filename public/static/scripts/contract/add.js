@@ -117,9 +117,9 @@ $(function(){
         if(month){
             start = start.replace(/-/g,"/");
             var d = new Date(start);
-            start = d.getTime();
+            start = d.getTime() / 1000;
             d.setMonth(d.getMonth()+ month);
-            var end = d.getTime();
+            var end = d.getTime() / 1000;
             $(".less-time input[name=start_time]").val(start);
             $(".less-time input[name=end_time]").val(end);
         }

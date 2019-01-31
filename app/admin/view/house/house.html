@@ -100,7 +100,7 @@
                             <ul>
                                 <li><a class="plot-add" data-id="{$item.hid}" href="" data-toggle="modal" data-target="#housing">添加房源</a></li>
                                 <li><hr style="width:70px;margin:10px auto;"></li>
-                                <li><a href="javascript:void(0);" class="del-plot">删除小区</a></li>
+                                <li><a href="javascript:void(0);" class="del-plot" data-rank="3">删除小区</a></li>
                             </ul>
                             <div class="list-arrow"></div>
                         </div>
@@ -249,7 +249,7 @@
                                     <div class="house-handle-list">
                                         <div class="house-controll">
                                             <div class="edit">编辑房源</div>
-                                            <div class="del-room">删除房源</div>
+                                            <div class="del-room" data-rank="1">删除房源</div>
                                         </div>
                                         {if $vv.status==1||$vv.status==2}
                                         <div class="house-contract-handle">
