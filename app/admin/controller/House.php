@@ -159,18 +159,53 @@ class House extends Base
         }
     }
 
-    public function delpage()
+    public function delpage(Request $request)
     {
-        return $this->fetch();
+        if ($request->isPost()){
+            $id = input('post.');
+            $case = key($id);
+            $vid  = current($id);
+            switch ($case){
+                case 'hid';
+                $data = db('house')->where('hid',$vid)->find();
+                return json(['data'=>$data,'status'=>200,'msg'=>'']);
+                case 'roomid';
+                $data = db('room')->where('roomid',$vid)->find();
+                return json(['data'=>$data,'status'=>200,'msg'=>'']);
+                case 'underid';
+                $data = db('underlying')->where('underid',$vid)->find();
+                return json(['data'=>$data,'status'=>200,'msg'=>'']);
+            }
+        }
     }
 
     /**
      * 删除
      */
-    public function del(){
-        $hid = input('post.hid');
-        db('house')->delete($hid);
-        return json(['data'=>'','status'=>200,'msg'=>'删除房源成功!']);
+    public function del(Request $request){
+        if ($request->isPost()){
+            $id = input('post.');
+            $case = key($id);
+            $vid  = current($id);
+            switch ($case){
+                case 'hid';
+                    db('house')->where('hid',$vid)->delete();
+                    $roomids = db('room')->field('roomid')->where('hid',$vid)->select();
+                    foreach ($roomids as $rk => $rv){
+                        $roomid[$rk] = $rv['roomid'];
+                    }
+                    db('room')->where('hid',$vid)->delete();
+                    db('underlying')->where('roomid','in',$roomid)->delete();
+                    return json(['data'=>'','status'=>200,'msg'=>'删除小区成功!']);
+                case 'roomid';
+                    db('room')->where('roomid',$vid)->delete();
+                    db('underlying')->where('roomid',$vid)->delete();
+                    return json(['data'=>'','status'=>200,'msg'=>'删除单元成功!']);
+                case 'underid';
+                    db('underlying')->where('underid',$vid)->delete();
+                    return json(['data'=>'','status'=>200,'msg'=>'删除房间成功!']);
+            }
+        }
     }
     /**
      * 整租房or合租房or全部显示
