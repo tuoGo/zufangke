@@ -492,10 +492,10 @@ $(function(){
 
                 break;
             case 3:
-                param.hid = that
+                console.log(111);
                 break;
         }
-        console.log(delId);
+        //console.log(param);
         // return $.confirm({
         //     title : "请确认您的操作",
         //     body : "确定要执行删除的操作吗！？",
