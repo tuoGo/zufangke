@@ -141,6 +141,7 @@ body{
     position:relative;
     top:0;
     min-height:500px;
+    font-family: "Microsoft YaHei 微软雅黑";
 }
 @media (min-width:1280px){
     body{

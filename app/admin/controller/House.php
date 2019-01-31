@@ -168,14 +168,9 @@ class House extends Base
      * 删除
      */
     public function del(){
-        try{
-            $hid = input('post.hid');
-            db('house')->delete($hid);
-            return json(['data'=>'','status'=>200,'msg'=>'删除房源成功!']);
-        }catch (Exception $e){
-            return json(['data'=>'','status'=>400,'msg'=>'系统错误,请联系我们团队!']);
-        }
-
+        $hid = input('post.hid');
+        db('house')->delete($hid);
+        return json(['data'=>'','status'=>200,'msg'=>'删除房源成功!']);
     }
     /**
      * 整租房or合租房or全部显示
