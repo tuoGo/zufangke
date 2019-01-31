@@ -109,6 +109,7 @@ class Contract extends Base
                     'sms_time'          => $time,
                     'start_time'        => $data['start_time'],
                     'end_time'          => $data['end_time'],
+                    'overdue_time'      => $time,
                     'address'           => $data['address'],
                     'note'              => $data['note'],
                 ];
