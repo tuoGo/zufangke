@@ -479,35 +479,38 @@ $(function(){
     //弹窗确认
     function popup(ev){
         var that = $(ev.target);
-        var rank = that.attr("data-rank");
-        var param = {
-            room : [],
-            unit : [],
-        };
+        //代表删除级别 1-房间  2-单元  3-小区
+        var rank = parseInt(that.attr("data-rank"));
+        var param = {};
         switch(rank){
             case 1:
-                param.room[0] = that.parents(".house-room").find(".cap").attr("data-id");
+                param.underid = that.parents(".house-room").find(".cap").attr("data-id");
                 break;
             case 2:
-
+                param.roomid = that.parents(".m-top-title").find(".room-title").attr("data-id");
                 break;
             case 3:
-                console.log(111);
+                param.hid = that.parents(".c-list").find(".plot-add").attr("data-id");
                 break;
         }
-        //console.log(param);
-        // return $.confirm({
-        //     title : "请确认您的操作",
-        //     body : "确定要执行删除的操作吗！？",
-        //     okHide : del.bind(null,id)
-        // });
+        return $.confirm({
+            title : "请确认您的操作",
+            body : "确定要执行删除的操作吗！？",
+            okHide : del.bind(null,param)
+        });
     }
-    function del(rank){
-        //rank代表要删除的级别
+    function del(param){
         /*
         *  发起ajax请求后台删除指定数据
         * */
-        console.log(rank);
+        $.ajax({
+            url : "/house/del",
+            data : param,
+            type : "post",
+            success : function(data){
+
+            }
+        });
     }
     //显示该小区下房间总数
     $.each($(".house-box"),function(index,el){
