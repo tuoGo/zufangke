@@ -128,9 +128,24 @@ class House extends Base
         }
     }
 
-    public function editpage()
+    public function editpage(Request $request)
     {
-        return $this->fetch();
+        if ($request->isPost()){
+            $id = input('post.');
+            $case = key($id);
+            $vid  = current($id);
+            switch ($case){
+                case 'hid';
+                    $data = db('house')->where('hid',$vid)->find();
+                    return json(['data'=>$data,'status'=>200,'msg'=>'']);
+                case 'roomid';
+                    $data = db('room')->where('roomid',$vid)->find();
+                    return json(['data'=>$data,'status'=>200,'msg'=>'']);
+                case 'underid';
+                    $data = db('underlying')->where('underid',$vid)->find();
+                    return json(['data'=>$data,'status'=>200,'msg'=>'']);
+            }
+        }
     }
 
     /**
@@ -159,25 +174,6 @@ class House extends Base
         }
     }
 
-    public function delpage(Request $request)
-    {
-        if ($request->isPost()){
-            $id = input('post.');
-            $case = key($id);
-            $vid  = current($id);
-            switch ($case){
-                case 'hid';
-                $data = db('house')->where('hid',$vid)->find();
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-                case 'roomid';
-                $data = db('room')->where('roomid',$vid)->find();
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-                case 'underid';
-                $data = db('underlying')->where('underid',$vid)->find();
-                return json(['data'=>$data,'status'=>200,'msg'=>'']);
-            }
-        }
-    }
 
     /**
      * 删除
