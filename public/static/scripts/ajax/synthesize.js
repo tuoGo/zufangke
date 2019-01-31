@@ -76,6 +76,7 @@ function leaseType() {
         $(this).siblings("input[name=status]").val(status);
         $(this).parents("form").submit();
     }else{
+        $(this).parents("form").find("input[name=status]").val("");
         if ($(this).hasClass("chose")){
             return false;
         }

@@ -283,9 +283,6 @@ $(function(){
         inner += '<li role="presentation" class="active">';
         inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="未租">未租</a>';
         inner += '</li>';
-        inner += '<li role="presentation" class="active">';
-        inner += '<a role="menuitem" tabindex="-1" href="javascript:void(0);" value="已租">已租</a>';
-        inner += '</li>';
         inner += '</ul>';
         inner += '</span>';
         inner += '</span>';
@@ -483,19 +480,19 @@ $(function(){
     function popup(ev){
         var that = $(ev.target);
         var rank = that.attr("data-rank");
-        var delId = {
+        var param = {
             room : [],
             unit : [],
         };
         switch(rank){
             case 1:
-                delId.room[0] = that.parents(".house-room").find(".cap").attr("data-id");
+                param.room[0] = that.parents(".house-room").find(".cap").attr("data-id");
                 break;
             case 2:
 
                 break;
             case 3:
-                delId.house = that
+                param.hid = that
                 break;
         }
         console.log(delId);
@@ -632,7 +629,7 @@ $(function(){
                     //bedroom 主卧 次卧 独卫
                     bedroom : $("#rooming .add .room-type .dropdown-inner input[name=room_type]").val(),
                     //status 房间出租状态
-                    status : $("#rooming .add .room-status .dropdown-inner input[name=lease_status]").val() === "未租" ? 0 : 1,
+                    status : 0,
                     //bet 押金方式
                     bet : $("#rooming .add .room-bp .dropdown-inner input[name=cash]").val().replace("押",""),
                     //pay 付款方式
