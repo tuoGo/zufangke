@@ -641,7 +641,7 @@ $(function(){
                         decorate : $(tr).find("input[name=fitment_status]").val()
                     };
                     $.ajax({
-                        url:"/house/add",
+                        url:"/house/edit",
                         data:param,
                         type:"post",
                         success:function (data){
@@ -727,7 +727,7 @@ $(function(){
                 param.underid = $("#rooming .table-area").attr("data-id");
                 param.datas = {
                     //tag 房间名称
-                    tag : $(tr).find("input[room_name]").val(),
+                    tag : $(tr).find("input[name=room_name]").val(),
                     //bedroom 主卧 次卧 独卫
                     bedroom : $(tr).find("input[name=room_type]").val(),
                     //status 房间出租状态
@@ -740,7 +740,7 @@ $(function(){
                     amount : $(tr).find("input[name=lease_price]").val()
                 };
                 $.ajax({
-                    url:"/house/add",
+                    url:"/house/editpage",
                     data:param,
                     type:"post",
                     success:function (data){
@@ -761,7 +761,7 @@ $(function(){
                 for(var i = 0; i < length; i++){
                     param.datas[i] = {
                         //tag 房间名称
-                        tag : $(trs[i]).find("input[room_name]").val(),
+                        tag : $(trs[i]).find("input[name=room_name]").val(),
                         //bedroom 主卧 次卧 独卫
                         bedroom : $(trs[i]).find("input[name=room_type]").val(),
                         //status 房间出租状态
