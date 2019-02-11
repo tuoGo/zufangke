@@ -90,6 +90,7 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
+            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
             if (!empty($result['plot_name'])){
@@ -153,12 +154,12 @@ class House extends Base
      */
     public function edit(Request $request){
         if($request->isPost()){
-            $hid = input('post.hid');//主键
             $result = input('post.');//数据
+            print_r($result);exit;
             $data = array(
                 'address'   => $result['name'],
             );
-            model('house')->allowField(true)->save($data,['hid' => $hid]);
+            model('house')->allowField(true)->save($data);
             return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
         }
     }
@@ -193,7 +194,7 @@ class House extends Base
         }
     }
     /**
-     * 整租房or合租房or全部显示
+     *  筛选
      */
     public function leaseType(Request $request)
     {
