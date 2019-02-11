@@ -147,4 +147,7 @@ $(function(){
         $(".top-banner .slide .text").html(adName);
     }
     init();
+    $(".left-banner .sleep").click(function(){
+        $.alert("该功能尚未开放");
+    });
 });
