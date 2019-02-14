@@ -90,7 +90,6 @@ class House extends Base
     public function add(Request $request){
         if ($request->isPost()){
             $result = input('post.');
-            print_r($result);exit;
             $adid   = Session::get('adid');
             $time   = time();
             if (!empty($result['plot_name'])){
@@ -154,13 +153,20 @@ class House extends Base
      */
     public function edit(Request $request){
         if($request->isPost()){
-            $result = input('post.');//数据
-            print_r($result);exit;
-            $data = array(
-                'address'   => $result['name'],
-            );
-            model('house')->allowField(true)->save($data);
-            return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
+            $id = input('post.');
+            $case = key($id);
+            $vid  = current($id);
+            switch ($case){
+                case 'hid';
+                    db('house')->where('hid',$vid)->update($id['datas']);
+                    return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
+                case 'roomid';
+                    db('room')->where('roomid',$vid)->update($id['datas']);
+                    return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
+                case 'underid';
+                    db('underlying')->where('underid',$vid)->update($id['datas']);
+                    return json(['data'=>'','status'=>200,'msg'=>'房源编辑成功!']);
+            }
         }
     }
 
