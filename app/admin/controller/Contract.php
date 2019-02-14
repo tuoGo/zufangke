@@ -20,7 +20,7 @@ class Contract extends Base
     public function index()
     {
             $adid = Session::get('adid');
-            $count = db('contract')->count();
+            $count = db('contract')->where('adid',$adid)->count();
             $contract = db('contract')->where('adid',$adid)->order('contid asc')->paginate(14,$count);
             $pagecount = $contract->render();
             foreach ($contract as $key => $val){
