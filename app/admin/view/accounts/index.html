@@ -89,7 +89,7 @@
                     <table class="sui-table table-primary">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>日期</th>
                                 <th>房源信息</th>
                                 <th>承租人</th>
                                 <th>联系号码</th>
@@ -105,7 +105,7 @@
                         <tbody class="add">
                         {foreach name="list" item="flist" key="fk"}
                             <tr>
-                                <td>{$flist.fid}</td>
+                                <td>{$flist.start_time}—{$flist.end_time}</td>
                                 <td>{$flist.address}</td>
                                 <td>{$flist.user.name}</td>
                                 <td>{$flist.user.phone}</td>
@@ -121,13 +121,78 @@
                                 <td>{$flist.amount}</td>
                                 <td>
                                     <div class="handle-area">
-                                        <button class="sui-btn btn-info btn-bordered btn-xlarge">查看合同</button>
+                                        {if $flist.status == 1}
+                                        <button class="sui-btn btn-info btn-bordered btn-xlarge check_con">查看合同</button>
+                                        {else}
+                                        <button class="sui-btn btn-primary btn-bordered btn-xlarge payoff">交付</button>
+                                        {/if}
                                     </div>
                                 </td>
                             </tr>
                         {/foreach}
                         </tbody>
                     </table>
+                </div>
+                <!--提示框-->
+                <div id="show">
+                    <div class="mask"></div>
+                    <div class="tip-box">
+                        <div class="loading">
+                            <div class="animal">
+                                <div class="ball one"></div>
+                                <div class="ball two"></div>
+                                <div class="ball three"></div>
+                                <div class="ball four"></div>
+                                <div class="ball five"></div>
+                                <div class="ball six"></div>
+                                <div class="ball seven"></div>
+                                <div class="ball eight"></div>
+                                <div class="ball nine"></div>
+                                <div class="ball ten"></div>
+                                <div class="ball eleven"></div>
+                                <div class="ball twelve"></div>
+                            </div>
+                            <div class="tip-msg">Loading....</div>
+                        </div>
+                        <div class="success-animal">
+                            <div class="s-animal">
+                                <div><img src="__STATIC__/images/jump/success.png" alt="" width="150" height="150"></div>
+                            </div>
+                            <div class="tip-msg"></div>
+                        </div>
+                        <div class="error-animal">
+                            <div class="animal"></div>
+                            <div class="tip-msg"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--弹窗区-->
+                <div id="we-input" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">X</button>
+                                <h4 class="modal-title">请填写房客消耗使用的水电单位</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post" class="sui-form">
+                                    <div class="input-box">
+                                        <div class="water input-prepend">
+                                            <span class="add-on">填写水的使用量(吨)</span>
+                                            <input type="text" class="span2 input-xfat" name="water">
+                                        </div>
+                                        <div class="elec">
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认</button>
+                                <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
