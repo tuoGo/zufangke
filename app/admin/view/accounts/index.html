@@ -105,7 +105,7 @@
                         </thead>
                         <tbody class="add">
                         {foreach name="list" item="flist" key="fk"}
-                            <tr>
+                            <tr data-id="{$flist.fid}">
                                 <td>{$flist.start_time}—{$flist.end_time}</td>
                                 <td>{$flist.address}</td>
                                 <td>{$flist.user.name}</td>
@@ -178,6 +178,7 @@
                             <div class="modal-body">
                                 <form action="" method="post" class="sui-form">
                                     <div class="input-box">
+                                        <input type="hidden" name="fid" value="">
                                         <div class="water input-prepend">
                                             <span class="add-on">填写水的使用量(吨)</span>
                                             <input type="text" class="span2 input-xfat" name="water">
