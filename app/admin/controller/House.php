@@ -174,7 +174,7 @@ class House extends Base
             $vid  = current($id);
             switch ($case){
                 case 'hid';
-                    db('house')->where('hid',$vid)->delete();
+//                    db('house')->where('hid',$vid)->delete();
                     $roomids = db('room')->field('roomid')->where('hid',$vid)->select();
                     foreach ($roomids as $rk => $rv){
                         $roomid[$rk] = $rv['roomid'];
@@ -187,7 +187,7 @@ class House extends Base
                     db('underlying')->where('roomid',$vid)->delete();
                     return json(['data'=>'','status'=>200,'msg'=>'删除单元成功!']);
                 case 'underid';
-                    db('underlying')->where('underid',$vid)->delete();
+//                    db('underlying')->where('underid',$vid)->delete();
                     return json(['data'=>'','status'=>200,'msg'=>'删除房间成功!']);
             }
         }

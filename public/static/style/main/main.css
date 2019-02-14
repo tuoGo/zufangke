@@ -1,4 +1,6 @@
 body,html{
+    min-width:1430px;
+    min-height:780px;
     height:100%;
 }
 body{
@@ -7,7 +9,7 @@ body{
 }
 /*电脑端*/
 .computer{
-    display:none;
+    /*display:none;*/
     height:100%;
 }
 .computer .top-banner{
@@ -16,6 +18,7 @@ body{
     height:80px;
     background:white;
     box-shadow:0 0 30px #DDDDDD;
+    z-index:1001;
 }
 .computer .top-banner .logo{
     position:absolute;
@@ -89,12 +92,21 @@ body{
     text-decoration:none;
 }
 .computer .left-banner{
+    overflow:hidden;
     position:fixed;
     top:80px;
     left:0;
     width:130px;
     height:100%;
+    padding-top:18px;
     background:rgb(60,63,63);
+    font-family:"Microsoft YaHei";
+    z-index:1000;
+}
+.computer .left-banner .left-move{
+    position:absolute;
+    top:0;
+    left:25px;
 }
 .computer .hide-box{
     width:100%;
@@ -107,10 +119,6 @@ body{
     margin-left:160px;
     min-height:500px;
     background:white;
-}
-.computer .left-banner{
-    font-family:"Microsoft YaHei";
-    padding-top:18px;
 }
 .computer .left-banner .banner-slide{
     padding:15px 0;
@@ -142,6 +150,140 @@ body{
     top:0;
     min-height:500px;
     font-family: "Microsoft YaHei 微软雅黑";
+}
+.computer #show{
+    display:none;
+    width:100%;
+    height:100%;
+}
+.computer #show .mask{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background:#000;
+    opacity:.8;
+    z-index:1002;
+}
+.computer #show .tip-box{
+    position:fixed;
+    top:calc(50% - 150px);
+    left:calc(50% - 150px);
+    width:300px;
+    height:300px;
+    border-radius:15px;
+    background:white;
+    z-index:1003;
+}
+.computer #show .tip-box .tip-msg{
+    padding-top:5px;
+    font-size:28px;
+    font-family:"Microsoft YaHei 微软雅黑";
+    color:#333;
+    text-align:center;
+}
+.computer #show .tip-box .animal{
+    position:relative;
+    width:300px;
+    height:250px;
+}
+.computer #show .tip-box .animal .ball{
+    position:absolute;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:#ccc;
+}
+.computer #show .tip-box .animal .one{
+    top:13px;
+    left:142px;
+    animation:loading 1.47s infinite linear;
+}
+.computer #show .tip-box .animal .two{
+    top:30px;
+    left:199px;
+    animation:loading 1.47s .5s infinite linear;
+}
+.computer #show .tip-box .animal .three{
+    top:66px;
+    left:236px;
+    animation:loading 1.47s .68s infinite linear;
+}
+.computer #show .tip-box .animal .four{
+    top:120px;
+    left:250px;
+    animation:loading 1.47s .77s infinite linear;
+}
+.computer #show .tip-box .animal .five{
+    top:173px;
+    left:234px;
+    animation:loading 1.47s .86s infinite linear;
+}
+.computer #show .tip-box .animal .six{
+    top:211px;
+    left:193px;
+    animation:loading 1.47s .95s infinite linear;
+}
+.computer #show .tip-box .animal .seven{
+    top:224px;
+    left:143px;
+    animation:loading 1.47s 1.04s infinite linear;
+}
+.computer #show .tip-box .animal .eight{
+    top:211px;
+    left:92px;
+    animation:loading 1.47s 1.13s infinite linear;
+}
+.computer #show .tip-box .animal .nine{
+    top:173px;
+    left:53px;
+    animation:loading 1.47s 1.2s infinite linear;
+}
+.computer #show .tip-box .animal .ten{
+    top:120px;
+    left:39px;
+    animation:loading 1.47s 1.29s infinite linear;
+}
+.computer #show .tip-box .animal .eleven{
+    top:66px;
+    left:53px;
+    animation:loading 1.47s 1.38s infinite linear;
+}
+.computer #show .tip-box .animal .twelve{
+    top:30px;
+    left:86px;
+    animation:loading 1.47s 1.47s infinite linear;
+}
+@keyframes loading{
+    0%{transform:scale(1)}
+    20%{transform:scale(1.25);background:#333;}
+    30%{transform:scale(1.5);background:#222;}
+    40%{transform:scale(1.25);background:#333;}
+    50%{transform:scale(1);background:#ccc;}
+    100%{transform:scale(1)}
+}
+.computer #show .tip-box .success-animal{
+    display:none;
+}
+.computer #show .tip-box .error-animal{
+    display:none;
+}
+.computer #show .tip-box .s-animal{
+    width:200px;
+    height:200px;
+    margin:25px auto 0;
+    border-radius:50%;
+    border:3px solid rgb(102,204,51);
+    animation:big .5s forwards;
+}
+.computer #show .tip-box .s-animal > div{
+    width:150px;
+    margin:30px auto;
+}
+@keyframes big{
+    0%{transform:scale(.1)}
+    100%{transform:scale(1)}
 }
 @media (min-width:1280px){
     body{

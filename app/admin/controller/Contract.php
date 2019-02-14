@@ -94,7 +94,6 @@ class Contract extends Base
                 $contData = [
                     'adid'              => $adid,
                     'underid'           => $data['underid'],
-                    'hid'               => $data['hid'],
                     'uid'               => $uid,
                     'bet'               => $data['bet'],
                     'pay'               => $data['pay'],
@@ -148,15 +147,28 @@ class Contract extends Base
         if ($request->isPost())
         {
             $contid = input('post.contid');
-            $rel = db('contract')->where('contid',$contid)->update(['status' => 0]);
+            $rel = db('contract')->where('contid',$contid)->delete();
             if ($rel)
             {
-                return json(['data'=>'','status'=>200,'msg'=>'合同已软删除!']);
+                return json(['data'=>'','status'=>200,'msg'=>'合同已删除!']);
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
     }
-    public function checkIn(){
-//        return $this->fetch();
+    //合同查看
+    public function check(Request $request){
+        if ($request->isPost()){
+            $contid = input('post.contid');
+            $contract = db('contract')->where('contid',$contid)->find();
+            $userinfo = db('user')->where('uid',$contract['uid'])->find();
+            $contract['start_time'] = date('Y年m月d日',$contract['start_time']);
+            $contract['end_time'] = date('Y年m月d日',$contract['end_time']);
+            return $this->fetch('check',['data' => $contract , 'user' => $userinfo]);
+        }
+    }
+    //补录合同
+    public function repair(){
+        $data = input('post.');
+        return $this->fetch('repair',['data' => $data]);
     }
 }

@@ -554,6 +554,7 @@ $(function(){
         });
     }
     function del(param){
+        $("#show").show();
         /*
         *  发起ajax请求后台删除指定数据
         * */
@@ -562,7 +563,14 @@ $(function(){
             data : param,
             type : "post",
             success : function(data){
-
+                if(data.status === 200){
+                    $("#show .loading").hide();
+                    $("#show .success-animal .tip-msg").html(data.msg);
+                    $("#show .success-animal").show();
+                    setTimeout(function(){
+                        window.location.href = "/house";
+                    },2000);
+                }
             }
         });
     }
@@ -787,6 +795,22 @@ $(function(){
                 return false;
             }
         }
+    });
+    //查看合同
+    $(".house-room .handle-area .house-contract-handle .check").click(function(){
+        $(this).parent().submit();
+    });
+    //补录电子合同
+    $(".house-room .handle-area .house-contract-handle .launch").click(function(){
+        var that = $(this);
+        var house = that.parents(".house-box");
+        var address = house.find(".area-title").html().trim();
+        address += house.find(".room-title p").html().trim();
+        address += house.find(".house-room .cap p:first").html().trim();
+        var underid = house.find(".house-room .cap").attr("data-id");
+        that.siblings("input[name=underid]").val(underid);
+        that.siblings("input[name=address]").val(address);
+        that.parent().submit();
     });
     //检测单元下是否有房间
     var mid = $(".mid-content");

@@ -318,8 +318,10 @@
     bottom:2%;
 }
 .computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-contract-handle > div:hover,
-.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-controll > div:hover{
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-controll > div:hover,
+.computer .show-content .house-box .mid-content .m-mid-content .house-room .house-handle .handle-area .house-handle-list .house-contract-handle form > div:hover{
     color:orange;
+    cursor:pointer;
 }
 /*模态框*/
 #housing{
