@@ -21,7 +21,7 @@ class Accounts extends Base
     public function index(){
         $adid    = Session::get('adid');//获取房东主键
         $fcount  = db('financial')->where('adid',$adid)->count();
-        $list    = db('financial')->where('adid',$adid)->order('fid asc')->paginate(14,$fcount);
+        $list    = db('financial')->where('adid',$adid)->order('end_time desc')->paginate(14,$fcount);
         $page    = $list->render();
         $count   = db('underlying')->where('adid',$adid)->count();
         $signing = db('underlying')->where('adid',$adid)->where('status != 0')->count();
@@ -34,6 +34,8 @@ class Accounts extends Base
         $user = db('user')->where('uid','in',$uid)->select();
         foreach ($list as $fk => $fv){
             $flist[$fk] = $fv;
+            $flist[$fk]['start_time'] = date('Y年m月d日',$flist[$fk]['start_time']);
+            $flist[$fk]['end_time'] = date('Y年m月d日',$flist[$fk]['end_time']);
             foreach ($user as $uk => $uv){
                 if ($flist[$fk]['uid'] == $uv['uid']){
                     $flist[$fk]['user'] = $uv;
