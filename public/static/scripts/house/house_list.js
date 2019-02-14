@@ -564,12 +564,7 @@ $(function(){
             type : "post",
             success : function(data){
                 if(data.status === 200){
-                    $("#show .loading").hide();
-                    $("#show .success-animal .tip-msg").html(data.msg);
-                    $("#show .success-animal").show();
-                    setTimeout(function(){
-                        window.location.href = "/house";
-                    },2000);
+                    succ(data.msg);
                 }
             }
         });
@@ -608,7 +603,12 @@ $(function(){
                 data : {hid : $("#housing .add-plot input[name=plot_name]").attr("data-hid"),name : $("#housing .add-plot input[name=plot_name]").val()},
                 type : "post",
                 success : function(data){
-
+                    $("#show .loading").hide();
+                    $("#show .success-animal .tip-msg").html(data.msg);
+                    $("#show .success-animal").show();
+                    setTimeout(function(){
+                        window.location.href = "/house";
+                    },2000);
                 }
             });
         }else{

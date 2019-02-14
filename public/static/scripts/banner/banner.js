@@ -157,3 +157,21 @@ $(function(){
         $(".left-banner .left-move").css("top",-$(document).scrollTop());
     });
 });
+//弹窗操作成功
+function succ(msg){
+    $("#show .loading").hide();
+    $("#show .success-animal .tip-msg").html(msg);
+    $("#show .success-animal").show();
+    setTimeout(function(){
+        window.history.go(0);
+    },2000);
+}
+//弹窗操作失败
+function fail(msg){
+    $("#show .loading").hide();
+    $("#show .success-animal .tip-msg").html(msg);
+    $("#show .success-animal").show();
+    setTimeout(function(){
+        window.history.go(0);
+    },2000);
+}
