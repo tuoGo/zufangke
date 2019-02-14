@@ -14,6 +14,7 @@
     <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
     <script src="__STATIC__/scripts/sui/sui.min.js"></script>
     <script src="__STATIC__/scripts/banner/banner.js"></script>
+    <script src="__STATIC__/scripts/contract/index.js"></script>
 </head>
 <body>
     <div class="computer">
@@ -56,7 +57,8 @@
                         <tbody class="add">
                         {foreach name="data" item="contract" key="ck"}
                             <tr>
-                                <td>{$contract.contid}</td>
+                                <form action="/contract/check" method="post" class="sui-form">
+                                <td>{$contract.contid} <input type="hidden" value="{$contract.contid}" name="contid"></td>
                                 <td>{$contract.address}</td>
                                 <td data-id="{$contract.user.uid}">{$contract.user.name}</td>
                                 <td>{$contract.user.phone}</td>
@@ -64,14 +66,48 @@
                                 <td>{$contract.end_time}</td>
                                 <td>
                                     <div class="handle-area">
-                                        <a href="javascript:void(0);" class="sui-btn btn-info btn-bordered btn-xlarge">查看</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-danger btn-bordered btn-xlarge">删除</a>
+                                        <button class="sui-btn btn-info btn-bordered btn-xlarge">查看</button>
+                                        <span class="sui-btn btn-danger btn-bordered btn-xlarge con_del">删除</span>
                                     </div>
                                 </td>
+                                </form>
                             </tr>
                         {/foreach}
                         </tbody>
                     </table>
+                </div>
+                <!--提示框-->
+                <div id="show">
+                    <div class="mask"></div>
+                    <div class="tip-box">
+                        <div class="loading">
+                            <div class="animal">
+                                <div class="ball one"></div>
+                                <div class="ball two"></div>
+                                <div class="ball three"></div>
+                                <div class="ball four"></div>
+                                <div class="ball five"></div>
+                                <div class="ball six"></div>
+                                <div class="ball seven"></div>
+                                <div class="ball eight"></div>
+                                <div class="ball nine"></div>
+                                <div class="ball ten"></div>
+                                <div class="ball eleven"></div>
+                                <div class="ball twelve"></div>
+                            </div>
+                            <div class="tip-msg">Loading....</div>
+                        </div>
+                        <div class="success-animal">
+                            <div class="s-animal">
+                                <div><img src="__STATIC__/images/jump/success.png" alt="" width="150" height="150"></div>
+                            </div>
+                            <div class="tip-msg"></div>
+                        </div>
+                        <div class="error-animal">
+                            <div class="animal"></div>
+                            <div class="tip-msg"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

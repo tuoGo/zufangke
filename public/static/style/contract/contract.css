@@ -15,6 +15,9 @@
 .computer .show-content .title a{
     margin-bottom:5px;
 }
+.computer .show-content .table-area{
+    margin-bottom:30px;
+}
 .computer .show-content .table-area thead th,
 .computer .show-content .table-area tbody td{
     text-align:center;

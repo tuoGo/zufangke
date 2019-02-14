@@ -1,0 +1,104 @@
+.computer .show-content{
+    padding:20px;
+    font-family:"Microsoft YaHei 微软雅黑";
+}
+.computer .show-content .title{
+    padding-bottom:10px;
+    border-bottom:1px solid rgb(238,238,238);
+    font-size:30px;
+    color:rgb(2,96,196);
+    line-height:30px;
+    margin-bottom:20px;
+}
+
+.computer .all-check .left-check{
+    width:100%;
+    height:100%;
+    margin:auto;
+    border-radius:5px;
+    color:white;
+    background:linear-gradient(#00ccff,#99ffff);
+}
+.computer .all-check .check-title{
+    padding:15px;
+    font-size:24px;
+}
+.computer .all-check .left-check .all-money{
+    position:relative;
+    height:150px;
+    text-align:center;
+    font-size:20px;
+}
+.computer .all-check .left-check .all-money .under-mid{
+    overflow:hidden;
+    position:relative;
+    height:105px;
+}
+.computer .all-check .left-check .all-money .under-mid .income{
+    position:absolute;
+    top:60px;
+    left:0;
+    width:100%;
+    font-size:30px;
+    color:#ffcc00;
+    text-align:center;
+}
+.computer .all-check .left-check .all-money .under-mid .circle{
+    position:absolute;
+    border-radius:50%;
+}
+.computer .all-check .left-check .all-money .under-mid .entity-circle{
+    top:0;
+    left:calc(50% - 84px);
+    width:160px;
+    height:150px;
+    border:4px solid white;
+}
+.computer .all-check .left-check .all-money .under-mid .dashed-circle{
+    top:10px;
+    left:calc(50% - 72px);
+    width:140px;
+    height:130px;
+    border:2px dotted white;
+}
+.computer .all-check .left-check .all-money .under-down{
+    position:absolute;
+    bottom:10px;
+    width:100%;
+}
+.computer .all-check .left-check .all-money .under-extra .circle{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:1px dotted white;
+    box-shadow:0 0 15px #eee;
+    font-size:22px;
+}
+.computer .all-check .left-check .all-money .under-extra .house-all{
+    top:10%;
+    left:8%;
+}
+.computer .all-check .left-check .all-money .under-extra .house-sign{
+    top:10%;
+    left:25%;
+}
+.computer .all-check .left-check .all-money .under-extra .house-cash{
+    top:10%;
+    right:25%;
+}
+.computer .all-check .left-check .all-money .under-extra .house-we{
+    top:10%;
+    right:8%;
+}
+.computer .show-content .table-area{
+    margin-bottom:30px;
+}
+.computer .show-content .table-area thead th,
+.computer .show-content .table-area tbody td{
+    text-align:center;
+}
+.computer .show-content .table-area .handle-area{
+    width:150px;
+    margin:0 auto;
+}

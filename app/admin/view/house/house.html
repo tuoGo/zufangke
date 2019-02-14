@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="__STATIC__/style/sui/sui-append.min.css">
     <link rel="stylesheet" href="__STATIC__/style/init/init.css">
     <link rel="stylesheet" href="__STATIC__/style/pure/grids-responsive.css">
-    <link rel="stylesheet" href="__STATIC__/style/main/main.css">
     <link rel="stylesheet" href="__STATIC__/style/house/house_list.css">
+    <link rel="stylesheet" href="__STATIC__/style/main/main.css">
     <script src="__STATIC__/scripts/jquery/jquery.min.js"></script>
     <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
     <script src="__STATIC__/scripts/sui/sui.min.js"></script>
@@ -86,7 +86,7 @@
                 </div>
             </div>
             {if $data==0}
-            <h1>沒有參數</h1>
+            <h1>沒有參數</h1><img src="" alt="">
             {else /}
             <!--房源列表-->
             {foreach name="data" item="item" key="key"}
@@ -165,7 +165,6 @@
                                 <p>
                                     {$vv['tag']}
                                 </p>
-
                                 <div class="pointer"></div>
                                 {if $vv.status==1}
                                 <div class="sign live">
@@ -257,12 +256,19 @@
                                         <div class="house-contract-handle">
                                             <div class="exit">退房</div>
                                             <div class="relet">续租</div>
-                                            <div class="check">查看合同</div>
+                                            <form action="/contract/check" method="post">
+                                                <input type="hidden" name="contid" value="{$vv['contract']['contid']}">
+                                                <div class="check">查看合同</div>
+                                            </form>
                                         </div>
                                         {else /}
                                         <div class="house-contract-handle">
-                                            <div class="enter">录入预定信息</div>
-                                            <div class="launch">发起电子合同</div>
+                                            <!--<div class="enter">录入预定信息</div>-->
+                                            <form action="/contract/repair" method="post">
+                                                <input type="hidden" value="" name="underid">
+                                                <input type="hidden" value="" name="address">
+                                                <div class="launch">发起电子合同</div>
+                                            </form>
                                         </div>
                                         {/if}
                                     </div>
@@ -950,6 +956,39 @@
             </div>
         </div>
     </div>
+    <!--提示框-->
+        <div id="show">
+            <div class="mask"></div>
+            <div class="tip-box">
+                <div class="loading">
+                    <div class="animal">
+                        <div class="ball one"></div>
+                        <div class="ball two"></div>
+                        <div class="ball three"></div>
+                        <div class="ball four"></div>
+                        <div class="ball five"></div>
+                        <div class="ball six"></div>
+                        <div class="ball seven"></div>
+                        <div class="ball eight"></div>
+                        <div class="ball nine"></div>
+                        <div class="ball ten"></div>
+                        <div class="ball eleven"></div>
+                        <div class="ball twelve"></div>
+                    </div>
+                    <div class="tip-msg">Loading....</div>
+                </div>
+                <div class="success-animal">
+                    <div class="s-animal">
+                        <div><img src="__STATIC__/images/jump/success.png" alt="" width="150" height="150"></div>
+                    </div>
+                    <div class="tip-msg"></div>
+                </div>
+                <div class="error-animal">
+                    <div class="animal"></div>
+                    <div class="tip-msg"></div>
+                </div>
+            </div>
+        </div>
 </div>
 </body>
 </html>

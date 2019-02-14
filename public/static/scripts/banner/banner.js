@@ -90,15 +90,18 @@ $(function(){
             window.onresize = function(){
                 handleWheel(0,true);
             };
-            if(window.addEventListener){
-                window.addEventListener("DOMMouseScroll",wheel,false);
+            var type = "mousewheel";
+            if(window.onmousewheel === undefined){
+                type = "DOMMouseScroll";
             }
-            window.onmousewheel = wheel;
+            if(window.addEventListener){
+                window.addEventListener(type,wheel,false);
+            }else{
+                window.attachEvent("on" + type, wheel);
+            }
             function wheel(ev){
                 var delta = 0;
-                if(!ev){
-                    ev = window.event;
-                }
+                ev = ev || window.event;
                 if(ev.wheelDelta){
                     delta = ev.wheelDelta / 120;
                     if(window.opera){
@@ -149,5 +152,8 @@ $(function(){
     init();
     $(".left-banner .sleep").click(function(){
         $.alert("该功能尚未开放");
+    });
+    $(document).on("scroll",function(){
+        $(".left-banner .left-move").css("top",-$(document).scrollTop());
     });
 });
