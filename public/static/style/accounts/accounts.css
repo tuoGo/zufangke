@@ -102,3 +102,11 @@
     width:150px;
     margin:0 auto;
 }
+#we-input .modal-body .input-box .add-on{
+    height:22px;
+    line-height:22px;
+}
+#we-input .modal-body .input-box .input-prepend{
+    padding:10px;
+    margin-bottom:0;
+}
