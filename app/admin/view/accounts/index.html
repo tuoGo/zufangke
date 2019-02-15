@@ -92,7 +92,11 @@
                             <tr>
                                 <th>日期</th>
                                 <th>房源信息</th>
+                                {if $user == 'fangdong'}
                                 <th>承租人</th>
+                                {else}
+                                <th>房主人</th>
+                                {/if}
                                 <th>联系号码</th>
                                 <th>合约状态</th>
                                 <th>应交租金</th>
@@ -105,7 +109,7 @@
                         </thead>
                         <tbody class="add">
                         {foreach name="list" item="flist" key="fk"}
-                            <tr data-fid="{$flist.fid}" data-contid="{$first.contid}">
+                            <tr data-fid="{$flist.fid}" data-contid="{$flist.contid}">
                                 <td>{$flist.start_time}—{$flist.end_time}</td>
                                 <td>{$flist.address}</td>
                                 <td>{$flist.user.name}</td>

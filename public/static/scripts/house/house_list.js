@@ -597,39 +597,38 @@ $(function(){
     });
     //添加房源的提交事件
     $("#housing").on("okHide",function(){
-        if($("#housing .table-area").is(":hidden")){
-            $.ajax({
-                url : "/house/edit",
-                data : {hid : $("#housing .add-plot input[name=plot_name]").attr("data-hid"),name : $("#housing .add-plot input[name=plot_name]").val()},
-                type : "post",
-                success : function(data){
-                    $("#show .loading").hide();
-                    $("#show .success-animal .tip-msg").html(data.msg);
-                    $("#show .success-animal").show();
-                    setTimeout(function(){
-                        window.location.href = "/house";
-                    },2000);
-                }
-            });
-        }else{
-            //先进行表单检验
-            var swit = true;
-            var validates = $("#housing .needCheck");
-            for(var j = 0; j < validates.length; j++){
-                $(validates[j]).removeClass("input-error");
-                if(!$(validates[j]).val()){
-                    $(validates[j]).addClass("input-error");
-                    swit = false;
-                }
-                if(isNaN($(validates[j]).val())){
-                    $(validates[j]).addClass("input-error");
-                    $(validates[j]).val("请填写纯数字");
-                    swit = false;
-                }
+        //先进行表单检验
+        var swit = true;
+        var validates = $("#housing .needCheck");
+        for(var j = 0; j < validates.length; j++){
+            $(validates[j]).removeClass("input-error");
+            if(!$(validates[j]).val()){
+                $(validates[j]).addClass("input-error");
+                swit = false;
             }
+            if(isNaN($(validates[j]).val())){
+                $(validates[j]).addClass("input-error");
+                $(validates[j]).val("请填写纯数字");
+                swit = false;
+            }
+        }
+        if($("#housing .table-area").is(":hidden")){
+            if(swit){
+                $("#show").show();
+                $.ajax({
+                    url : "/house/edit",
+                    data : {hid : $("#housing .add-plot input[name=plot_name]").attr("data-hid"),name : $("#housing .add-plot input[name=plot_name]").val()},
+                    type : "post",
+                    success : function(data){
+                        succ(data.msg);
+                    }
+                });
+            }
+        }else{
             //判断是新增还是修改
             if($("#housing").attr("data-edit")){
                 if(swit){
+                    $("#show").show();
                     $("#housing").attr("data-edit","");
                     var param = {};
                     var tr = $("#housing .add tr");
@@ -653,7 +652,7 @@ $(function(){
                         data:param,
                         type:"post",
                         success:function (data){
-
+                            succ(data.msg);
                         }
                     });
                 }else{
@@ -662,6 +661,7 @@ $(function(){
                 }
             }else{
                 if(swit){
+                    $("#show").show();
                     var trs = $("#housing .add tr");
                     var length = trs.length;
                     var param = {};
@@ -697,7 +697,7 @@ $(function(){
                         data:param,
                         type:"post",
                         success:function (data){
-
+                            succ(data.msg);
                         }
                     });
                 }else{
@@ -729,6 +729,7 @@ $(function(){
         }
         if($("#rooming").attr("data-edit")){
             if(swit){
+                $("#show").show();
                 $("#rooming").attr("data-edit","");
                 var param = {};
                 var tr = $("#rooming .add tr");
@@ -752,7 +753,7 @@ $(function(){
                     data:param,
                     type:"post",
                     success:function (data){
-
+                        succ(data.msg);
                     }
                 });
             }else{
@@ -761,6 +762,7 @@ $(function(){
             }
         }else{
             if(swit){
+                $("#show").show();
                 var trs = $("#rooming .add tr");
                 var length = trs.length;
                 var param = {};
@@ -787,7 +789,7 @@ $(function(){
                     data : param,
                     type : "post",
                     success : function(data){
-
+                        succ(data.msg);
                     }
                 });
             }else{
