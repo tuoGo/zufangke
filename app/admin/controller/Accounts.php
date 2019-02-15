@@ -10,7 +10,6 @@
 namespace app\admin\controller;
 
 use think\Request;
-use think\Exception;
 use think\Session;
 
 class Accounts extends Base
@@ -85,6 +84,23 @@ class Accounts extends Base
                 return json(['data'=>'','status'=>200,'msg'=>'已向租客发起支付!']);
             }
             return json(['data'=>'','status'=>400,'msg'=>'发起订单失败!']);
+        }
+    }
+    /*
+     * 房东确认支付
+     */
+    public function confirm(Request $request){
+        if ($request->isPost()){
+            $fid  = input('post.fid');
+            $data = db('financial')->where('fid',$fid)->find();
+            $future = db('contract')->where('contid',$data['contid'])->find();
+            $future_time = date('Y-m-d',strtotime("+".$future['pay']."month",$future['future_time']));
+            $future_time = strtotime($future_time);
+            $rel = db('contract')->where('contid',$data['contid'])->update(['future_time'=>$future_time]);
+            if ($rel){
+                return json(['data'=>'','status'=>200,'msg'=>'确认交租!']);
+            }
+            return json(['data'=>'','status'=>400,'msg'=>'交租失败!']);
         }
     }
 }
