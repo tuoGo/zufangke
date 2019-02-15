@@ -12,6 +12,7 @@ use think\Controller;
 use think\Exception;
 use think\Request;
 use think\Db;
+use think\Session;
 
 class User extends Base
 {
@@ -21,8 +22,48 @@ class User extends Base
      */
     public function index()
     {
-//        $data = Db::table('zfk_user')->select();
         return $this->fetch('index');
+    }
+    /*
+     * 修改密码
+     */
+    public function psw(Request $request){
+        if ($request->isPost()){
+            $adid = Session::get('adid');
+            $password = input('post.');
+            $psw = db('admin')->where('adid',$adid)->find();
+            if (md5($password['old']) == $psw['password']){
+                if ($password['new'] != $password['repeat']){
+                    if($password['new'] != $password['old']){
+                        db('admin')->where('adid',$adid)->update(['password'=>md5($password['new'])]);
+                        Session::clear();
+                        return json(['data'=>'','status'=>200,'msg'=>'密码修改成功!']);
+                    }
+                    return json(['data'=>'','status'=>400,'msg'=>'新密码不可跟旧密码相同!']);
+                }
+                return json(['data'=>'','status'=>400,'msg'=>'两次密码输入不一致!']);
+            }
+            return json(['data'=>'','status'=>400,'msg'=>'密码错误!']);
+        }
+    }
+    /*
+     * 收款二维码上传
+     */
+    public function payImg(){
+        $adid = Session::get('adid');
+        // 获取表单上传文件
+        $files = request()->file('image');
+        foreach($files as $file){
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $file->move('uploads' . DS . 'payimg');
+            $path = DS . 'uploads' . DS . 'payimg'. DS .$info->getSaveName();
+            $pathNow = str_replace('\\','/',$path);
+            $imgData[] = $pathNow;
+        }
+        $update = db('admin')->where('adid',$adid)->update(['wechat_img'=>$imgData[0],'alipay_img'=>$imgData[1]]);
+        if ($update){
+            return json(['data'=>'','status'=>200,'msg'=>'上传成功!']);
+        }
     }
     /*
      * 添加用户
