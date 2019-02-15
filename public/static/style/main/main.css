@@ -277,9 +277,21 @@ body{
     border:3px solid rgb(102,204,51);
     animation:big .5s forwards;
 }
+.computer #show .tip-box .e-animal{
+    width:200px;
+    height:200px;
+    margin:25px auto 0;
+    border-radius:50%;
+    border:3px solid rgb(255,0,0);
+    animation:big .5s forwards;
+}
 .computer #show .tip-box .s-animal > div{
     width:150px;
     margin:30px auto;
+}
+.computer #show .tip-box .e-animal > div{
+    width:130px;
+    margin:35px auto;
 }
 @keyframes big{
     0%{transform:scale(.1)}

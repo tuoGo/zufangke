@@ -128,8 +128,10 @@
                                     <div class="handle-area">
                                         {if $flist.status == 1}
                                         <button class="sui-btn btn-info btn-bordered btn-xlarge check_con">查看合同</button>
+                                        {elseif $flist.status == 3}
+                                        <button class="sui-btn btn-success btn-bordered btn-xlarge checkPay">确认支付</button>
                                         {else}
-                                        <button class="sui-btn btn-primary btn-bordered btn-xlarge payoff">交付</button>
+                                        <button class="sui-btn btn-primary btn-bordered btn-xlarge payoff">发起支付</button>
                                         {/if}
                                     </div>
                                 </td>

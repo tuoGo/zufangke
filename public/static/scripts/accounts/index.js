@@ -5,6 +5,24 @@ $(function(){
         we.find(".modal-body .input-box input[name=contid]").val($(this).parents("tr").attr("data-contid"));
         we.modal("show");
     });
+    $(".table-area .add .checkPay").click(function(){
+        $.confirm({
+            body : "是否已收到租客的租金!!",
+            okHidden : function(){
+                $("#show").show();
+                $.ajax({
+                    url : "",
+                    type : "post",
+                    data : {},
+                    success : function(data){
+                        if(data.status === 200){
+                            succ(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+    });
     $("#we-input").on("okHidden",function(){
         $("#show").show();
         var we = $("#we-input");

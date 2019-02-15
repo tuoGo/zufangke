@@ -169,8 +169,8 @@ function succ(msg){
 //弹窗操作失败
 function fail(msg){
     $("#show .loading").hide();
-    $("#show .success-animal .tip-msg").html(msg);
-    $("#show .success-animal").show();
+    $("#show .error-animal .tip-msg").html(msg);
+    $("#show .error-animal").show();
     setTimeout(function(){
         window.history.go(0);
     },2000);
