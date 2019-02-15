@@ -112,7 +112,11 @@
                             <tr data-fid="{$flist.fid}" data-contid="{$flist.contid}">
                                 <td>{$flist.start_time}—{$flist.end_time}</td>
                                 <td>{$flist.address}</td>
+                                {if $user == 'fangdong'}
                                 <td>{$flist.user.name}</td>
+                                {else}
+                                <td>{$flist.user.adname}</td>
+                                {/if}
                                 <td>{$flist.user.phone}</td>
                                 {if $flist.status == 1}
                                 <td class="clear">已交付</td>

@@ -57,8 +57,11 @@ class Accounts extends Base
             $fcount  = db('financial')->where('uid',$uid)->count();
             $list    = db('financial')->where('uid',$uid)->order('end_time desc')->paginate(14,$fcount);
             $page    = $list->render();
+            $adid    = db('user')->where('uid',$uid)->find()['adid'];
+            $admin  = db('admin')->field('adname,phone')->where('adid',$adid)->find();
             foreach ($list as $uk => $uv){
                 $flist[$uk] = $uv;
+                $flist[$uk]['user'] = $admin;
                 $flist[$uk]['start_time'] = date('Y年m月d日',$flist[$uk]['start_time']);
                 $flist[$uk]['end_time'] = date('Y年m月d日',$flist[$uk]['end_time']);
             }
