@@ -6,14 +6,15 @@ $(function(){
         we.modal("show");
     });
     $(".table-area .add .checkPay").click(function(){
+        var fid = $(this).parents("tr").attr("data-fid");
         $.confirm({
             body : "是否已收到租客的租金!!",
             okHidden : function(){
                 $("#show").show();
                 $.ajax({
-                    url : "",
+                    url : "/accounts/confirm",
                     type : "post",
-                    data : {},
+                    data : {fid : fid},
                     success : function(data){
                         if(data.status === 200){
                             succ(data.msg);
@@ -22,6 +23,12 @@ $(function(){
                 });
             }
         });
+    });
+    $(".table-area .add .check_con").click(function(){
+        var that = $(this);
+        var contid = that.parents("tr").attr("data-contid");
+        that.siblings("input[name=contid]").val(contid);
+        that.parent().submit();
     });
     $("#we-input").on("okHidden",function(){
         $("#show").show();
