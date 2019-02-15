@@ -14,6 +14,7 @@
     <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
     <script src="__STATIC__/scripts/sui/sui.min.js"></script>
     <script src="__STATIC__/scripts/banner/banner.js"></script>
+    <script src="__STATIC__/scripts/user/user.js"></script>
 </head>
 <body>
     <div class="computer">
@@ -27,31 +28,32 @@
                                 个人中心
                             </div>
                         </div>
-                        <form action="" method="post" class="sui-form form-horizontal sui-validate">
+                        <form action="/user/psw" method="post" class="sui-form form-horizontal sui-validate">
                             <div class="input-area">
                                 <div class="milky">
                                     原密码:
                                 </div>
-                                <input type="password" placeholder="请输入原始密码" class="input-large input-xfat" data-rules="required">
+                                <input type="password" placeholder="请输入原始密码" class="input-large input-xfat ori_pwd" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     新密码:
                                 </div>
-                                <input type="password" name="password" placeholder="请输入新密码" class="input-large input-xfat" data-rules="required">
+                                <input type="password" name="password" placeholder="请输入新密码" class="input-large input-xfat new_pwd" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     确认密码:
                                 </div>
-                                <input type="password" placeholder="请再一次输入新密码" class="input-large input-xfat" data-rules="required|match=password">
+                                <input type="password" placeholder="请再一次输入新密码" class="input-large input-xfat new_pwd2" data-rules="required|match=password">
                             </div>
                             <div class="input-area">
-                                <a href="javascript:void(0);" class="sui-btn btn-xlarge btn-success">确认修改</a>
+                                <div class="sui-btn btn-xlarge btn-success alter">确认修改</div>
                             </div>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
