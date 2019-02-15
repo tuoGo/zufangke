@@ -55,7 +55,7 @@ class Accounts extends Base
             return $this->fetch('index',['data'=>$data,'list'=>$flist,'page'=>$page,'user'=>'fangdong']);
         }else if (!empty($uid)){
             $fcount  = db('financial')->where('uid',$uid)->count();
-            $list    = db('financial')->where('uid',$uid)->order('end_time desc')->paginate(14,$fcount);
+            $list    = db('financial')->where('uid',$uid)->where('status != 2')->order('end_time desc')->paginate(14,$fcount);
             $page    = $list->render();
             $adid    = db('user')->where('uid',$uid)->find()['adid'];
             $admin  = db('admin')->field('adname,phone')->where('adid',$adid)->find();
@@ -80,7 +80,7 @@ class Accounts extends Base
             $elec  = $data['elec'] * $contract['elec'];
             $costs = $water + $elec;
             $sum   = $rent + $costs;
-            $rel   = db('financial')->where('fid',$data['fid'])->update(['water'=>$data['water'],'elec'=>$data['elec'],'additional_costs'=>$costs,'amount'=>$sum]);
+            $rel   = db('financial')->where('fid',$data['fid'])->update(['water'=>$data['water'],'elec'=>$data['elec'],'additional_costs'=>$costs,'amount'=>$sum,'status'=>3]);
             if ($rel){
                 return json(['data'=>'','status'=>200,'msg'=>'已向租客发起支付!']);
             }

@@ -25,7 +25,7 @@ class Remind extends Controller
                 $sms_date = $v['sms_time'];
                 $newDate = date('Y-m-d H:i:s',strtotime("+".$v['pay']."month",$sms_date));  //计算时间的月份按照付几
                 $date = strtotime($newDate);          //转回时间戳
-                $unixDate = $date - 5 * 60 * 60 * 24; //减五天的时间戳
+                $unixDate = $date - 3 * 60 * 60 * 24; //减五天的时间戳
                 $curTime = time();
                 if ($curTime > $unixDate)//判断当前时间是否到了通知时间
                 {
@@ -72,22 +72,20 @@ class Remind extends Controller
     //逾期房间自动计算
     public function  autoChange(){
         $nowDate = time();
-        $contract   = db('contract')->select();
-        $underlying = db('underlying')->select();
-        foreach ($contract as $key=>$val){
-            $data[$key] = $val;
-            foreach ($underlying as $ky => $vl){
-                if ($contract[$key]['underid'] == $underlying[$ky]['underid']){
-                    $data[$key]['child'] = $vl;
-                    continue;
-                }
-            }
-        }
-        foreach ($data as $dk => $dv){
-            $newDate = date('Y-m-d',strtotime("+".$dv['pay']."month",$dv['child']['overdue_time']));
-            $date = strtotime($newDate);
-            if ($nowDate > $date){
-                db('underlying')->where('underid',$dv['underid'])->update(['status'=>'2','overdue_time'=>$nowDate]);
+        $contract   = db('contract')->where('status',1)->select();
+//        $underlying = db('underlying')->select();
+//        foreach ($contract as $key=>$val){
+//            $data[$key] = $val;
+//            foreach ($underlying as $ky => $vl){
+//                if ($contract[$key]['underid'] == $underlying[$ky]['underid']){
+//                    $data[$key]['child'] = $vl;
+//                    continue;
+//                }
+//            }
+//        }
+        foreach ($contract as $dk => $dv){
+            if ($nowDate > $dv['future']){
+                db('underlying')->where('underid',$dv['underid'])->update(['status'=>'2']);
             }
         }
     }

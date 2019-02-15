@@ -78,6 +78,8 @@ class Contract extends Base
                 $pathNow = str_replace('\\','/',$path);
                 $imgData[] = $pathNow;
             }
+            $future = date('Y-m-d',strtotime("+".$data['pay']."month",$data['start_time']));
+            $future_time = strtotime($future);
             $userData = [
                 'adid'          => $adid,
                 'rid'           => '2',
@@ -108,6 +110,7 @@ class Contract extends Base
                     'sms_time'          => $time,
                     'start_time'        => $data['start_time'],
                     'end_time'          => $data['end_time'],
+                    'future_time'       => $future_time,
                     'overdue_time'      => $time,
                     'address'           => $data['address'],
                     'note'              => $data['note'],
@@ -147,7 +150,7 @@ class Contract extends Base
         if ($request->isPost())
         {
             $contid = input('post.contid');
-            $rel = db('contract')->where('contid',$contid)->delete();
+            $rel = db('contract')->where('contid',$contid)->update(['status'=>0]);
             if ($rel)
             {
                 return json(['data'=>'','status'=>200,'msg'=>'合同已删除!']);
