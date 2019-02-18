@@ -60,7 +60,7 @@
                                 <div class="sui-btn btn-xlarge btn-danger back">返回</div>
                             </div>
                         </form>
-                        <form action="/user/payImg" method="post" class="qr-form sui-form form-horizontal">
+                        <form action="/user/payImg" method="post" enctype="multipart/form-data" class="qr-form sui-form form-horizontal">
                             <div class="pics">
                                 <div class="pic-box clearfix">
                                     <div class="fl">
@@ -87,7 +87,7 @@
                                             <div class="text">添加上传图片</div>
                                         </div>
                                         <img src="" alt="" class="hidden card">
-                                        <input class="hidden" type="file" name="image[0]" multiple="multiple" accept="image/*">
+                                        <input class="hidden" type="file" name="image[1]" multiple="multiple" accept="image/*">
                                     </div>
                                 </div>
                                 <div class="input-area">
