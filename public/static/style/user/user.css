@@ -32,6 +32,9 @@
 .computer .main-box .pwd-form{
     display: none;
 }
+.computer .main-box .qr-form{
+    display: none;
+}
 .computer .main-box .input-area{
     position:relative;
     width:360px;

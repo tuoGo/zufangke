@@ -1,4 +1,5 @@
 $(function(){
+    //修改密码确定提交事件
     $(".input-area .alter").click(function(){
         var swit = false;
         var p1 = $(".input-area .ori_pwd").val();
@@ -25,6 +26,23 @@ $(function(){
         }else{
             $.alert("请填补好标红部分的内容!");
             return false;
+        }
+    });
+    //收款码提交事件
+    $(".input-area .img-up").click(function(){
+        //认证是否至少上传了一种收款码
+        var swit = false;
+        var pics = $(".pics .pic-box input[type=file]");
+        for(var i = 0; i < pics.length; i++){
+            if(pics[i].value){
+                swit = true;
+                break;
+            }
+        }
+        if(swit){
+            $(this).parents("form").submit();
+        }else{
+            $.alert("请至少上传一种平台的收款码!");
         }
     });
     //模拟上传文件按钮的点击
@@ -72,6 +90,11 @@ $(function(){
     $(".btn-area .show-pwd").click(function(){
         $(".btn-area").hide();
         $(".pwd-form").show();
+    });
+    //房东收款码点击
+    $(".btn-area .show-qrcode").click(function(){
+        $(".btn-area").hide();
+        $(".qr-form").show();
     });
     function swit(hide){
         hide.hide();
