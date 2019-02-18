@@ -19,6 +19,19 @@
     left:50%;
     width:100%;
 }
+.computer .main-box .btn-area .btn-box{
+    width:200px;
+    margin:40px auto;
+}
+.computer .main-box .btn-area .btn-box .sui-btn{
+    height:70px;
+    font-size:30px;
+    line-height:60px;
+    text-shadow: 0 3px 1px #c4b59d, 0px 1px 0px #fff;
+}
+.computer .main-box .pwd-form{
+    display: none;
+}
 .computer .main-box .input-area{
     position:relative;
     width:360px;
@@ -33,4 +46,52 @@
     font-size:24px;
     letter-spacing:2px;
     text-align:right;
+}
+.computer .pics{
+    margin-top:50px;
+}
+.computer .pics .pic-box{
+    width:327px;
+    margin:50px auto;
+}
+.computer .pics h3{
+    width:125px;
+    text-align:center;
+    color:rgb(18,150,219);
+}
+.computer .pics .dashed-box{
+    overflow: hidden;
+    position:relative;
+    width:200px;
+    height:120px;
+    border:1px dashed #ddd;
+}
+.computer .pics .dashed-box img{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    transform:translateY(-50%);
+}
+.computer .pics .dashed-box:hover{
+    border-color:#00ccff;
+    cursor:pointer;
+}
+.computer .pics .dashed-box:hover .upload{
+    color:#00ccff;
+}
+.computer .pics .dashed-box .upload{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    transform:translateY(-50%);
+    text-align:center;
+    color:#ddd;
+}
+.computer .pics .dashed-box .upload i{
+    font-size:40px;
+}
+.computer .pics .dashed-box .upload .text{
+    font-size:14px;
 }

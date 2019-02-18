@@ -156,22 +156,44 @@ $(function(){
     $(document).on("scroll",function(){
         $(".left-banner .left-move").css("top",-$(document).scrollTop());
     });
+    //隐藏模态图片区
+    $("#img .mask").click(function(){
+        $("#img").hide();
+    });
 });
 //弹窗操作成功
-function succ(msg){
+function succ(msg,url){
     $("#show .loading").hide();
     $("#show .success-animal .tip-msg").html(msg);
     $("#show .success-animal").show();
     setTimeout(function(){
-        window.history.go(0);
+        if(url){
+            window.location.href = url;
+        }else{
+            window.history.go(0);
+        }
     },2000);
 }
 //弹窗操作失败
-function fail(msg){
+function fail(msg,url){
     $("#show .loading").hide();
     $("#show .error-animal .tip-msg").html(msg);
     $("#show .error-animal").show();
     setTimeout(function(){
-        window.history.go(0);
+        if(url){
+            window.location.href = url;
+        }else{
+            window.history.go(0);
+        }
     },2000);
+}
+//调整图片黑白框的居中
+function centerImg(){
+    var that = $(this);
+    var window_w = $(window).width();
+    var window_h = $(window).height();
+    var w = that.width();
+    var h = that.height();
+    that.css("top",window_h / 2 - h / 2);
+    that.css("left",window_w / 2 - w / 2);
 }
