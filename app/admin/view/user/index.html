@@ -28,32 +28,77 @@
                                 个人中心
                             </div>
                         </div>
-                        <form action="/user/psw" method="post" class="sui-form form-horizontal sui-validate">
+                        <div class="btn-area hidden">
+                            <div class="btn-box">
+                                <div class="sui-btn btn-primary btn-block btn-xlarge show-pwd">修改密码</div>
+                            </div>
+                            <div class="btn-box">
+                                <div class="sui-btn btn-success btn-block btn-xlarge show-qrcode">房东收款码</div>
+                            </div>
+                        </div>
+                        <form action="/user/psw" method="post" class="pwd-form sui-form form-horizontal sui-validate">
                             <div class="input-area">
                                 <div class="milky">
                                     原密码:
                                 </div>
-                                <input type="password" placeholder="请输入原始密码" class="input-large input-xfat ori_pwd" data-rules="required">
+                                <input type="password" name="old_password" placeholder="请输入原始密码" class="input-large input-xfat ori_pwd" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     新密码:
                                 </div>
-                                <input type="password" name="password" placeholder="请输入新密码" class="input-large input-xfat new_pwd" data-rules="required">
+                                <input type="password" name="new_password" placeholder="请输入新密码" class="input-large input-xfat new_pwd" data-rules="required">
                             </div>
                             <div class="input-area">
                                 <div class="milky">
                                     确认密码:
                                 </div>
-                                <input type="password" placeholder="请再一次输入新密码" class="input-large input-xfat new_pwd2" data-rules="required|match=password">
+                                <input type="password" name="check_password" placeholder="请再一次输入新密码" class="input-large input-xfat new_pwd2" data-rules="required|match=password">
                             </div>
                             <div class="input-area">
                                 <div class="sui-btn btn-xlarge btn-success alter">确认修改</div>
+                                <div class="sui-btn btn-xlarge btn-danger back">返回</div>
+                            </div>
+                        </form>
+                        <form action="/user/payImg" method="post" class="qr-form sui-form form-horizontal">
+                            <div class="pics">
+                                <div class="pic-box clearfix">
+                                    <div class="fl">
+                                        <h3><img src="__STATIC__/images/jump/wx.png" alt="" width="100" height="100"></h3>
+                                        <h3>微信收款码</h3>
+                                    </div>
+                                    <div class="dashed-box fl">
+                                        <div class="upload">
+                                            <div class="plus"><i class="sui-icon icon-touch-plus"></i></div>
+                                            <div class="text">添加上传图片</div>
+                                        </div>
+                                        <img src="" alt="" class="hidden card">
+                                        <input class="hidden" type="file" name="image[0]" multiple="multiple" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="pic-box clearfix">
+                                    <div class="fl">
+                                        <h3><img src="__STATIC__/images/jump/zfb.png" alt="" width="100" height="100"></h3>
+                                        <h3>支付宝收款码</h3>
+                                    </div>
+                                    <div class="dashed-box fl">
+                                        <div class="upload">
+                                            <div class="plus"><i class="sui-icon icon-touch-plus"></i></div>
+                                            <div class="text">添加上传图片</div>
+                                        </div>
+                                        <img src="" alt="" class="hidden card">
+                                        <input class="hidden" type="file" name="image[0]" multiple="multiple" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="input-area">
+                                    <div class="sui-btn btn-xlarge btn-success alter">确认上传</div>
+                                    <div class="sui-btn btn-xlarge btn-danger back">返回</div>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
+                {include file="tips/img" /}
             </div>
         </div>
     </div>
