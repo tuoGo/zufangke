@@ -613,11 +613,19 @@ $(function(){
             }
         }
         if($("#housing .table-area").is(":hidden")){
+            var plot = $(".add-plot input[name=plot_name]").val();
+            if(plot){
+                swit = true;
+            }
+            var param = {
+                hid :  $("#housing .add-plot input[name=plot_name]").attr("data-hid"),
+                datas : {address : $("#housing .add-plot input[name=plot_name]").val()}
+            };
             if(swit){
                 $("#show").show();
                 $.ajax({
                     url : "/house/edit",
-                    data : {hid : $("#housing .add-plot input[name=plot_name]").attr("data-hid"),name : $("#housing .add-plot input[name=plot_name]").val()},
+                    data : param,
                     type : "post",
                     success : function(data){
                         succ(data.msg);
