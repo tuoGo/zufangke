@@ -22,6 +22,13 @@ class User extends Base
      */
     public function index()
     {
+//        $siteurl = 'https://www.zufangk.cn/login';
+//        $userid = 10000;
+//
+//        $url = $siteurl.'?id='.$userid;
+//
+//        $img = $this->qrcode($url);
+//        print_r($img);exit;
         return $this->fetch('index');
     }
     /*
@@ -53,6 +60,9 @@ class User extends Base
         $adid = Session::get('adid');
         // 获取表单上传文件
         $files = request()->file('image');
+        if (empty($files)){
+            return json(['data'=>'','status'=>400,'msg'=>'请上传收款码!']);
+        }
         foreach($files as $file){
             // 移动到框架应用根目录/public/uploads/ 目录下
             $info = $file->move('uploads' . DS . 'payimg');
@@ -64,6 +74,27 @@ class User extends Base
         if ($update){
             return json(['data'=>'','status'=>200,'msg'=>'上传成功!']);
         }
+    }
+    /*
+     * 生成二维码
+     * */
+    function qrcode($url,$level=3,$size=4){
+        vendor('phpqrcode.phpqrcode');
+        $errorCorrectionLevel =intval($level) ;//容错级别
+        $matrixPointSize = intval($size);//生成图片大小
+        //生成二维码图片
+        //echo $_SERVER['REQUEST_URI'];
+        $object = new \QRcode();
+        $date = date('Y-m-d');
+        $path = "Uploads/qrcode/".$date.'/';
+        if (!file_exists($path)) {
+            mkdir ("$path", 0777, true);
+        }
+        $name = time().'_'.mt_rand();
+        //生成的文件名
+        $fileName = $path.$name.'.png';
+        $res = $object->png($url, $fileName, $errorCorrectionLevel, $matrixPointSize, 2);
+        return $fileName;
     }
     /*
      * 添加用户
