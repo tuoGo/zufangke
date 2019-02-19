@@ -98,3 +98,29 @@
 .computer .pics .dashed-box .upload .text{
     font-size:14px;
 }
+.computer .qr-form .hide-menu{
+    display:none;
+    position:fixed;
+    width:100px;
+    height:73px;
+    background:white;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:14px;
+    color:#333;
+    font-family:"Microsoft YaHei 微软雅黑";
+    z-index:998;
+}
+.computer .qr-form .hide-menu p{
+    height:20px;
+    margin:7px 0;
+    line-height:20px;
+    text-align:center;
+}
+.computer .qr-form .hide-menu hr{
+    margin:0 0;
+}
+.computer .qr-form .hide-menu p:hover{
+    color:red;
+    cursor:pointer;
+}

@@ -46,17 +46,25 @@ $(function(){
         }
     });
     //模拟上传文件按钮的点击
-    $(".dashed-box").click(function(){
+    $(".dashed-box").click(function(ev){
         var that = $(this);
         if(that.find(".upload").is(":hidden")) {
-            $("#img .img-box img").attr("src",that.find(".card").attr("src"));
-            $("#img").show(function(){
-                centerImg.call($("#img .img-box"));
-            });
+            ev = ev || window.event;
+            var menu = that.siblings(".hide-menu");
+            menu.css("top",ev.pageY).css("left",ev.pageX);
+            if(menu.is(":hidden")){
+                menu.show();
+            }else{
+                menu.hide();
+            }
+            ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = true;
         }else{
             that.find("input[type=file]")[0].click();
         }
     });
+    document.onclick = function(){
+        $(".pic-box .hide-menu").hide();
+    };
     //文件上传框值发生改变时进行处理
     $(".dashed-box input[type=file]").change(function(){
         //文件上传浏览器兼容问题
@@ -79,7 +87,8 @@ $(function(){
                 path = path.slice(1,-1);
             }
             //上传的文件加载完毕后显示预览
-            $(".card_f").attr("src",path);
+            that.siblings(".upload").hide();
+            that.siblings(".card").removeClass("hidden").attr("src",path);
         }
     });
     //返回
@@ -100,4 +109,20 @@ $(function(){
         hide.hide();
         $(".btn-area").show();
     }
+    //隐藏菜单下
+    // 查看图片的点击事件
+    $(".qr-form .hide-menu .look-img").click(function(){
+        var that = $(this).parent();
+        that.hide();
+        $("#img .img-box img").attr("src",that.siblings(".dashed-box").find(".card").attr("src"));
+        $("#img").show(function(){
+            centerImg.call($("#img .img-box"));
+        });
+    });
+    //重新上传图片点击事件
+    $(".qr-form .hide-menu .reupload").click(function(){
+        var that = $(this).parent();
+        that.hide();
+        that.siblings(".dashed-box").find("input[type=file]")[0].click();
+    });
 });
