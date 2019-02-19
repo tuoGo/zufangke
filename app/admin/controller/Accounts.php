@@ -109,6 +109,6 @@ class Accounts extends Base
     public function pay(){
         $uid = Session::get('uid');
         $data = db('user')->where('uid',$uid)->find();
-
+        
     }
 }
