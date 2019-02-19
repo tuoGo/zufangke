@@ -103,4 +103,10 @@ class Accounts extends Base
             return json(['data'=>'','status'=>400,'msg'=>'交租失败!']);
         }
     }
+    /*
+     *  租客扫码支付页面
+     */
+    public function pay(){
+        return $this->fetch('pay');
+    }
 }
