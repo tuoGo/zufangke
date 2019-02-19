@@ -103,4 +103,12 @@ class Accounts extends Base
             return json(['data'=>'','status'=>400,'msg'=>'交租失败!']);
         }
     }
+    /*
+     * 租客去支付
+     */
+    public function pay(){
+        $uid = Session::get('uid');
+        $data = db('user')->where('uid',$uid)->find();
+
+    }
 }
