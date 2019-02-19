@@ -50,12 +50,11 @@ $(function(){
         var that = $(this);
         if(that.find(".upload").is(":hidden")) {
             ev = ev || window.event;
+            $(".pic-box .hide-menu").hide();
             var menu = that.siblings(".hide-menu");
             menu.css("top",ev.pageY).css("left",ev.pageX);
             if(menu.is(":hidden")){
                 menu.show();
-            }else{
-                menu.hide();
             }
             ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = true;
         }else{
