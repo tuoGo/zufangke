@@ -104,11 +104,9 @@ class Accounts extends Base
         }
     }
     /*
-     * 租客去支付
+     *  租客扫码支付页面
      */
     public function pay(){
-        $uid = Session::get('uid');
-        $data = db('user')->where('uid',$uid)->find();
-        
+        return $this->fetch('pay');
     }
 }

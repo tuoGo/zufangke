@@ -131,16 +131,24 @@
                                 <td>{$flist.additional_costs}</td>
                                 <td>{$flist.amount}</td>
                                 <td>
-                                    <div class="handle-area">
-                                        {if $flist.status == 1}
-                                        <form action="/contract/check" method="post">
-                                            <input type="hidden" value="" name="contid">
-                                            <div class="sui-btn btn-info btn-bordered btn-xlarge check_con">查看合同</div>
-                                        </form>
-                                        {elseif $flist.status == 3}
-                                        <button class="sui-btn btn-success btn-bordered btn-xlarge checkPay">确认支付</button>
+                                    <div class="handle-area clearfix">
+                                        {if user == 'fangdong'}
+                                            {if $flist.status == 1}
+                                            <form action="/contract/check" method="post">
+                                                <input type="hidden" value="" name="contid">
+                                                <div class="sui-btn btn-info btn-bordered btn-xlarge check_con">查看合同</div>
+                                            </form>
+                                            {elseif $flist.status == 3}
+                                            <button class="sui-btn btn-success btn-bordered btn-xlarge checkPay">确认支付</button>
+                                            {else}
+                                            <button class="sui-btn btn-danger btn-bordered btn-xlarge payoff">发起支付</button>
+                                            {/if}
                                         {else}
-                                        <button class="sui-btn btn-danger btn-bordered btn-xlarge payoff">发起支付</button>
+                                            <form action="/contract/check" method="post">
+                                                <input type="hidden" value="" name="contid">
+                                                <span class="sui-btn btn-info btn-bordered btn-large fl check_con">查看合同</span>
+                                            </form>
+                                            <a href="/accounts/pay" class="sui-btn btn-success btn-bordered btn-large fl goPay">支付</a>
                                         {/if}
                                     </div>
                                 </td>
