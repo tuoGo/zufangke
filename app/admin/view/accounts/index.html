@@ -148,7 +148,9 @@
                                                 <input type="hidden" value="" name="contid">
                                                 <span class="sui-btn btn-info btn-bordered btn-large fl check_con">查看合同</span>
                                             </form>
+                                            {if $flist.status == 3}
                                             <a href="/accounts/pay" class="sui-btn btn-success btn-bordered btn-large fl goPay">支付</a>
+                                            {/if}
                                         {/if}
                                     </div>
                                 </td>
