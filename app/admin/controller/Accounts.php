@@ -107,6 +107,9 @@ class Accounts extends Base
      *  租客扫码支付页面
      */
     public function pay(){
-        return $this->fetch('pay');
+        $uid = Session::get('uid');
+        $adid = db('user')->where('uid',$uid)->find()['adid'];
+        $data = db('admin')->where('adid',$adid)->find();
+        return $this->fetch('pay',['data'=>$data]);
     }
 }
