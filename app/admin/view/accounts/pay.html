@@ -14,6 +14,7 @@
     <script src="__STATIC__/scripts/jquery/jquery.actual.min.js"></script>
     <script src="__STATIC__/scripts/sui/sui.min.js"></script>
     <script src="__STATIC__/scripts/banner/banner.js"></script>
+    <script src="__STATIC__/scripts/accounts/pay.js"></script>
 </head>
 <body>
     <div class="computer">
@@ -21,11 +22,31 @@
         <div class="main-content">
             <div class="show-content">
                 <!--业务界面-->
-                <div class="qr-box" align="center">
-                    <img style="border:1px solid #bbb;" src="__STATIC__/images/jump/wx.jpg" alt="" width="500" height="500">
-                    <img style="border:1px solid #bbb;" src="__STATIC__/images/jump/zfb.jpg" alt="" width="500" height="500">
-                    <!--<div class="back">返回</div>-->
+                <div class="qr-box">
+                    <div class="title">
+                        <div class="milky">支付类型</div>
+                    </div>
+                    <div class="btn-area">
+                        <div class="pay-btn">
+                            <button class="sui-btn btn-bordered btn-success btn-xlarge wx">
+                                微信
+                            </button>
+                            <img src="__STATIC__/images/jump/wx.jpg" class="hidden wx-img" alt="">
+                        </div>
+                        <div class="pay-btn">
+                            <button class="sui-btn btn-bordered btn-primary btn-xlarge zfb">
+                                支付宝
+                            </button>
+                            <img src="__STATIC__/images/jump/zfb.jpg" class="hidden zfb-img" alt="">
+                        </div>
+                        <div class="pay-btn">
+                            <button class="sui-btn btn-bordered btn-danger btn-xlarge back">
+                                返回
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                {include file="tips/img" /}
             </div>
         </div>
     </div>
