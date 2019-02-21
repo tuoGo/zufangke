@@ -70,9 +70,34 @@ class Accounts extends Base
     /*
      * 搜索报表
      */
-    public function search(){
-        $data = input('post.cont_phone');
-        print_r($data);
+    public function search(Request $request){
+        if ($request->isPost()){
+            $adid = Session::get('adid');
+            $phone = input('post.cont_phone');
+            $user    = db('user')->where('phone',$phone)->where('adid',$adid)->find();
+            $fcount  = db('financial')->where('adid',$adid)->where('uid',$user['uid'])->count();
+            $list    = db('financial')->where('adid',$adid)->where('uid',$user['uid'])->order('end_time desc')->paginate(14,$fcount);
+            $page    = $list->render();
+            $count   = db('underlying')->where('adid',$adid)->count();
+            $signing = db('underlying')->where('adid',$adid)->where('status != 0')->count();
+            $total   = db('financial')->where('adid',$adid)->sum('amount');
+            $delivery= db('financial')->where('adid',$adid)->sum('rent');
+            $costs   = db('financial')->where('adid',$adid)->sum('additional_costs');
+            foreach ($list as $fk => $fv){
+                $flist[$fk] = $fv;
+                $flist[$fk]['user'] = $user;
+                $flist[$fk]['start_time'] = date('Y年m月d日',$flist[$fk]['start_time']);
+                $flist[$fk]['end_time'] = date('Y年m月d日',$flist[$fk]['end_time']);
+            }
+            $data = array(
+                'count'    => $count,   //房源总计
+                'signing'  => $signing, //已签约房源
+                'total'    => $total,   //总金额
+                'delivery' => $delivery,//租金收入
+                'costs'    => $costs,   //水电收入
+            );
+            return $this->fetch('index',['data'=>$data,'list'=>$flist,'page'=>$page,'user'=>'fangdong']);
+        }
     }
     /*
      * 向租客发起支付单

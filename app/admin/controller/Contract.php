@@ -41,6 +41,24 @@ class Contract extends Base
             }
             return $this->fetch('index',['data' => $data , 'pagecount'=>$pagecount]);
     }
+    //搜索合同
+    public function search(Request $request){
+        if ($request->isPost()){
+            $adid  = Session::get('adid');
+            $phone = input('post.cont_phone');
+            $user  = db('user')->where('phone',$phone)->where('adid',$adid)->find();
+            $count = db('contract')->where('adid',$adid)->where('uid',$user['uid'])->count();
+            $contract = db('contract')->where('adid',$adid)->where('uid',$user['uid'])->order('create_time desc')->paginate(14,$count);
+            $pagecount = $contract->render();
+            foreach ($contract as $contk => $contv){
+                $data[$contk] = $contv;
+                $data[$contk]['user'] = $user;
+                $data[$contk]['start_time'] = date('Y年m月d日',$data[$contk]['start_time']);
+                $data[$contk]['end_time'] = date('Y年m月d日',$data[$contk]['end_time']);
+            }
+            return $this->fetch('index',['data' => $data , 'pagecount'=>$pagecount]);
+        }
+    }
 
     //显示合同添加页
     public function addpage()
@@ -150,10 +168,11 @@ class Contract extends Base
         if ($request->isPost())
         {
             $contid = input('post.contid');
+            db('underlying')->where('contid',$contid)->update(['contid'=>0,'status'=>0]);
             $rel = db('contract')->where('contid',$contid)->update(['status'=>0]);
             if ($rel)
             {
-                return json(['data'=>'','status'=>200,'msg'=>'合同已删除!']);
+                return json(['data'=>'','status'=>200,'msg'=>'合同已删除房源已空置!']);
             }
             return json(['data'=>'','status'=>400,'msg'=>'合同删除失败或不存在此合同!']);
         }
