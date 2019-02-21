@@ -76,17 +76,28 @@
                 </div>
                 {/if}
                 <!--表格详细区-->
-                <div class="sui-pagination pagination-large">
-                    <ul>
-                        <li>{$page}</li>
-                        <!--<li class="prev disabled"><a href="javascript:void(0);">«</a></li>-->
-                        <!--<li class="active"><a href="javascript:void(0);">1</a></li>-->
-                        <!--<li><a href="javascript:void(0);">2</a></li>-->
-                        <!--<li><a href="javascript:void(0);">3</a></li>-->
-                        <!--<li><a href="javascript:void(0);">4</a></li>-->
-                        <!--<li><a href="javascript:void(0);">5</a></li>-->
-                        <!--<li class="next"><a href="javascript:void(0);">»</a></li>-->
-                    </ul>
+                <div class="func clearfix">
+                    <div class="sui-pagination pagination-large fl page-menu">
+                        <ul>
+                            <li>{$page}</li>
+                            <!--<li class="prev disabled"><a href="javascript:void(0);">«</a></li>-->
+                            <!--<li class="active"><a href="javascript:void(0);">1</a></li>-->
+                            <!--<li><a href="javascript:void(0);">2</a></li>-->
+                            <!--<li><a href="javascript:void(0);">3</a></li>-->
+                            <!--<li><a href="javascript:void(0);">4</a></li>-->
+                            <!--<li><a href="javascript:void(0);">5</a></li>-->
+                            <!--<li class="next"><a href="javascript:void(0);">»</a></li>-->
+                        </ul>
+                    </div>
+                    <div class="search-area fr">
+                        <form action="/accounts/search" class="sui-form clearfix">
+                            <div class="sui-btn btn-primary btn-bordered btn-large fr search-btn">搜索</div>
+                            <div class="input-control control-right fr">
+                                <input type="text" class="input-fat" name="cont_phone" placeholder="输入手机查询对应合同">
+                                <i class="sui-icon icon-touch-magnifier"></i>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-area">
                     <table class="sui-table table-primary">

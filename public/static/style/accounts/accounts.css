@@ -102,6 +102,19 @@
     width:150px;
     margin:0 auto;
 }
+.computer .func .page-menu,.computer .func .search-area{
+    width:50%;
+}
+.computer .func .search-area .sui-form{
+    margin:18px 0;
+}
+.computer .func .search-area .sui-form .sui-btn{
+    margin:0 30px 0 10px;
+}
+.computer .func .search-area .sui-form .input-control input{
+    width:170px;
+    text-align:center;
+}
 #we-input .modal-body .input-box .add-on{
     height:22px;
     line-height:22px;

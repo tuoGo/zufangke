@@ -160,6 +160,15 @@ $(function(){
     $("#img .mask").click(function(){
         $("#img").hide();
     });
+    //个人中心点击判断是否是房东
+    $(".left-banner .system").click(function(){
+        var adid = trim($(".top-banner .user .adid").html());
+        if(adid){
+            window.location.href = "/user";
+        }else{
+            $.alert("该功能仅房东可用");
+        }
+    });
 });
 //弹窗操作成功
 function succ(msg,url){
