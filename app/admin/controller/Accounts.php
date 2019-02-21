@@ -68,6 +68,13 @@ class Accounts extends Base
         }
     }
     /*
+     * 搜索报表
+     */
+    public function search(){
+        $data = input('post.cont_phone');
+        print_r($data);
+    }
+    /*
      * 向租客发起支付单
      */
     public function init(Request $request){
