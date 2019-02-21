@@ -52,4 +52,17 @@ $(function(){
             }
         });
     });
+    //搜索按钮点击
+    $(".search-area .search-btn").click(function(){
+        var phone = $(this).parent().find("input[name=cont_phone]").val();
+        if(phone){
+            if(isNaN(phone)){
+                $.alert("请输入数字查询");
+            }else{
+                $(this).parent().submit();
+            }
+        }else{
+            return false;
+        }
+    });
 });

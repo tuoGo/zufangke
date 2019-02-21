@@ -587,13 +587,30 @@ $(function(){
         var phone = room.find(".all-msg-contract .user-phone").html();
         var pay = room.find(".house-handle .all-msg-house .house-price").html();
         var cash = room.find(".house-handle .all-msg-house .house-cash").html();
+        var contid = that.parent().find("input[name=contid]").val();
         $("#checkOut .msg-box .house-msg").html(title);
         $("#checkOut .msg-box .house-contract").html(con);
         $("#checkOut .msg-box .user").html(user);
         $("#checkOut .msg-box .user-contact").html(phone);
         $("#checkOut .msg-box .house-pay").html(pay);
         $("#checkOut .msg-box .house-cash").html(cash);
+        $("#checkOut .modal-footer input[name=contid]").val(contid);
         $("#checkOut").modal("show");
+    });
+    //确认退房
+    $("#checkOut").on("okHidden",function(){
+        var contid = $(this).find(".modal-footer input[name=contid]").val();
+        $("#show").show();
+        $.ajax({
+            url : "/contract/del",
+            type : "post",
+            data : {contid : contid},
+            success : function(data){
+                if(data.status === 200){
+                    succ(data.msg);
+                }
+            }
+        });
     });
     //添加房源的提交事件
     $("#housing").on("okHide",function(){

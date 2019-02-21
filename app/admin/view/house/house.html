@@ -255,7 +255,7 @@
                                         {if $vv.status==1||$vv.status==2}
                                         <div class="house-contract-handle">
                                             <div class="exit">退房</div>
-                                            <div class="relet">续租</div>
+                                            <!--<div class="relet">续租</div>-->
                                             <form action="/contract/check" method="post">
                                                 <input type="hidden" name="contid" value="{$vv['contract']['contid']}">
                                                 <div class="check">查看合同</div>
@@ -950,7 +950,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确认退房</button>
+                    <input type="hidden" value="" name="contid">
+                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large out-room">确认退房</button>
                     <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消退房</button>
                 </div>
             </div>

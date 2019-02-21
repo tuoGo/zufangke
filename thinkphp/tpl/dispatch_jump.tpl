@@ -81,7 +81,7 @@
                             <h1>
                             <?php echo(strip_tags($msg)); ?>
                             </h1>
-                            <h4>页面将在5秒后自动<a id="jump" href="<?php echo ($url); ?>">跳转</a>返回</h4>
+                            <h4>页面将在3秒后自动<a id="jump" href="<?php echo ($url); ?>">跳转</a>返回</h4>
                         </div>
                         <div class="s-shadow">
                         </div>
@@ -94,7 +94,7 @@
                             <h1>
                             <?php echo(strip_tags($msg)); ?>
                             </h1>
-                            <h4>页面将在5秒后自动<a id="jump" href="<?php echo ($url); ?>">跳转</a>返回</h4>
+                            <h4>页面将在3秒后自动<a id="jump" href="<?php echo ($url); ?>">跳转</a>返回</h4>
                         </div>
                         <div class="e-shadow">
                         </div>
@@ -110,7 +110,7 @@
             setTimeout(function(){
                 var href = $("#jump").attr("href");
                 window.location.href = href;
-            },5000);
+            },3000);
         });
     </script>
 </body>
